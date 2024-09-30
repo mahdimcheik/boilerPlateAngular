@@ -1,0 +1,7 @@
+<p-dropdown
+  [options]="themes"
+  [(ngModel)]="activeTheme"
+  optionLabel="name"
+  [placeholder]="activeTheme.value"
+  (ngModelChange)="changeTheme()"
+/>
