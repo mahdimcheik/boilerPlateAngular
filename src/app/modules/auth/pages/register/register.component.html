@@ -1,10 +1,116 @@
-<div class="card">
-  <p-card header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-      consequuntur error repudiandae numquam deserunt quisquam repellat libero
-      asperiores earum nam nobis, culpa ratione quam perferendis esse,
-      cupiditate neque quas!
-    </p>
-  </p-card>
-</div>
+<form
+  [formGroup]="userForm"
+  class="form"
+  (ngSubmit)="userForm.valid && submit()"
+  #form="ngForm"
+>
+  <h2 class="title">Veuillez entrer vos données personnelles</h2>
+  <div class="float">
+    <label for="firstName">Prénom</label>
+    <input
+      pInputText
+      id="firstName"
+      formControlName="firstName"
+      class="input-field"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['firstName'].errors"
+  >
+    <div [hidden]="!userForm.controls['firstName'].errors['required']">
+      Le prénom est requis
+    </div>
+  </div>
+  <div class="float">
+    <label for="lastName">Nom</label>
+    <input
+      pInputText
+      id="lastName"
+      formControlName="lastName"
+      class="input-field"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['lastName'].errors"
+  >
+    <div [hidden]="!userForm.controls['lastName'].errors['required']">
+      Le nom est requis
+    </div>
+  </div>
+  <div class="float">
+    <label for="email">Email</label>
+    <input pInputText id="email" formControlName="email" class="input-field" />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['email'].errors"
+  >
+    <div
+      class="error"
+      [hidden]="!userForm.controls['email'].errors['required']"
+    >
+      L'email est requis
+    </div>
+    <div class="error" [hidden]="!userForm.controls['email'].errors['email']">
+      verifier le format de l'email
+    </div>
+  </div>
+  <div class="float">
+    <label for="password">Mot de passe</label>
+    <input
+      pInputText
+      id="password"
+      formControlName="password"
+      class="input-field"
+      type="password"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['password'].errors"
+  >
+    <div [hidden]="!userForm.controls['password'].errors['required']">
+      Le mot de passe est requis
+    </div>
+    <div [hidden]="!userForm.controls['password'].errors['minlength']">
+      Le mot de passe doit avoir au moins 8 caractères
+    </div>
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.errors?.['passwordDifference']"
+  >
+    les mots de passe sont différents
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.errors?.['weakPassword']"
+  >
+    le mot de passe est faibles
+  </div>
+  <div class="float">
+    <label for="confirmPassword">confirmer Mot de passe</label>
+    <input
+      pInputText
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      class="input-field"
+      type="password"
+    />
+  </div>
+
+  <div class="control">
+    <p-button label="Annuler" severity="danger" />
+
+    <p-button
+      [type]="'submit'"
+      label="Valider"
+      icon="pi pi-check"
+      iconPos="right"
+      color=""
+      severity="primary"
+    />
+  </div>
+</form>
