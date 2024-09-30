@@ -59,4 +59,6 @@ export class ThemeService {
     this.activeTheme = activeTheme;
     console.log(htmlLink.href);
   }
+
+  getActiveTheme() {}
 }
