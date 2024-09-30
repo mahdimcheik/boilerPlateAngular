@@ -6,14 +6,15 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   BrowserAnimationsModule,
   provideAnimations,
 } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, ThemeSelectorComponent],
+  declarations: [AppComponent, ThemeSelectorComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,6 +22,7 @@ import {
     DropdownModule,
     FormsModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
   ],
   providers: [provideAnimations()],
   bootstrap: [AppComponent],
