@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,8 @@ import {
   passwordStrengthValidator,
   passwordValidator,
 } from '../../../../shared/validators/confirmPasswordValidator';
+import { AuthService } from '../../../../services/auth.service';
+import { UserCreateDTO } from '../../../../shared/Models/user/user';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +20,8 @@ import {
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  authService = inject(AuthService);
+
   userForm = new FormGroup(
     {
       email: new FormControl<string>('', [
@@ -38,5 +42,9 @@ export class RegisterComponent {
 
   submit() {
     console.log(this.userForm.errors);
+    this.authService
+      .register(this.userForm.value as UserCreateDTO)
+      .pipe()
+      .subscribe((res) => console.log('in page', res));
   }
 }
