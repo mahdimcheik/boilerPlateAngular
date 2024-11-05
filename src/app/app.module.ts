@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { MessageService } from 'primeng/api';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TokenInterceptor } from './utilities/interceptors/token.interceptor';
+import { errorHandlerInterceptor } from './utilities/interceptors/error-handler.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ThemeSelectorComponent, HomeComponent],
@@ -33,7 +34,9 @@ import { TokenInterceptor } from './utilities/interceptors/token.interceptor';
     provideAnimations(),
     MessageService,
     provideHttpClient(),
-    provideHttpClient(withInterceptors([TokenInterceptor])),
+    provideHttpClient(
+      withInterceptors([TokenInterceptor, errorHandlerInterceptor])
+    ),
   ],
   bootstrap: [AppComponent],
 })

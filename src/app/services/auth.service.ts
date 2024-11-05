@@ -6,9 +6,9 @@ import {
   UserLoginDTO,
   UserResponseDTO,
 } from '../shared/Models/user/user';
-import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
-import { Token } from '@angular/compiler';
+import { MessageService } from 'primeng/api';
 
 type ResponseRegister = {
   succeeded: boolean;
@@ -21,6 +21,7 @@ type ResponseRegister = {
 export class AuthService {
   private http: HttpClient = inject(HttpClient);
   private localStorageService = inject(LocalstorageService);
+  private messageService = inject(MessageService);
 
   userConnected$ = new BehaviorSubject<UserResponseDTO>({} as UserResponseDTO);
 
@@ -42,11 +43,27 @@ export class AuthService {
         tap((res) => {
           this.userConnected$.next(res.data);
           this.localStorageService.setUser(this.userConnected$.value);
-          console.log('called');
-        }),
-        catchError((e) => {
-          console.log(e);
-          return of();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Bienvenu ! ',
+            detail: res.message ?? 'Youpi!!!',
+          });
+        })
+      );
+  }
+
+  logout(): void {
+    this.http
+      .get<ResponseLoginDTO>(`https://localhost:7100/api/Users/logout`)
+      .pipe(
+        tap((res) => {
+          this.localStorageService.setUser({} as UserResponseDTO);
+          this.userConnected$.next({} as UserResponseDTO);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Au revoir ! ',
+            detail: res.message ?? 'Youpi!!!',
+          });
         })
       );
   }
@@ -56,12 +73,6 @@ export class AuthService {
     this.userConnected$.next(this.localStorageService.getUser());
     return this.http
       .get<ResponseLoginDTO>(`https://localhost:7100/api/Users/profile`)
-      .pipe(
-        tap((res) => this.userConnected$.next(res.data)),
-        catchError((e) => {
-          console.log(e);
-          return of();
-        })
-      );
+      .pipe(tap((res) => this.userConnected$.next(res.data)));
   }
 }

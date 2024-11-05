@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Theme } from '../components/theme-selector/theme.service';
+import { Theme } from './theme.service';
 import { UserResponseDTO } from '../shared/Models/user/user';
 
 @Injectable({
@@ -10,7 +10,6 @@ export class LocalstorageService {
     const theme = JSON.parse(localStorage.getItem('theme') || '{}');
     return theme;
   }
-
   setTheme(theme: Theme) {
     localStorage.setItem('theme', JSON.stringify(theme));
   }

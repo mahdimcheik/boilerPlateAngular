@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Theme, ThemeService } from './theme.service';
+import { Theme, ThemeService } from '../../services/theme.service';
 import { LocalstorageService } from '../../services/localstorage.service';
 
 @Component({
