@@ -14,7 +14,8 @@ import {
 } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MessageService } from 'primeng/api';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { TokenInterceptor } from './utilities/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ThemeSelectorComponent, HomeComponent],
@@ -28,7 +29,12 @@ import { provideHttpClient } from '@angular/common/http';
     ReactiveFormsModule,
     ToastModule,
   ],
-  providers: [provideAnimations(), MessageService, provideHttpClient()],
+  providers: [
+    provideAnimations(),
+    MessageService,
+    provideHttpClient(),
+    provideHttpClient(withInterceptors([TokenInterceptor])),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

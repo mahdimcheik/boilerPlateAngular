@@ -13,6 +13,8 @@ export type UserResponseDTO = {
   lastName: string;
   email: string;
   id: string;
+  token: string;
+  roles: string[];
 };
 
 export type UserLoginDTO = {
@@ -22,11 +24,6 @@ export type UserLoginDTO = {
 
 export type ResponseLoginDTO = {
   message: string;
-  data: {
-    token: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    roles: string[];
-  };
+  status: number;
+  data: UserResponseDTO;
 };
