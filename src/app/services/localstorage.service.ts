@@ -19,5 +19,11 @@ export class LocalstorageService {
   getUser(): UserResponseDTO {
     return JSON.parse(localStorage.getItem('user') || '{}') as UserResponseDTO;
   }
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+  getToken(): string {
+    return localStorage.getItem('token') || '';
+  }
   constructor() {}
 }

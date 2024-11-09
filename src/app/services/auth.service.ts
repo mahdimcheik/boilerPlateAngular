@@ -24,25 +24,29 @@ export class AuthService {
   private messageService = inject(MessageService);
 
   userConnected$ = new BehaviorSubject<UserResponseDTO>({} as UserResponseDTO);
+  token$ = new BehaviorSubject<string>('');
 
   constructor() {}
 
   register(userDTO: UserCreateDTO): Observable<ResponseRegister> {
     return this.http
-      .post<ResponseRegister>('https://localhost:7113/users/register', userDTO)
+      .post<ResponseRegister>('https://localhost:7113/Users/register', userDTO)
       .pipe(tap((res) => console.log(res)));
   }
 
   login(userLoginDTO: UserLoginDTO): Observable<ResponseLoginDTO> {
     return this.http
       .post<ResponseLoginDTO>(
-        `https://localhost:7100/api/Users/login`,
+        `https://localhost:7113/Users/login`,
         userLoginDTO
       )
       .pipe(
         tap((res) => {
-          this.userConnected$.next(res.data);
+          this.userConnected$.next(res.data.user);
+          this.token$.next(res.data.token);
           this.localStorageService.setUser(this.userConnected$.value);
+          this.localStorageService.setToken(this.token$.value);
+
           this.messageService.add({
             severity: 'success',
             summary: 'Bienvenu ! ',
@@ -71,8 +75,16 @@ export class AuthService {
   getprofile(): Observable<ResponseLoginDTO> {
     // set user from localstoarage
     this.userConnected$.next(this.localStorageService.getUser());
+    this.token$.next(this.localStorageService.getToken());
     return this.http
-      .get<ResponseLoginDTO>(`https://localhost:7100/api/Users/profile`)
-      .pipe(tap((res) => this.userConnected$.next(res.data)));
+      .get<ResponseLoginDTO>(`https://localhost:7113/users/my-informations`)
+      .pipe(
+        tap((res) => {
+          this.userConnected$.next(res.data.user);
+          this.token$.next(res.data.token);
+          this.localStorageService.setUser(this.userConnected$.value);
+          this.localStorageService.setToken(this.token$.value);
+        })
+      );
   }
 }
