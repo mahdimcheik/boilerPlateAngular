@@ -7,7 +7,7 @@ import {
   UserLoginDTO,
   UserResponseDTO,
 } from '../shared/Models/user/user';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../environments/environment.development';
@@ -60,33 +60,39 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.get<ResponseDTO>(`${environment.BACK_URL}/api/Users/logout`).pipe(
-      tap((res) => {
-        this.localStorageService.setUser({} as UserResponseDTO);
-        this.userConnected.set({} as UserResponseDTO);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Au revoir ! ',
-          detail: res.message ?? 'Youpi!!!',
-        });
-      })
-    );
+    this.reset();
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Au revoir ! ',
+      detail: 'vous êtes déconnecté',
+    });
   }
 
   getprofile(): Observable<ResponseDTO> {
     // set user from localstoarage
     this.userConnected.set(this.localStorageService.getUser());
     this.token.set(this.localStorageService.getToken());
-    return this.http
-      .get<ResponseDTO>(`${environment.BACK_URL}/users/my-informations`)
-      .pipe(
-        tap((res) => {
-          this.userConnected.set(res.data.user);
-          this.token.set(res.data.token);
-          this.localStorageService.setUser(this.userConnected());
-          this.localStorageService.setToken(this.token());
-        })
-      );
+    console.log('token ', this.token());
+    console.log('user ', this.userConnected());
+
+    if (this.token()) {
+      console.log('token on ');
+
+      return this.http
+        .get<ResponseDTO>(`${environment.BACK_URL}/users/my-informations`)
+        .pipe(
+          tap((res) => {
+            this.userConnected.set(res.data.user);
+            this.token.set(res.data.token);
+            this.localStorageService.setUser(this.userConnected());
+            this.localStorageService.setToken(this.token());
+            console.log('mes infos ', res);
+          })
+        );
+    }
+    console.log('token off ');
+
+    return of().pipe(tap(() => this.reset()));
   }
 
   forgotPassword(input: { email: string }): Observable<ResponseDTO> {
@@ -112,5 +118,12 @@ export class AuthService {
           console.log(res);
         })
       );
+  }
+
+  reset(): void {
+    this.localStorageService.setUser({} as UserResponseDTO);
+    this.userConnected.set({} as UserResponseDTO);
+    this.localStorageService.setToken('');
+    this.token.set('');
   }
 }
