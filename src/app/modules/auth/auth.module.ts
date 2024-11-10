@@ -8,9 +8,11 @@ import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent],
+  declarations: [RegisterComponent, LoginComponent, ForgetPasswordComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

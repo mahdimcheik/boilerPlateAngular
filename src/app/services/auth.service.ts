@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, OnInit, inject, signal } from '@angular/core';
 import {
-  ResponseLoginDTO,
+  ResponseDTO,
+  UserChangePasswordDTO,
   UserCreateDTO,
   UserLoginDTO,
   UserResponseDTO,
@@ -10,6 +11,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../environments/environment.development';
+import { ActivatedRoute } from '@angular/router';
 
 type ResponseRegister = {
   succeeded: boolean;
@@ -38,12 +40,9 @@ export class AuthService {
       .pipe(tap((res) => console.log(res)));
   }
 
-  login(userLoginDTO: UserLoginDTO): Observable<ResponseLoginDTO> {
+  login(userLoginDTO: UserLoginDTO): Observable<ResponseDTO> {
     return this.http
-      .post<ResponseLoginDTO>(
-        `${environment.BACK_URL}/Users/login`,
-        userLoginDTO
-      )
+      .post<ResponseDTO>(`${environment.BACK_URL}/Users/login`, userLoginDTO)
       .pipe(
         tap((res) => {
           this.userConnected.set(res.data.user);
@@ -61,33 +60,56 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http
-      .get<ResponseLoginDTO>(`${environment.BACK_URL}/api/Users/logout`)
-      .pipe(
-        tap((res) => {
-          this.localStorageService.setUser({} as UserResponseDTO);
-          this.userConnected.set({} as UserResponseDTO);
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Au revoir ! ',
-            detail: res.message ?? 'Youpi!!!',
-          });
-        })
-      );
+    this.http.get<ResponseDTO>(`${environment.BACK_URL}/api/Users/logout`).pipe(
+      tap((res) => {
+        this.localStorageService.setUser({} as UserResponseDTO);
+        this.userConnected.set({} as UserResponseDTO);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Au revoir ! ',
+          detail: res.message ?? 'Youpi!!!',
+        });
+      })
+    );
   }
 
-  getprofile(): Observable<ResponseLoginDTO> {
+  getprofile(): Observable<ResponseDTO> {
     // set user from localstoarage
     this.userConnected.set(this.localStorageService.getUser());
     this.token.set(this.localStorageService.getToken());
     return this.http
-      .get<ResponseLoginDTO>(`${environment.BACK_URL}/users/my-informations`)
+      .get<ResponseDTO>(`${environment.BACK_URL}/users/my-informations`)
       .pipe(
         tap((res) => {
           this.userConnected.set(res.data.user);
           this.token.set(res.data.token);
           this.localStorageService.setUser(this.userConnected());
           this.localStorageService.setToken(this.token());
+        })
+      );
+  }
+
+  forgotPassword(input: { email: string }): Observable<ResponseDTO> {
+    return this.http
+      .post<ResponseDTO>(`${environment.BACK_URL}/forgot-password`, input)
+      .pipe(
+        tap((res) => {
+          console.log(res);
+        })
+      );
+  }
+
+  resetPassword(
+    changePassword: UserChangePasswordDTO
+  ): Observable<ResponseDTO> {
+    return this.http
+      .post<ResponseDTO>(
+        `${environment.BACK_URL}/password-reset`,
+        changePassword
+      )
+      .pipe(
+        tap((res) => {
+          console.log(res);
         })
       );
   }

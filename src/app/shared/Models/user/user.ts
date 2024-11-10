@@ -7,6 +7,12 @@ export type UserCreateDTO = {
   firstName: string;
   lastName: string;
 };
+export type UserChangePasswordDTO = {
+  userId: string;
+  resetToken: string;
+  password?: string;
+  passwordConfirmation?: string;
+};
 
 export type UserResponseDTO = {
   firstName: string;
@@ -21,7 +27,7 @@ export type UserLoginDTO = {
   password: string;
 };
 
-export type ResponseLoginDTO = {
+export type ResponseDTO = {
   message: string;
   status: number;
   data: {
