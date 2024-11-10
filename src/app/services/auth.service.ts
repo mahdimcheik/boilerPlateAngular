@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import {
   ResponseLoginDTO,
   UserCreateDTO,
@@ -9,6 +9,7 @@ import {
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
 import { MessageService } from 'primeng/api';
+import { environment } from '../../environments/environment.development';
 
 type ResponseRegister = {
   succeeded: boolean;
@@ -23,29 +24,32 @@ export class AuthService {
   private localStorageService = inject(LocalstorageService);
   private messageService = inject(MessageService);
 
-  userConnected$ = new BehaviorSubject<UserResponseDTO>({} as UserResponseDTO);
-  token$ = new BehaviorSubject<string>('');
+  // userConnected$ = new BehaviorSubject<UserResponseDTO>({} as UserResponseDTO);
+  // token$ = new BehaviorSubject<string>('');
+
+  userConnected = signal({} as UserResponseDTO);
+  token = signal<string>('');
 
   constructor() {}
 
   register(userDTO: UserCreateDTO): Observable<ResponseRegister> {
     return this.http
-      .post<ResponseRegister>('https://localhost:7113/Users/register', userDTO)
+      .post<ResponseRegister>(`${environment.BACK_URL}/Users/register`, userDTO)
       .pipe(tap((res) => console.log(res)));
   }
 
   login(userLoginDTO: UserLoginDTO): Observable<ResponseLoginDTO> {
     return this.http
       .post<ResponseLoginDTO>(
-        `https://localhost:7113/Users/login`,
+        `${environment.BACK_URL}/Users/login`,
         userLoginDTO
       )
       .pipe(
         tap((res) => {
-          this.userConnected$.next(res.data.user);
-          this.token$.next(res.data.token);
-          this.localStorageService.setUser(this.userConnected$.value);
-          this.localStorageService.setToken(this.token$.value);
+          this.userConnected.set(res.data.user);
+          this.token.set(res.data.token);
+          this.localStorageService.setUser(this.userConnected());
+          this.localStorageService.setToken(this.token());
 
           this.messageService.add({
             severity: 'success',
@@ -58,11 +62,11 @@ export class AuthService {
 
   logout(): void {
     this.http
-      .get<ResponseLoginDTO>(`https://localhost:7100/api/Users/logout`)
+      .get<ResponseLoginDTO>(`${environment.BACK_URL}/api/Users/logout`)
       .pipe(
         tap((res) => {
           this.localStorageService.setUser({} as UserResponseDTO);
-          this.userConnected$.next({} as UserResponseDTO);
+          this.userConnected.set({} as UserResponseDTO);
           this.messageService.add({
             severity: 'success',
             summary: 'Au revoir ! ',
@@ -74,16 +78,16 @@ export class AuthService {
 
   getprofile(): Observable<ResponseLoginDTO> {
     // set user from localstoarage
-    this.userConnected$.next(this.localStorageService.getUser());
-    this.token$.next(this.localStorageService.getToken());
+    this.userConnected.set(this.localStorageService.getUser());
+    this.token.set(this.localStorageService.getToken());
     return this.http
-      .get<ResponseLoginDTO>(`https://localhost:7113/users/my-informations`)
+      .get<ResponseLoginDTO>(`${environment.BACK_URL}/users/my-informations`)
       .pipe(
         tap((res) => {
-          this.userConnected$.next(res.data.user);
-          this.token$.next(res.data.token);
-          this.localStorageService.setUser(this.userConnected$.value);
-          this.localStorageService.setToken(this.token$.value);
+          this.userConnected.set(res.data.user);
+          this.token.set(res.data.token);
+          this.localStorageService.setUser(this.userConnected());
+          this.localStorageService.setToken(this.token());
         })
       );
   }
