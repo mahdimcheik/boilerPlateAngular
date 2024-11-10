@@ -5,20 +5,20 @@ import { LoginComponent } from './pages/login/login.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import {
-  canLoginGuard,
-  canRegisterGuard,
+  canNotLoginGuard,
+  canNotRegisterGuard,
 } from '../../utilities/guards/can-login.guard';
 
 const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [canRegisterGuard],
+    canActivate: [canNotRegisterGuard],
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [canLoginGuard],
+    canActivate: [canNotLoginGuard],
   },
   {
     path: 'forgot-password',
@@ -27,6 +27,7 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ChangePasswordComponent,
+    canActivate: [canNotLoginGuard],
   },
 ];
 
