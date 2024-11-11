@@ -8,26 +8,33 @@ import {
   canNotLoginGuard,
   canNotRegisterGuard,
 } from '../../utilities/guards/can-login.guard';
+import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
 
 const routes: Routes = [
   {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [canNotRegisterGuard],
-  },
-  {
     path: '',
-    component: LoginComponent,
-    canActivate: [canNotLoginGuard],
-  },
-  {
-    path: 'forgot-password',
-    component: ForgetPasswordComponent,
-  },
-  {
-    path: 'reset-password',
-    component: ChangePasswordComponent,
-    canActivate: [canNotLoginGuard],
+    component: LayoutAuthComponent,
+    children: [
+      {
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [canNotRegisterGuard],
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [canNotLoginGuard],
+      },
+      {
+        path: 'forgot-password',
+        component: ForgetPasswordComponent,
+      },
+      {
+        path: 'reset-password',
+        component: ChangePasswordComponent,
+        canActivate: [canNotLoginGuard],
+      },
+    ],
   },
 ];
 

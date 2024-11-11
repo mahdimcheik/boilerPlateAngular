@@ -13,6 +13,7 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
 import { ModalComponent } from './components/modal/modal.component';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ForgetPasswordComponent,
     ChangePasswordComponent,
     ModalComponent,
+    LayoutAuthComponent,
   ],
   imports: [
     CommonModule,

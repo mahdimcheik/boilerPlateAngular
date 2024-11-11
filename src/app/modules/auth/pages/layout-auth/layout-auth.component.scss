@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 50%;
+    height: calc(100vh - 70px);
+    object-fit: cover;
+  }
+  div.layout-main {
+    width: 50%;
+    height: calc(100vh - 70px);
+    padding: 1rem;
+    overflow-y: auto;
+  }
+}

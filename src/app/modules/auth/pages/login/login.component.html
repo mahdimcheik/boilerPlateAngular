@@ -47,17 +47,25 @@
   </div>
 
   <div class="control">
-    <p-button label="Annuler" severity="danger" />
-
     <p-button
       [type]="'submit'"
-      label="Valider"
+      label="Connexion"
       icon="pi pi-check"
       iconPos="right"
       color=""
       severity="primary"
     />
   </div>
+  <div class="register-forgot">
+    <p-button
+      label="Mot de passe oublié"
+      [link]="true"
+      [routerLink]="'/auth/forgot-password'"
+    />
+    <p-button
+      label="Créez un compte"
+      [link]="true"
+      [routerLink]="'/auth/register'"
+    />
+  </div>
 </form>
-
-<a [routerLink]="'/auth/forgot-password'">Mot de passe oublié</a>

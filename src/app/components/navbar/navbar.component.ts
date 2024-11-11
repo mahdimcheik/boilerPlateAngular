@@ -27,7 +27,7 @@ export class NavbarComponent {
         {
           label: 'Connexion',
           icon: 'pi pi-home',
-          command: () => this.router.navigateByUrl('auth'),
+          command: () => this.router.navigateByUrl('auth/login'),
         },
         {
           label: 'Inscription',

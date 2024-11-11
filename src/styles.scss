@@ -7,3 +7,11 @@ body {
   max-width: 1680px;
   margin: 0 auto;
 }
+
+.scrollbar-off {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

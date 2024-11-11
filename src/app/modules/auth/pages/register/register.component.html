@@ -102,15 +102,20 @@
   </div>
 
   <div class="control">
-    <p-button label="Annuler" severity="danger" />
-
     <p-button
       [type]="'submit'"
-      label="Valider"
+      label="Validez"
       icon="pi pi-check"
       iconPos="right"
       color=""
       severity="primary"
+    />
+  </div>
+  <div class="register-forgot">
+    <p-button
+      label="Vous avez déjà un compte?"
+      [link]="true"
+      [routerLink]="'/auth/login'"
     />
   </div>
 </form>
