@@ -10,9 +10,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent, ForgetPasswordComponent, ChangePasswordComponent],
+  declarations: [
+    RegisterComponent,
+    LoginComponent,
+    ForgetPasswordComponent,
+    ChangePasswordComponent,
+    ModalComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -21,6 +30,9 @@ import { ChangePasswordComponent } from './pages/change-password/change-password
     FloatLabelModule,
     FormsModule,
     ReactiveFormsModule,
+    DialogModule,
+    ButtonModule,
+    InputTextModule,
   ],
 })
 export class AuthModule {}

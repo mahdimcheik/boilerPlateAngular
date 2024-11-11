@@ -1,0 +1,22 @@
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+  (onHide)="hideModal()"
+  class="main"
+>
+  <span class="">Update your information.</span>
+  <div class="input-field">
+    <label for="username" class="">Username</label>
+    <input pInputText id="username" class="flex-auto" autocomplete="off" />
+  </div>
+  <div class="input-field">
+    <label for="email" class="">Email</label>
+    <input pInputText id="email" class="flex-auto" autocomplete="off" />
+  </div>
+  <div class="control">
+    <p-button label="Cancel" severity="secondary" (onClick)="hideModal()" />
+    <p-button label="Save" (onClick)="hideModal()" />
+  </div>
+</p-dialog>

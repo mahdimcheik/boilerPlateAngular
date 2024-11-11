@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  flex-direction: column;
+
+  .input-field {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+  }
+  .control {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+  }
+}

@@ -18,6 +18,7 @@ import { delay, tap } from 'rxjs';
   styleUrl: './change-password.component.scss',
 })
 export class ChangePasswordComponent implements OnInit {
+  visible: boolean = false;
   private authService = inject(AuthService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
@@ -60,5 +61,8 @@ export class ChangePasswordComponent implements OnInit {
         })
       )
       .subscribe((res) => console.log('in page', res));
+  }
+  showDialog() {
+    this.visible = true;
   }
 }
