@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 50%;
+    height: calc(100vh - 54px);
+    object-fit: cover;
+  }
+  div {
+    width: 50%;
+  }
+}

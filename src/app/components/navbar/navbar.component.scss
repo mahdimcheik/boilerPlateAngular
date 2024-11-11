@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100wh;
+}
+.search-avatar {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.p-menuitem-link {
+  .gap-1 {
+    margin-left: 0.5rem;
+  }
+}

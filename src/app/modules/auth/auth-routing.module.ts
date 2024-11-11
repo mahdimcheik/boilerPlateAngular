@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [canNotRegisterGuard],
   },
   {
-    path: 'login',
+    path: '',
     component: LoginComponent,
     canActivate: [canNotLoginGuard],
   },

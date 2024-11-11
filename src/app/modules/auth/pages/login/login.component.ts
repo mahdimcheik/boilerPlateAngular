@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
 import { UserLoginDTO } from '../../../../shared/Models/user/user';
-import { tap } from 'rxjs';
+import { firstValueFrom, tap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -22,10 +22,10 @@ export class LoginComponent {
     ]),
   });
 
-  submit() {
-    this.authService
-      .login(this.userForm.value as UserLoginDTO)
-      .pipe(tap((res) => this.router.navigateByUrl('/')))
-      .subscribe();
+  async submit() {
+    await firstValueFrom(
+      this.authService.login(this.userForm.value as UserLoginDTO)
+      //.pipe(tap((res) => this.router.navigateByUrl('/')))
+    );
   }
 }
