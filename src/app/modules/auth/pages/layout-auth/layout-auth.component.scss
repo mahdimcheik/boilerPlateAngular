@@ -14,3 +14,15 @@
     overflow-y: auto;
   }
 }
+
+@media screen and (width < 600px) {
+  .main {
+    img {
+      display: none;
+    }
+    div.layout-main {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+}

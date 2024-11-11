@@ -2,6 +2,7 @@ import { Component, computed, effect, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,12 @@ export class NavbarComponent {
   userItems = computed(() => {
     if (this.userConnected().email) {
       return [
+        {
+          label: `${this.userConnected().firstName} ${
+            this.userConnected().lastName
+          }`,
+          icon: 'pi pi-user',
+        },
         {
           label: 'Déconnexion',
           icon: 'pi pi-star',

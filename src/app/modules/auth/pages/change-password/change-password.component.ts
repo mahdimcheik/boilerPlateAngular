@@ -10,7 +10,7 @@ import {
   UserCreateDTO,
 } from '../../../../shared/Models/user/user';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay, tap } from 'rxjs';
+import { delay, firstValueFrom, tap } from 'rxjs';
 
 @Component({
   selector: 'app-change-password',
@@ -50,19 +50,17 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  submit() {
+  async submit() {
     console.log(this.userForm.errors);
-    this.authService
-      .resetPassword(this.userForm.value as UserChangePasswordDTO)
-      .pipe(
-        delay(1000),
-        tap((res) => {
-          this.router.navigateByUrl('/');
-        })
-      )
-      .subscribe((res) => console.log('in page', res));
-  }
-  showDialog() {
-    this.visible = true;
+    await firstValueFrom(
+      this.authService
+        .resetPassword(this.userForm.value as UserChangePasswordDTO)
+        .pipe(
+          delay(1000),
+          tap((res) => {
+            this.router.navigateByUrl('/');
+          })
+        )
+    );
   }
 }

@@ -38,7 +38,7 @@
           <ng-template pTemplate="item" let-item let-root="root">
             <a pRipple class="p-menuitem-link">
               <span [class]="item.icon"></span>
-              <span class="ml-2">{{ item.label }}</span>
+              <span class="ml-2">{{ item.label | titlecase }}</span>
               <span
                 *ngIf="item.shortcut"
                 class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1"
@@ -56,9 +56,11 @@
         </p-menu>
         <button (click)="menu.toggle($event)" ngClass="invisible-button">
           <p-avatar
+            *ngIf="userConnected().email"
             image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
             shape="circle"
           />
+          <i *ngIf="!userConnected().email" [ngClass]="['pi pi-user']"></i>
         </button>
       </div>
     </div>
