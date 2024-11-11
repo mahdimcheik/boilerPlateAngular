@@ -24,8 +24,9 @@ export class LoginComponent {
 
   async submit() {
     await firstValueFrom(
-      this.authService.login(this.userForm.value as UserLoginDTO)
-      //.pipe(tap((res) => this.router.navigateByUrl('/')))
+      this.authService
+        .login(this.userForm.value as UserLoginDTO)
+        .pipe(tap((res) => this.router.navigateByUrl('/')))
     );
   }
 }

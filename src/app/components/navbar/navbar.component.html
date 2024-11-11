@@ -20,16 +20,47 @@
   <ng-template pTemplate="end">
     <div class="search-avatar">
       <app-theme-selector></app-theme-selector>
-      <input
+      <!-- <input
         type="text"
         pInputText
         placeholder="Search"
         class="w-8rem sm:w-auto"
-      />
-      <p-avatar
-        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-        shape="circle"
-      />
+      /> -->
+      <span>
+        <i
+          class="pi pi-cart-arrow-down"
+          style="color: var(--primary-color); font-size: 1.3rem; margin: 0 10px"
+        ></i>
+      </span>
+
+      <div class="card flex justify-content-center">
+        <p-menu #menu [model]="userItems()" [popup]="true">
+          <ng-template pTemplate="item" let-item let-root="root">
+            <a pRipple class="p-menuitem-link">
+              <span [class]="item.icon"></span>
+              <span class="ml-2">{{ item.label }}</span>
+              <span
+                *ngIf="item.shortcut"
+                class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1"
+                >{{ item.shortcut }}</span
+              >
+              <i
+                *ngIf="item.items"
+                [ngClass]="[
+                  'pi',
+                  root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto'
+                ]"
+              ></i>
+            </a>
+          </ng-template>
+        </p-menu>
+        <button (click)="menu.toggle($event)" ngClass="invisible-button">
+          <p-avatar
+            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            shape="circle"
+          />
+        </button>
+      </div>
     </div>
   </ng-template>
 </p-menubar>

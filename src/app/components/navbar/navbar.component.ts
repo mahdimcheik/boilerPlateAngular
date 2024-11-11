@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +9,34 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  authService = inject(AuthService);
+  router = inject(Router);
+  userConnected = this.authService.userConnected;
   items: MenuItem[] | undefined;
+  userItems = computed(() => {
+    if (this.userConnected().email) {
+      return [
+        {
+          label: 'Déconnexion',
+          icon: 'pi pi-star',
+          command: () => this.authService.logout(),
+        },
+      ];
+    } else {
+      return [
+        {
+          label: 'Connexion',
+          icon: 'pi pi-home',
+          command: () => this.router.navigateByUrl('auth'),
+        },
+        {
+          label: 'Inscription',
+          icon: 'pi pi-star',
+          command: () => this.router.navigateByUrl('auth/register'),
+        },
+      ];
+    }
+  }); //: MenuItem[] | undefined;
 
   ngOnInit() {
     this.items = [

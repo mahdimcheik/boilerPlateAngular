@@ -1,7 +1,4 @@
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100wh;
 }
 .search-avatar {
@@ -14,4 +11,13 @@
   .gap-1 {
     margin-left: 0.5rem;
   }
+  gap: 0.5rem;
+}
+.invisible-button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+@media screen and (width < 600px) {
 }

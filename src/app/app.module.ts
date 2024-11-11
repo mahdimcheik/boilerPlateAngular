@@ -26,6 +26,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
 import { CommonModule } from '@angular/common';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { CommonModule } from '@angular/common';
     InputTextModule,
     RippleModule,
     CommonModule,
+    MenuModule,
   ],
   providers: [
     provideAnimations(),
