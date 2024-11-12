@@ -5,6 +5,8 @@ import {
   BehaviorSubject,
   distinctUntilChanged,
   map,
+  Observable,
+  of,
   switchMap,
   tap,
 } from 'rxjs';
@@ -16,58 +18,27 @@ import { Router } from '@angular/router';
   styleUrl: './outlet-navbar.component.scss',
 })
 export class OutletNavbarComponent implements OnInit {
-  items: MenuItem[] | undefined;
   activeItem: MenuItem | undefined;
   windowWidth$ = inject(SizeWatcherService).windowWidth$;
-  showLabel$!: BehaviorSubject<boolean>;
+  showLabel$!: Observable<boolean>;
+  items: MenuItem[] = [
+    {
+      label: 'Dashboard',
+      icon: 'pi pi-home',
+      command: () => this.router.navigateByUrl('client'),
+    },
+    {
+      label: 'Transactions',
+      icon: 'pi pi-chart-line',
+      command: () => this.router.navigateByUrl('client/adresses'),
+    },
+    { label: 'Products', icon: 'pi pi-list' },
+    { label: 'Messages', icon: 'pi pi-inbox' },
+  ];
 
   router = inject(Router);
 
   ngOnInit() {
-    console.log('before subs');
-
-    this.windowWidth$
-      .pipe(
-        map((x) => x > 990),
-        distinctUntilChanged()
-      )
-      .subscribe((x) => {
-        if (x) {
-          this.items = [
-            {
-              label: 'Dashboard',
-              icon: 'pi pi-home',
-              command: () => this.router.navigateByUrl('client'),
-            },
-            {
-              label: 'Transactions',
-              icon: 'pi pi-chart-line',
-              command: () => this.router.navigateByUrl('client/adresses'),
-            },
-            { label: 'Products', icon: 'pi pi-list' },
-            { label: 'Messages', icon: 'pi pi-inbox' },
-          ];
-        } else {
-          this.items = [
-            {
-              icon: 'pi pi-home',
-              command: () => this.router.navigateByUrl('client'),
-            },
-            {
-              icon: 'pi pi-chart-line',
-              command: () => this.router.navigateByUrl('auth/adresses'),
-            },
-            { icon: 'pi pi-list' },
-            { icon: 'pi pi-inbox' },
-          ];
-        }
-      });
-  }
-
-  navigate(url: string) {
-    console.log('url', url);
-
-    this.router.navigateByUrl(this.activeItem?.url ?? '');
-    console.log(url);
+    this.showLabel$ = this.windowWidth$.pipe(switchMap((x) => of(x > 990)));
   }
 }

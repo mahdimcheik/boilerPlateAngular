@@ -3,21 +3,30 @@
 .exposed-field {
   display: flex;
   align-items: center;
+  border-radius: 2px;
 
   .key {
     width: 25%;
     height: 1.5rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .key {
+  .value {
     width: 75%;
-    height: 1.5rem;
+    height: 2rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 .primary {
   color: $text-color;
-  background-color: $surface-a;
+  background-color: $surface-b;
 }
 .secondary {
   color: $secondary-color-text;
-  background-color: $surface-b;
+  background-color: $surface-c;
 }
