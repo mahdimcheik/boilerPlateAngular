@@ -2,20 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ClientRoutingModule } from './client-routing.module';
-import { ClientMainComponent } from './pages/client-main/client-main.component';
-import { ListDishesComponent } from './pages/list-dishes/list-dishes.component';
-import { ListDrinksComponent } from './pages/list-drinks/list-drinks.component';
-
+import { LayoutClientComponent } from './pages/layout-client/layout-client.component';
+import { FormsModule } from '@angular/forms';
+import { RatingModule } from 'primeng/rating';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { OutletNavbarComponent } from './components/outlet-navbar/outlet-navbar.component';
 
 @NgModule({
-  declarations: [
-    ClientMainComponent,
-    ListDishesComponent,
-    ListDrinksComponent
-  ],
+  declarations: [LayoutClientComponent, OutletNavbarComponent],
   imports: [
     CommonModule,
-    ClientRoutingModule
-  ]
+    ClientRoutingModule,
+    FormsModule,
+    RatingModule,
+    TabMenuModule,
+  ],
 })
-export class ClientModule { }
+export class ClientModule {}

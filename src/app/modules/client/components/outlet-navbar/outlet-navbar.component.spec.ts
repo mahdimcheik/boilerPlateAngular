@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListDishesComponent } from './list-dishes.component';
+import { OutletNavbarComponent } from './outlet-navbar.component';
 
-describe('ListDishesComponent', () => {
-  let component: ListDishesComponent;
-  let fixture: ComponentFixture<ListDishesComponent>;
+describe('OutletNavbarComponent', () => {
+  let component: OutletNavbarComponent;
+  let fixture: ComponentFixture<OutletNavbarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListDishesComponent]
+      declarations: [OutletNavbarComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListDishesComponent);
+    fixture = TestBed.createComponent(OutletNavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

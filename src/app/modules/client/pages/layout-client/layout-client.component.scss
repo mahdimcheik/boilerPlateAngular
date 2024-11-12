@@ -1,0 +1,155 @@
+// Define colors, fonts, and spacing for easy customization
+$primary-color: var(--primary-color);
+$primary-color-text: var(--primary-color-text);
+$secondary-color: var(--surface-b);
+$secondary-color-text: var(--text-color-secondary);
+$accent-color: var(--primaryDark);
+$padding: 16px;
+// --text-color: rgba(255, 255, 255, 0.87);
+//   --text-color-secondary: rgba(255, 255, 255, 0.6);
+//   --primary-color: #60a5fa;
+//   --primary-color-text: #030712;
+
+// Main container styling
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: $secondary-color;
+  font-family: Arial, sans-serif;
+}
+
+// Sidebar styling
+.sidebar-left {
+  width: 250px;
+  padding: $padding;
+  background-color: $primary-color;
+  color: $primary-color-text;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $padding;
+
+  .profile-image {
+    width: 100%;
+    img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  .details {
+    text-align: center;
+    h3 {
+      font-size: 1.5em;
+      color: $accent-color;
+      margin-bottom: 8px;
+    }
+
+    .resume-perso {
+      display: block;
+      font-size: 1em;
+      margin: 4px 0;
+      color: $accent-color;
+      text-align: start;
+    }
+  }
+}
+
+// Main content styling
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  //   background-color: white;
+  padding: $padding;
+
+  .presentation {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: $padding;
+    margin-bottom: $padding;
+
+    .title {
+      font-size: 2em;
+      color: $primary-color;
+    }
+
+    .fonction {
+      font-size: 1.2em;
+      color: $accent-color;
+    }
+
+    h3 {
+      font-size: 1em;
+      color: #888;
+    }
+  }
+
+  .outlet {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: $secondary-color-text;
+
+    .navbar-outlet {
+      background-color: $primary-color;
+      color: $primary-color-text;
+      padding: $padding;
+      font-size: 1.1em;
+      margin-bottom: $padding;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .body-outlet {
+      flex: 1;
+      padding: $padding;
+      background-color: $secondary-color;
+      border-radius: 8px;
+    }
+  }
+}
+
+@media (max-width: 960px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar-left {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $padding;
+
+    .profile-image {
+      width: 80px;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .details {
+      flex: 1;
+      text-align: left;
+      margin-left: $padding;
+
+      .resume-perso {
+        font-size: 0.9em;
+      }
+    }
+  }
+
+  .main {
+    padding: $padding / 2;
+
+    .presentation {
+      .title {
+        font-size: 1.5em;
+      }
+      .fonction {
+        font-size: 1em;
+      }
+    }
+  }
+}
