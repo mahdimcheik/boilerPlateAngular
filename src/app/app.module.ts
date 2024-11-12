@@ -27,6 +27,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
+import { LineBinaryDataComponent } from './shared/components/line-binary-data/line-binary-data.component';
 
 @NgModule({
   declarations: [

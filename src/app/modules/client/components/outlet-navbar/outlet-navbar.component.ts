@@ -8,6 +8,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-outlet-navbar',
@@ -20,13 +21,9 @@ export class OutletNavbarComponent implements OnInit {
   windowWidth$ = inject(SizeWatcherService).windowWidth$;
   showLabel$!: BehaviorSubject<boolean>;
 
+  router = inject(Router);
+
   ngOnInit() {
-    this.items = [
-      { label: 'Dashboard', icon: 'pi pi-home' },
-      { label: 'Transactions', icon: 'pi pi-chart-line' },
-      { label: 'Products', icon: 'pi pi-list' },
-      { label: 'Messages', icon: 'pi pi-inbox' },
-    ];
     console.log('before subs');
 
     this.windowWidth$
@@ -37,19 +34,40 @@ export class OutletNavbarComponent implements OnInit {
       .subscribe((x) => {
         if (x) {
           this.items = [
-            { label: 'Dashboard', icon: 'pi pi-home' },
-            { label: 'Transactions', icon: 'pi pi-chart-line' },
+            {
+              label: 'Dashboard',
+              icon: 'pi pi-home',
+              command: () => this.router.navigateByUrl('client'),
+            },
+            {
+              label: 'Transactions',
+              icon: 'pi pi-chart-line',
+              command: () => this.router.navigateByUrl('client/adresses'),
+            },
             { label: 'Products', icon: 'pi pi-list' },
             { label: 'Messages', icon: 'pi pi-inbox' },
           ];
         } else {
           this.items = [
-            { icon: 'pi pi-home' },
-            { icon: 'pi pi-chart-line' },
+            {
+              icon: 'pi pi-home',
+              command: () => this.router.navigateByUrl('client'),
+            },
+            {
+              icon: 'pi pi-chart-line',
+              command: () => this.router.navigateByUrl('auth/adresses'),
+            },
             { icon: 'pi pi-list' },
             { icon: 'pi pi-inbox' },
           ];
         }
       });
+  }
+
+  navigate(url: string) {
+    console.log('url', url);
+
+    this.router.navigateByUrl(this.activeItem?.url ?? '');
+    console.log(url);
   }
 }

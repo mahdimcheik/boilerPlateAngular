@@ -1,0 +1,23 @@
+@import "../../../../variables.scss";
+
+.exposed-field {
+  display: flex;
+  align-items: center;
+
+  .key {
+    width: 25%;
+    height: 1.5rem;
+  }
+  .key {
+    width: 75%;
+    height: 1.5rem;
+  }
+}
+.primary {
+  color: $text-color;
+  background-color: $surface-a;
+}
+.secondary {
+  color: $secondary-color-text;
+  background-color: $surface-b;
+}

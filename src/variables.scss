@@ -1,6 +1,4 @@
 @import "primeicons/primeicons.css";
-@import "./variables.scss";
-
 $primary-color: var(--primary-color);
 $primary-color-text: var(--primary-color-text);
 $secondary-color: var(--surface-b);
@@ -16,23 +14,3 @@ $surface-c: var(--surface-c);
 $surface-d: var(--surface-d);
 $surface-e: var(--surface-e);
 $surface-f: var(--surface-f);
-// --text-color: rgba(255, 255, 255, 0.87);
-//   --text-color-secondary: rgba(255, 255, 255, 0.6);
-//   --primary-color: #60a5fa;
-//   --primary-color-text: #030712;
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  max-width: 1680px;
-  margin: 0 auto;
-}
-
-.scrollbar-off {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
