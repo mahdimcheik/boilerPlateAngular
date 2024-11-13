@@ -1,0 +1,40 @@
+<div class="card-skill" *ngIf="formation">
+  <div class="card-skill-body">
+    <p-button [style]="{ height: '120px' }">
+      <i class="pi pi-address-book image-button"> </i>
+    </p-button>
+    <div class="details">
+      <p class="title">{{ formation.title }}</p>
+      <div>
+        <p class="city">
+          {{ formation.company | uppercase }} - {{ formation.city | uppercase }}
+        </p>
+      </div>
+      <div class="date-place">
+        <p>
+          {{ formation.dateEnd | date : " yyyy" }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-skill-control" *ngIf="editModeOn">
+    <button (click)="showEditForm()">
+      <i class="pi pi-pen-to-square left-i"> </i>
+    </button>
+    <button (click)="showPopUpDelete()">
+      <i class="pi pi-delete-left left-i"> </i>
+    </button>
+  </div>
+</div>
+<ng-container>
+  <p-sidebar
+    (onHide)="hideEditForm()"
+    *ngIf="isVisibleFormEditCourse"
+    [(visible)]="isVisibleFormEditCourse"
+    position="right"
+    [style]="{
+      width: '50vw'
+    }"
+  >
+  </p-sidebar>
+</ng-container>

@@ -11,6 +11,9 @@ import { PersonnalInfosComponent } from './pages/personnal-infos/personnal-infos
 import { FieldsetModule } from 'primeng/fieldset';
 import { LineBinaryDataComponent } from '../../shared/components/line-binary-data/line-binary-data.component';
 import { AdressesComponent } from './pages/adresses/adresses.component';
+import { FormationComponent } from './components/formation/formation.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { AdressesComponent } from './pages/adresses/adresses.component';
     OutletNavbarComponent,
     PersonnalInfosComponent,
     AdressesComponent,
+    FormationComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +31,8 @@ import { AdressesComponent } from './pages/adresses/adresses.component';
     TabMenuModule,
     FieldsetModule,
     LineBinaryDataComponent,
+    SidebarModule,
+    ButtonModule,
   ],
 })
 export class ClientModule {}

@@ -1,0 +1,59 @@
+@import "../../../../../variables.scss";
+.card-skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 120px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px $primary-color;
+
+  .card-skill-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .details {
+      p {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .date-place {
+        display: flex;
+        color: $text-color; //$secondary-color-text;
+        p {
+          font-size: 13px;
+          font-weight: 300;
+          margin-top: -2px;
+        }
+      }
+    }
+  }
+  .city {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .card-skill-control {
+    display: flex;
+    gap: 5px;
+    margin-right: 10px;
+    button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+.title {
+  font-size: 18px;
+}
+
+.image-button {
+  font-size: 35px;
+}
+.left-i {
+  font-size: 25px;
+}

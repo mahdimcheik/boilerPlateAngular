@@ -106,6 +106,14 @@ $padding: 16px;
       padding: $padding;
       background-color: $secondary-color;
       border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      .main {
+      }
+      .notifications {
+        padding: 10px 5px;
+        width: 250px;
+      }
     }
   }
 }
