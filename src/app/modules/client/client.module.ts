@@ -14,6 +14,7 @@ import { AdressesComponent } from './pages/adresses/adresses.component';
 import { FormationComponent } from './components/formation/formation.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ButtonModule } from 'primeng/button';
     PersonnalInfosComponent,
     AdressesComponent,
     FormationComponent,
+    NotificationComponent,
   ],
   imports: [
     CommonModule,

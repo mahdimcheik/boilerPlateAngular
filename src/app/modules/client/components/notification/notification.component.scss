@@ -1,0 +1,22 @@
+@import "../../../../../variables.scss";
+.notifcation {
+  border: 1px solid $primary-color;
+  padding: 5px 8px;
+  border-radius: 5px;
+  width: 100%;
+  h4 {
+    margin: 0;
+  }
+  p {
+    margin: 0.5rem 0;
+  }
+  .date-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .control {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
