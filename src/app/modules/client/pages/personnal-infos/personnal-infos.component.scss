@@ -1,11 +1,36 @@
 .list-info {
   display: flex;
-  flex-direction: column;
   gap: 5px;
+  width: 100%;
+  align-items: center;
+  .nom-prenom-age-genre {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-grow: 1;
+  }
+  .image {
+  }
 }
 .formations {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+@media screen and (max-width: 990px) {
+  .list-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    .nom-prenom-age-genre {
+      width: 100%;
+    }
+    .image {
+    }
+  }
 }

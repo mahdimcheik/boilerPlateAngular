@@ -23,12 +23,12 @@ export class OutletNavbarComponent implements OnInit {
   showLabel$!: Observable<boolean>;
   items: MenuItem[] = [
     {
-      label: 'Dashboard',
+      label: 'Infos',
       icon: 'pi pi-home',
       command: () => this.router.navigateByUrl('client'),
     },
     {
-      label: 'Transactions',
+      label: 'Addresses',
       icon: 'pi pi-chart-line',
       command: () => this.router.navigateByUrl('client/adresses'),
     },

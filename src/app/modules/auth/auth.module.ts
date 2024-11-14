@@ -14,6 +14,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
     DialogModule,
     ButtonModule,
     InputTextModule,
+    BadgeModule,
   ],
 })
 export class AuthModule {}

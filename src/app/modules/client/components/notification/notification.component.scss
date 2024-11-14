@@ -3,7 +3,7 @@
   border: 1px solid $primary-color;
   padding: 5px 8px;
   border-radius: 5px;
-  width: 100%;
+  width: 250px;
   h4 {
     margin: 0;
   }
@@ -18,5 +18,10 @@
       width: 15px;
       height: 15px;
     }
+  }
+}
+@media screen and (max-width: 990px) {
+  .notifcation {
+    width: 100%;
   }
 }

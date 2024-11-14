@@ -36,6 +36,7 @@ export class RegisterComponent {
       confirmPassword: new FormControl<string>('', [Validators.required]),
       firstName: new FormControl<string>('', [Validators.required]),
       lastName: new FormControl<string>('', [Validators.required]),
+      phoneNumber: new FormControl<string>(''),
     },
     { validators: [passwordValidator('password', 'confirmPassword')] }
   );

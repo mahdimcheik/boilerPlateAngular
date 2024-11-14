@@ -6,7 +6,7 @@
 >
   <h2 class="title">Veuillez entrer vos données personnelles</h2>
   <div class="float">
-    <label for="firstName">Prénom</label>
+    <label for="firstName">Prénom<span class="asterix">*</span></label>
     <input
       pInputText
       id="firstName"
@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="float">
-    <label for="lastName">Nom</label>
+    <label for="lastName">Nom<span class="asterix">*</span></label>
     <input
       pInputText
       id="lastName"
@@ -40,7 +40,7 @@
     </div>
   </div>
   <div class="float">
-    <label for="email">Email</label>
+    <label for="email">Email<span class="asterix">*</span></label>
     <input pInputText id="email" formControlName="email" class="input-field" />
   </div>
   <div
@@ -58,7 +58,7 @@
     </div>
   </div>
   <div class="float">
-    <label for="password">Mot de passe</label>
+    <label for="password">Mot de passe<span class="asterix">*</span></label>
     <input
       pInputText
       id="password"
@@ -91,13 +91,26 @@
     le mot de passe est faibles
   </div>
   <div class="float">
-    <label for="confirmPassword">confirmer Mot de passe</label>
+    <label for="confirmPassword"
+      >confirmer Mot de passe<span class="asterix">*</span></label
+    >
     <input
       pInputText
       id="confirmPassword"
       formControlName="confirmPassword"
       class="input-field"
       type="password"
+    />
+  </div>
+
+  <div class="float">
+    <label for="password">Numéro de téléphone (facultatif)</label>
+    <input
+      pInputText
+      id="phoneNumber"
+      formControlName="phoneNumber"
+      class="input-field"
+      type="number"
     />
   </div>
 

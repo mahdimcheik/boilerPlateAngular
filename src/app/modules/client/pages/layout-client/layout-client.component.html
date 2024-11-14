@@ -10,28 +10,29 @@
       <span class="resume-perso">32 ans</span>
     </div>
   </div>
-  <article class="main-article">
+  <article class="main-article scrollbar-off">
     <header class="presentation">
       <h1 class="title">Johnny Sins</h1>
       <h2 class="fonction">Acteur chez Github</h2>
     </header>
-    <main class="outlet">
+    <div class="outlet">
       <nav class="navbar-outlet">
         <app-outlet-navbar></app-outlet-navbar>
       </nav>
       <div class="body-outlet">
-        <div class="main">
+        <div class="page-outlet">
           <router-outlet></router-outlet>
         </div>
         <div class="notifications">
-          <h3>Notifications</h3>
-          <div class="list-notifications">
-            <app-notification></app-notification>
-            <app-notification></app-notification>
-            <app-notification></app-notification>
-          </div>
+          <p-fieldset legend="Notifications">
+            <div class="list-notifications">
+              <app-notification></app-notification>
+              <app-notification></app-notification>
+              <app-notification></app-notification>
+            </div>
+          </p-fieldset>
         </div>
       </div>
-    </main>
+    </div>
   </article>
 </div>
