@@ -1,5 +1,6 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, computed, inject, input, Input } from '@angular/core';
 import { FormationResponseDTO } from '../../../../shared/Models/formation';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-personnal-infos',
@@ -10,6 +11,11 @@ export class PersonnalInfosComponent {
   @Input() key!: string;
   @Input() value!: string;
   @Input() order!: boolean;
+
+  userConnected = inject(AuthService).userConnected;
+  fullName = computed(
+    () => `${this.userConnected().firstName} ${this.userConnected().lastName}`
+  );
 
   formation1: FormationResponseDTO = {
     id: '11',
@@ -29,4 +35,7 @@ export class PersonnalInfosComponent {
     city: 'Bordeaux',
     country: 'France',
   };
+  run() {
+    console.log('runner');
+  }
 }

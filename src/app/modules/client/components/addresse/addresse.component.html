@@ -1,0 +1,38 @@
+<div class="card-skill" *ngIf="adresse">
+  <div class="card-skill-body">
+    <p-button [style]="{ height: '120px' }">
+      <i class="pi image-button" [ngClass]="classIcon"></i>
+    </p-button>
+    <div class="details">
+      <p class="title">{{ adresse.streetNumber }} {{ adresse.street }}</p>
+      <div>
+        <p class="city">
+          {{ adresse.postalCode }} - {{ adresse.city | uppercase }},
+          {{ adresse.country | titlecase }}
+        </p>
+      </div>
+      <div class="date-place">
+        <p>
+          {{ adresse.streetLine2 }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-skill-control" *ngIf="editModeOn">
+    <button (click)="showEditForm()">
+      <i class="pi pi-pen-to-square left-i"> </i>
+    </button>
+  </div>
+</div>
+<ng-container>
+  <p-sidebar
+    (onHide)="hideEditForm()"
+    *ngIf="isVisibleFormEditCourse"
+    [(visible)]="isVisibleFormEditCourse"
+    position="right"
+    [style]="{
+      width: '50vw'
+    }"
+  >
+  </p-sidebar>
+</ng-container>

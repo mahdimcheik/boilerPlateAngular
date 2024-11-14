@@ -28,6 +28,8 @@ import { RippleModule } from 'primeng/ripple';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
 import { LineBinaryDataComponent } from './shared/components/line-binary-data/line-binary-data.component';
+import { DobToAgePipe } from './utilities/pipes/dob-to-age.pipe';
+import { AdresseTypePipe } from './utilities/pipes/adresse-type.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { LineBinaryDataComponent } from './shared/components/line-binary-data/li
     HomeComponent,
     NavbarComponent,
     LandingComponent,
+    DobToAgePipe,
+    AdresseTypePipe,
   ],
   imports: [
     BrowserModule,

@@ -57,7 +57,10 @@
         <button (click)="menu.toggle($event)" ngClass="invisible-button">
           <p-avatar
             *ngIf="userConnected().email"
-            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            [image]="
+              userConnected().imgUrl ??
+              'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png'
+            "
             shape="circle"
           />
           <i *ngIf="!userConnected().email" [ngClass]="['pi pi-user']"></i>

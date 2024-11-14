@@ -3,26 +3,38 @@
     <p-button label="Editer"></p-button>
     <app-line-binary-data
       [key]="'Nom'"
-      [value]="'Jhonny'"
+      [value]="fullName() | titlecase"
       [order]="false"
     ></app-line-binary-data>
     <app-line-binary-data
       [key]="'Age'"
-      [value]="'Jhonny'"
+      [value]="'' + (userConnected().dateOfBirth | dobToAge)"
       [order]="true"
     ></app-line-binary-data>
-
     <app-line-binary-data
       [key]="'Genre'"
-      [value]="'Jhonny'"
+      [value]="userConnected().gender | genderTransform"
       [order]="false"
     ></app-line-binary-data>
   </div>
   <div class="image">
-    <img src="https://placehold.co/150x150/EEE/31343C" alt="" />
+    <img
+      [src]="
+        userConnected().imgUrl ?? 'https://placehold.co/150x150/EEE/31343C'
+      "
+      width="200"
+      height="200"
+      alt=""
+    />
   </div>
 </div>
-<p-fieldset legend="Formations">
+
+<p-fieldset>
+  <ng-template pTemplate="header">
+    <div class="legend-fieldset">
+      <i class="pi pi-plus" (click)="run()"></i> Formations
+    </div>
+  </ng-template>
   <div class="formations">
     <app-formation [editModeOn]="true" [formation]="formation1"></app-formation>
     <app-formation [editModeOn]="true" [formation]="formation2"></app-formation>

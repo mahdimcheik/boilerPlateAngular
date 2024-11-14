@@ -26,7 +26,7 @@ export class LoginComponent {
     await firstValueFrom(
       this.authService
         .login(this.userForm.value as UserLoginDTO)
-        .pipe(tap((res) => this.router.navigateByUrl('/')))
+        .pipe(tap((res) => this.router.navigateByUrl('client')))
     );
   }
 }

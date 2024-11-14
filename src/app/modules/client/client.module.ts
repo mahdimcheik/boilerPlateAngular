@@ -15,6 +15,9 @@ import { FormationComponent } from './components/formation/formation.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { NotificationComponent } from './components/notification/notification.component';
+import { DobToAgePipe } from '../../utilities/pipes/dob-to-age.pipe';
+import { GenderTransformPipe } from '../../utilities/pipes/gender-transform.pipe';
+import { AddresseComponent } from './components/addresse/addresse.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { NotificationComponent } from './components/notification/notification.co
     AdressesComponent,
     FormationComponent,
     NotificationComponent,
+    DobToAgePipe,
+    GenderTransformPipe,
+    AddresseComponent,
   ],
   imports: [
     CommonModule,

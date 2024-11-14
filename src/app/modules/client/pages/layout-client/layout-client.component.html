@@ -1,18 +1,32 @@
 <div class="container">
   <div class="sidebar-left">
     <div class="profile-image">
-      <img src="https://placehold.co/300x200" alt="profile image" />
+      <img
+        [src]="
+          userConnected().imgUrl ??
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBFbCgb0ajYdgdzEXKZ3Kg7y1Lc3upM0IDg&s'
+        "
+        alt="profile image"
+      />
     </div>
     <div class="details">
       <h3>Qui je suis?</h3>
-      <span class="resume-perso">Johnny Sins</span>
+      <span class="resume-perso"
+        >{{ userConnected().firstName | titlecase }}
+        {{ userConnected().lastName | titlecase }}</span
+      >
       <span class="resume-perso">Acteur</span>
-      <span class="resume-perso">32 ans</span>
+      <span class="resume-perso">{{
+        userConnected().dateOfBirth | dobToAge
+      }}</span>
     </div>
   </div>
   <article class="main-article scrollbar-off">
     <header class="presentation">
-      <h1 class="title">Johnny Sins</h1>
+      <h1 class="title">
+        {{ userConnected().firstName | titlecase }}
+        {{ userConnected().lastName | titlecase }}
+      </h1>
       <h2 class="fonction">Acteur chez Github</h2>
     </header>
     <div class="outlet">

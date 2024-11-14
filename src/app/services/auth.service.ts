@@ -45,8 +45,12 @@ export class AuthService {
       .post<ResponseDTO>(`${environment.BACK_URL}/Users/login`, userLoginDTO)
       .pipe(
         tap((res) => {
-          this.userConnected.set(res.data.user);
-          this.token.set(res.data.token);
+          this.userConnected.set(
+            (res.data as { token: string; user: UserResponseDTO }).user
+          );
+          this.token.set(
+            (res.data as { token: string; user: UserResponseDTO }).token
+          );
           this.localStorageService.setUser(this.userConnected());
           this.localStorageService.setToken(this.token());
 
@@ -82,8 +86,12 @@ export class AuthService {
         .get<ResponseDTO>(`${environment.BACK_URL}/users/my-informations`)
         .pipe(
           tap((res) => {
-            this.userConnected.set(res.data.user);
-            this.token.set(res.data.token);
+            this.userConnected.set(
+              (res.data as { token: string; user: UserResponseDTO }).user
+            );
+            this.token.set(
+              (res.data as { token: string; user: UserResponseDTO }).token
+            );
             this.localStorageService.setUser(this.userConnected());
             this.localStorageService.setToken(this.token());
             console.log('mes infos ', res);
