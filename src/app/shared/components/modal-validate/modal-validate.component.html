@@ -15,9 +15,23 @@
     </div>
     <h1>{{ question }}</h1>
     <div class="control">
-      <p-button (onClick)="cancel()" severity="danger"> Annuler </p-button>
+      <p-button
+        (onClick)="cancel()"
+        severity="danger"
+        icon="pi pi-times"
+        iconPos="right"
+        label="Annuler"
+      >
+      </p-button>
 
-      <p-button (onClick)="Validate()" severity="primary"> Supprimer </p-button>
+      <p-button
+        (onClick)="Validate()"
+        severity="primary"
+        icon="pi pi-check"
+        iconPos="right"
+        label="Supprimer"
+      >
+      </p-button>
     </div>
   </div>
 </p-dialog>

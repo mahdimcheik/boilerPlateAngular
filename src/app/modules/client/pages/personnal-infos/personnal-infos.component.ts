@@ -1,41 +1,48 @@
-import { Component, computed, inject, input, Input } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { FormationResponseDTO } from '../../../../shared/Models/formation';
 import { AuthService } from '../../../../services/auth.service';
+import { FormationService } from '../../../../services/formation.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-personnal-infos',
   templateUrl: './personnal-infos.component.html',
   styleUrl: './personnal-infos.component.scss',
 })
-export class PersonnalInfosComponent {
+export class PersonnalInfosComponent implements OnInit {
   @Input() key!: string;
   @Input() value!: string;
   @Input() order!: boolean;
+  isVisibleModalAddFormation: boolean = false;
 
   userConnected = inject(AuthService).userConnected;
+  formationService = inject(FormationService);
+  listFormations = this.formationService.listFormations;
   fullName = computed(
     () => `${this.userConnected().firstName} ${this.userConnected().lastName}`
   );
 
-  formation1: FormationResponseDTO = {
-    id: '11',
-    title: 'Formation DWWM',
-    company: 'Beecoming',
-    dateBegin: '2024-12-15',
-    dateEnd: '2024-12-15',
-    city: 'Bordeaux',
-    country: 'France',
-  };
-  formation2: FormationResponseDTO = {
-    id: '10',
-    title: 'Formation DWWM',
-    company: 'Beecoming',
-    dateBegin: '2024-12-15',
-    dateEnd: '2024-12-15',
-    city: 'Bordeaux',
-    country: 'France',
-  };
+  async ngOnInit(): Promise<void> {
+    await firstValueFrom(
+      this.formationService.getFormations(this.userConnected().id)
+    );
+  }
+
   run() {
     console.log('runner');
+  }
+
+  hideAddForm() {
+    this.isVisibleModalAddFormation = false;
+  }
+  showModalEditFormation() {
+    this.isVisibleModalAddFormation = true;
   }
 }

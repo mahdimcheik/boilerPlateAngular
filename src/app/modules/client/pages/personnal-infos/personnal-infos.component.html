@@ -23,10 +23,31 @@
 </div>
 
 <p-fieldset [legend]="'Formations'">
-  <p-button [icon]="'pi pi-plus'"></p-button>
+  <p-button
+    [icon]="'pi pi-plus'"
+    (onClick)="showModalEditFormation()"
+  ></p-button>
   <p-divider></p-divider>
   <div class="formations">
-    <app-formation [editModeOn]="true" [formation]="formation1"></app-formation>
-    <app-formation [editModeOn]="true" [formation]="formation2"></app-formation>
+    <app-formation
+      *ngFor="let formation of listFormations()"
+      [editModeOn]="true"
+      [formation]="formation"
+    ></app-formation>
   </div>
 </p-fieldset>
+
+<p-sidebar
+  (onHide)="hideAddForm()"
+  *ngIf="isVisibleModalAddFormation"
+  [(visible)]="isVisibleModalAddFormation"
+  position="right"
+  [style]="{
+    width: '50vw'
+  }"
+>
+  <app-modal-edit-formation
+    (actionEmitter)="hideAddForm()"
+    [updateOrAdd]="'add'"
+  ></app-modal-edit-formation>
+</p-sidebar>

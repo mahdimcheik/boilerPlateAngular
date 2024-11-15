@@ -12,7 +12,9 @@
       </div>
       <div class="date-place">
         <p>
-          {{ formation.dateEnd | date : " yyyy" }}
+          {{ formation.startAt | date : " mm/yyyy" }} -
+          {{ formation.endAt | date : " mm/yyyy" }} à
+          {{ formation.city | titlecase }}
         </p>
       </div>
     </div>
@@ -26,15 +28,26 @@
     </button>
   </div>
 </div>
-<ng-container>
-  <p-sidebar
-    (onHide)="hideEditForm()"
-    *ngIf="isVisibleFormEditCourse"
-    [(visible)]="isVisibleFormEditCourse"
-    position="right"
-    [style]="{
-      width: '50vw'
-    }"
-  >
-  </p-sidebar>
-</ng-container>
+
+<p-sidebar
+  (onHide)="hideEditForm()"
+  *ngIf="isVisibleFormEditCourse"
+  [(visible)]="isVisibleFormEditCourse"
+  position="right"
+  [style]="{
+    width: '50vw'
+  }"
+>
+  <app-modal-edit-formation
+    [updateOrAdd]="'update'"
+    [formationTochange]="formation"
+    (actionEmitter)="hideEditForm()"
+  ></app-modal-edit-formation>
+</p-sidebar>
+
+<app-modal-validate
+  question="Vous voulez supprimer cette formation?"
+  [visible]="popupDeleteVisible"
+  (onCancel)="hidePopUpDelete()"
+  (onValidate)="deleteFormation()"
+></app-modal-validate>

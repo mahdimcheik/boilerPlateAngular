@@ -36,7 +36,6 @@ export class AdresseService {
           // console.log('new adress ', newAdress);
           this.listAddresses()[newAdress] = adresseDTO;
 
-          const resu = this.listAddresses();
           this.listAddresses.update((oldList) => [...oldList]);
         })
       );

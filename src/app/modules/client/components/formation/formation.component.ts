@@ -1,6 +1,8 @@
 import { Component, inject, Input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormationResponseDTO } from '../../../../shared/Models/formation';
+import { FormationService } from '../../../../services/formation.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-formation',
@@ -13,6 +15,8 @@ export class FormationComponent {
   isVisibleFormEditCourse = false;
   popupDeleteVisible = false;
 
+  formationService = inject(FormationService);
+
   showEditForm() {
     this.isVisibleFormEditCourse = true;
   }
@@ -24,10 +28,16 @@ export class FormationComponent {
   showPopUpDelete() {
     this.popupDeleteVisible = true;
   }
+  hidePopUpDelete() {
+    this.popupDeleteVisible = false;
+  }
 
   editForm(formation: FormationResponseDTO) {
     this.isVisibleFormEditCourse = false;
   }
 
-  deleteFormation() {}
+  async deleteFormation() {
+    // await firstValueFrom(this.formationService.);
+    this.popupDeleteVisible = false;
+  }
 }

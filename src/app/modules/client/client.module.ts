@@ -23,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ModalEditAdresseComponent } from './components/modal-edit-adresse/modal-edit-adresse.component';
 import { ModalValidateComponent } from '../../shared/components/modal-validate/modal-validate.component';
+import { ModalEditFormationComponent } from './components/modal-edit-formation/modal-edit-formation.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ModalValidateComponent } from '../../shared/components/modal-validate/m
     GenderTransformPipe,
     AddresseComponent,
     ModalEditAdresseComponent,
+    ModalEditFormationComponent,
   ],
   imports: [
     CommonModule,
