@@ -1,5 +1,5 @@
 <p-fieldset [legend]="'Liste d\'adresses'">
-  <p-button [icon]="'pi pi-plus'"></p-button>
+  <p-button [icon]="'pi pi-plus'" (onClick)="openModalAdd()"></p-button>
   <p-divider></p-divider>
   <div class="list-adresses">
     <app-addresse
@@ -9,3 +9,18 @@
     ></app-addresse>
   </div>
 </p-fieldset>
+
+<p-sidebar
+  (onHide)="hideAddForm()"
+  *ngIf="isVisibleFormAddAdress"
+  [(visible)]="isVisibleFormAddAdress"
+  position="right"
+  [style]="{
+    width: '50vw'
+  }"
+>
+  <app-modal-edit-adresse
+    (actionEmitter)="hideAddForm()"
+    [updateOrAdd]="'add'"
+  ></app-modal-edit-adresse>
+</p-sidebar>

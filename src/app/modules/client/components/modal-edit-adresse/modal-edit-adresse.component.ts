@@ -1,4 +1,11 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import {
   FormBuilder,
@@ -12,8 +19,8 @@ import {
   AdresseDTO,
 } from '../../../../shared/Models/adresse';
 import { AdresseService } from '../../../../services/adresse.service';
-import { firstValueFrom } from 'rxjs';
-
+import { finalize, firstValueFrom } from 'rxjs';
+/// same component is used to add or update an address
 @Component({
   selector: 'app-modal-edit-adresse',
   templateUrl: './modal-edit-adresse.component.html',
@@ -21,6 +28,8 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ModalEditAdresseComponent implements OnInit {
   @Input() adresseTochange!: AdresseDTO;
+  @Input() updateOrAdd: 'update' | 'add' = 'update';
+  @Output() actionEmitter = new EventEmitter<void>();
   selectedType!: AddressDropDown;
 
   authService = inject(AuthService);
@@ -53,61 +62,77 @@ export class ModalEditAdresseComponent implements OnInit {
   userForm!: FormGroup;
 
   ngOnInit(): void {
-    this.selectedType = this.typesAdresseList.find(
-      (x) => x.id == '' + this.adresseTochange.addressType
-    ) ?? {
-      id: '1',
-      name: 'Domicile',
-      value: AddressTypeEnum.Domicile,
-    };
+    if (this.updateOrAdd == 'update') {
+      // pour primeng drop down options
+      this.selectedType = this.typesAdresseList.find(
+        (x) => x.id == '' + this.adresseTochange.addressType
+      ) ?? {
+        id: '1',
+        name: 'Domicile',
+        value: AddressTypeEnum.Domicile,
+      };
 
-    this.userForm = this.fb.group({
-      street: [this.adresseTochange.street, [Validators.required]],
-      streetNumber: [this.adresseTochange.streetNumber, [Validators.required]],
-      streetLine2: [this.adresseTochange.streetLine2],
-      postalCode: [this.adresseTochange.postalCode, [Validators.required]],
-      city: [this.adresseTochange.city, [Validators.required]],
-      addressType: [this.selectedType],
-    });
-    // this.userForm = new FormGroup({
-    // streetNumber: new FormControl<number>(this.adresseTochange.streetNumber, [
-    //   Validators.required,
-    // ]),
-    // street: new FormControl<string>(this.adresseTochange.street, [
-    //   Validators.required,
-    // ]),
-    // streetLine2: new FormControl<string>(this.adresseTochange.streetLine2),
-    // city: new FormControl<string>(this.adresseTochange.city, [
-    //   Validators.required,
-    // ]),
-    // postalCode: new FormControl<string>(this.adresseTochange.postalCode, [
-    //   Validators.required,
-    // ]),
-    // addressType: new FormControl<AddressTypeEnum>(
-    //   this.adresseTochange.addressType
-    // ),
-    // });
+      this.userForm = this.fb.group({
+        street: [this.adresseTochange.street, [Validators.required]],
+        streetNumber: [
+          this.adresseTochange.streetNumber,
+          [Validators.required],
+        ],
+        streetLine2: [this.adresseTochange.streetLine2],
+        postalCode: [this.adresseTochange.postalCode, [Validators.required]],
+        city: [this.adresseTochange.city, [Validators.required]],
+        addressType: [this.selectedType],
+        country: [this.adresseTochange.country],
+        state: [this.adresseTochange.state],
+      });
+    } else if (this.updateOrAdd == 'add') {
+      this.selectedType = {
+        id: '1',
+        name: 'Domicile',
+        value: AddressTypeEnum.Domicile,
+      };
+
+      this.userForm = this.fb.group({
+        street: ['', [Validators.required]],
+        streetNumber: [1, [Validators.required]],
+        streetLine2: [''],
+        postalCode: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        addressType: [this.selectedType],
+        country: ['France'],
+        state: [''],
+      });
+    }
   }
   async submit() {
-    const newAdresse: AdresseDTO = {
-      id: this.adresseTochange.id,
-      street: this.userForm.value['street'],
-      streetNumber: this.userForm.value['streetNumber'],
-      streetLine2: this.userForm.value['streetLine2'],
-      city: this.userForm.value['city'],
-      postalCode: this.userForm.value['postalCode'],
-      country: this.adresseTochange.country,
-      addressType: (this.userForm.value['addressType'] as AddressDropDown)
-        .value,
-      state: this.adresseTochange.state,
-    };
+    if (this.updateOrAdd == 'update') {
+      const newAdresse = {
+        ...this.userForm.value,
+        addressType: this.userForm.value['addressType'].value,
+        id: this.adresseTochange.id,
+      };
 
-    await firstValueFrom(this.adresseService.updateAddresse(newAdresse));
+      this.actionEmitter.emit();
+      await firstValueFrom(
+        this.adresseService
+          .updateAddresse(newAdresse)
+          .pipe(finalize(() => this.actionEmitter.emit()))
+      );
+    } else if (this.updateOrAdd == 'add') {
+      const newAdresse = {
+        ...this.userForm.value,
+        addressType: this.userForm.value['addressType'].value,
+      };
 
-    console.log(newAdresse);
+      this.actionEmitter.emit();
+      await firstValueFrom(
+        this.adresseService
+          .addAddresse(newAdresse)
+          .pipe(finalize(() => this.actionEmitter.emit()))
+      );
+    }
   }
-
-  modelchanged() {
-    console.log(this.userForm.value);
+  cancel() {
+    this.actionEmitter.emit();
   }
 }

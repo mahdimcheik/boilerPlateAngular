@@ -13,10 +13,18 @@ export class AdressesComponent implements OnInit {
   addressService = inject(AdresseService);
   userConnected = inject(AuthService).userConnected;
   adressesList: Signal<AdresseDTO[]> = this.addressService.listAddresses;
+  isVisibleFormAddAdress: boolean = false;
 
   async ngOnInit(): Promise<void> {
     await firstValueFrom(
       this.addressService.getAllAddresses(this.userConnected().id)
     );
+  }
+
+  openModalAdd() {
+    this.isVisibleFormAddAdress = true;
+  }
+  hideAddForm() {
+    this.isVisibleFormAddAdress = false;
   }
 }

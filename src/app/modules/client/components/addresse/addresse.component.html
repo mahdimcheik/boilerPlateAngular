@@ -39,6 +39,7 @@
   >
     <app-modal-edit-adresse
       [adresseTochange]="adresse"
+      (actionEmitter)="hideEditForm()"
     ></app-modal-edit-adresse>
   </p-sidebar>
 </ng-container>

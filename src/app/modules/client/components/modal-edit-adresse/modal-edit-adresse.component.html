@@ -80,9 +80,17 @@
       class="input-field"
     />
   </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['postalCode'].errors"
+  >
+    <div [hidden]="!userForm.controls['postalCode'].errors['required']">
+      Ce champs est obligatoire
+    </div>
+  </div>
 
   <div class="float">
-    <label for="postalCode"
+    <label for="addressType"
       >Type d'adresse<span class="asterix">*</span>{{ " " }}</label
     >
     <p-dropdown
@@ -92,8 +100,15 @@
       variant="filled"
       optionLabel="name"
       placeholder="Type d'adresse"
-      (ngModelChange)="modelchanged()"
     />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['addressType'].errors"
+  >
+    <div [hidden]="!userForm.controls['addressType'].errors['required']">
+      Ce champs est obligatoire
+    </div>
   </div>
 
   <div class="control">
@@ -104,6 +119,7 @@
       iconPos="right"
       color=""
       severity="danger"
+      (onClick)="cancel()"
     />
     <p-button
       [type]="'submit'"
