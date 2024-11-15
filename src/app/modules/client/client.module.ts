@@ -22,6 +22,7 @@ import { DividerModule } from 'primeng/divider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { ModalEditAdresseComponent } from './components/modal-edit-adresse/modal-edit-adresse.component';
+import { ModalValidateComponent } from '../../shared/components/modal-validate/modal-validate.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ModalEditAdresseComponent } from './components/modal-edit-adresse/modal
     DividerModule,
     ReactiveFormsModule,
     DropdownModule,
+    ModalValidateComponent,
   ],
 })
 export class ClientModule {}

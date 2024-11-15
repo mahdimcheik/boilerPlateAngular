@@ -54,4 +54,20 @@ export class AdresseService {
         })
       );
   }
+
+  deleteAddresse(adresseId: string): Observable<ResponseDTO> {
+    return this.http
+      .delete<ResponseDTO>(
+        `https://localhost:7113/address?addressId=${adresseId}`
+      )
+      .pipe(
+        tap((res) => {
+          if (res.status == 204) {
+            this.listAddresses.update((oldList) =>
+              oldList.filter((x) => x.id != adresseId)
+            );
+          }
+        })
+      );
+  }
 }

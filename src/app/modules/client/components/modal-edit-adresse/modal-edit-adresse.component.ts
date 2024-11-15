@@ -31,6 +31,7 @@ export class ModalEditAdresseComponent implements OnInit {
   @Input() updateOrAdd: 'update' | 'add' = 'update';
   @Output() actionEmitter = new EventEmitter<void>();
   selectedType!: AddressDropDown;
+  title!: string;
 
   authService = inject(AuthService);
   fb = inject(FormBuilder);
@@ -64,6 +65,7 @@ export class ModalEditAdresseComponent implements OnInit {
   ngOnInit(): void {
     if (this.updateOrAdd == 'update') {
       // pour primeng drop down options
+      this.title = "Editer l'adresse suivante";
       this.selectedType = this.typesAdresseList.find(
         (x) => x.id == '' + this.adresseTochange.addressType
       ) ?? {
@@ -86,6 +88,8 @@ export class ModalEditAdresseComponent implements OnInit {
         state: [this.adresseTochange.state],
       });
     } else if (this.updateOrAdd == 'add') {
+      this.title = 'Ajouter une adresse';
+
       this.selectedType = {
         id: '1',
         name: 'Domicile',

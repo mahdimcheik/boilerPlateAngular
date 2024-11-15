@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { AdresseDTO } from '../../../../shared/Models/adresse';
+import { AdresseService } from '../../../../services/adresse.service';
+import { finalize, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-addresse',
@@ -9,6 +11,7 @@ import { AdresseDTO } from '../../../../shared/Models/adresse';
 export class AddresseComponent implements OnInit {
   @Input() adresse!: AdresseDTO;
   @Input() editModeOn: boolean = true;
+  adresseService = inject(AdresseService);
 
   classIcon!: string;
 
@@ -36,6 +39,14 @@ export class AddresseComponent implements OnInit {
     }
   }
 
+  async deleteAdresse() {
+    await firstValueFrom(
+      this.adresseService
+        .deleteAddresse(this.adresse.id)
+        .pipe(finalize(() => this.hidePopUpDelete()))
+    );
+  }
+
   showEditForm() {
     this.isVisibleFormEditCourse = true;
   }
@@ -46,6 +57,9 @@ export class AddresseComponent implements OnInit {
 
   showPopUpDelete() {
     this.popupDeleteVisible = true;
+  }
+  hidePopUpDelete() {
+    this.popupDeleteVisible = false;
   }
 
   editForm(adresse: AdresseDTO) {

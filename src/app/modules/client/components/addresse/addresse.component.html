@@ -27,19 +27,25 @@
     </button>
   </div>
 </div>
-<ng-container>
-  <p-sidebar
-    (onHide)="hideEditForm()"
-    *ngIf="isVisibleFormEditCourse"
-    [(visible)]="isVisibleFormEditCourse"
-    position="right"
-    [style]="{
-      width: '50vw'
-    }"
-  >
-    <app-modal-edit-adresse
-      [adresseTochange]="adresse"
-      (actionEmitter)="hideEditForm()"
-    ></app-modal-edit-adresse>
-  </p-sidebar>
-</ng-container>
+
+<p-sidebar
+  (onHide)="hideEditForm()"
+  *ngIf="isVisibleFormEditCourse"
+  [(visible)]="isVisibleFormEditCourse"
+  position="right"
+  [style]="{
+    width: '50vw'
+  }"
+>
+  <app-modal-edit-adresse
+    [adresseTochange]="adresse"
+    (actionEmitter)="hideEditForm()"
+  ></app-modal-edit-adresse>
+</p-sidebar>
+
+<app-modal-validate
+  [visible]="popupDeleteVisible"
+  question="Vous voulez supprimer cette adresse?"
+  (onCancel)="hidePopUpDelete()"
+  (onValidate)="deleteAdresse()"
+></app-modal-validate>
