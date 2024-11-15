@@ -167,7 +167,7 @@ article.main-article {
       position: static;
 
       background-color: rgb(58, 49, 49);
-      padding: $padding / 2;
+      padding: calc($padding / 2);
       max-width: 100%;
     }
     .notifications {

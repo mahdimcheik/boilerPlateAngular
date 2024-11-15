@@ -23,4 +23,21 @@ export class AdresseService {
       .get<ResponseDTO>(`https://localhost:7113/address/all?userId=${userId}`)
       .pipe(tap((res) => this.listAddresses.set(res.data as AdresseDTO[])));
   }
+  // https://localhost:7113/address
+  updateAddresse(adresseDTO: AdresseDTO): Observable<ResponseDTO> {
+    return this.http
+      .put<ResponseDTO>(`https://localhost:7113/address`, adresseDTO)
+      .pipe(
+        tap((res) => {
+          let newAdress =
+            this.listAddresses().find((x) => x.id == adresseDTO.id) ??
+            this.listAddresses()[0];
+          newAdress.city = (res.data as AdresseDTO).city;
+          console.log('new adress ', newAdress);
+
+          const resu = this.listAddresses();
+          this.listAddresses.update((oldList) => [...oldList]);
+        })
+      );
+  }
 }

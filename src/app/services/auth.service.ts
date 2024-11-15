@@ -81,7 +81,6 @@ export class AuthService {
 
     if (this.token()) {
       console.log('token on ');
-
       return this.http
         .get<ResponseDTO>(`${environment.BACK_URL}/users/my-informations`)
         .pipe(

@@ -1,1 +1,11 @@
-<p>adresses works!</p>
+<p-fieldset [legend]="'Liste d\'adresses'">
+  <p-button [icon]="'pi pi-plus'"></p-button>
+  <p-divider></p-divider>
+  <div class="list-adresses">
+    <app-addresse
+      *ngFor="let adresse of adressesList()"
+      [adresse]="adresse"
+      [editModeOn]="true"
+    ></app-addresse>
+  </div>
+</p-fieldset>

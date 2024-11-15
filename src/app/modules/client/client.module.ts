@@ -18,6 +18,10 @@ import { NotificationComponent } from './components/notification/notification.co
 import { DobToAgePipe } from '../../utilities/pipes/dob-to-age.pipe';
 import { GenderTransformPipe } from '../../utilities/pipes/gender-transform.pipe';
 import { AddresseComponent } from './components/addresse/addresse.component';
+import { DividerModule } from 'primeng/divider';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { ModalEditAdresseComponent } from './components/modal-edit-adresse/modal-edit-adresse.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import { AddresseComponent } from './components/addresse/addresse.component';
     DobToAgePipe,
     GenderTransformPipe,
     AddresseComponent,
+    ModalEditAdresseComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +46,9 @@ import { AddresseComponent } from './components/addresse/addresse.component';
     LineBinaryDataComponent,
     SidebarModule,
     ButtonModule,
+    DividerModule,
+    ReactiveFormsModule,
+    DropdownModule,
   ],
 })
 export class ClientModule {}

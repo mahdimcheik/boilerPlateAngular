@@ -1,13 +1,7 @@
 <div class="container">
   <div class="sidebar-left">
     <div class="profile-image">
-      <img
-        [src]="
-          userConnected().imgUrl ??
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBFbCgb0ajYdgdzEXKZ3Kg7y1Lc3upM0IDg&s'
-        "
-        alt="profile image"
-      />
+      <img [src]="userConnected().imgUrl" alt="profile image" />
     </div>
     <div class="details">
       <h3>Qui je suis?</h3>

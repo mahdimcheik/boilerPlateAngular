@@ -22,6 +22,9 @@
     <button (click)="showEditForm()">
       <i class="pi pi-pen-to-square left-i"> </i>
     </button>
+    <button (click)="showPopUpDelete()">
+      <i class="pi pi-delete-left left-i"> </i>
+    </button>
   </div>
 </div>
 <ng-container>
@@ -34,5 +37,8 @@
       width: '50vw'
     }"
   >
+    <app-modal-edit-adresse
+      [adresseTochange]="adresse"
+    ></app-modal-edit-adresse>
   </p-sidebar>
 </ng-container>

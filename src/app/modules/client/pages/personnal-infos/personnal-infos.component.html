@@ -18,23 +18,13 @@
     ></app-line-binary-data>
   </div>
   <div class="image">
-    <img
-      [src]="
-        userConnected().imgUrl ?? 'https://placehold.co/150x150/EEE/31343C'
-      "
-      width="200"
-      height="200"
-      alt=""
-    />
+    <img [src]="userConnected().imgUrl" width="200" height="200" alt="" />
   </div>
 </div>
 
-<p-fieldset>
-  <ng-template pTemplate="header">
-    <div class="legend-fieldset">
-      <i class="pi pi-plus" (click)="run()"></i> Formations
-    </div>
-  </ng-template>
+<p-fieldset [legend]="'Formations'">
+  <p-button [icon]="'pi pi-plus'"></p-button>
+  <p-divider></p-divider>
   <div class="formations">
     <app-formation [editModeOn]="true" [formation]="formation1"></app-formation>
     <app-formation [editModeOn]="true" [formation]="formation2"></app-formation>

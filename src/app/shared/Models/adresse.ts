@@ -6,12 +6,18 @@ export type AdresseDTO = {
   city: string;
   state: string;
   postalCode: string;
-  country: string;
+  country?: string;
   addressType: number;
 };
-export enum addressTypeEnum {
+export enum AddressTypeEnum {
   Domicile = 1,
   Travail = 2,
   Facturation = 3,
   Livraison = 4,
 }
+
+export type AddressDropDown = {
+  id: string;
+  name: string;
+  value: number;
+};

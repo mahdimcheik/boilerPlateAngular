@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { addressTypeEnum } from '../../shared/Models/adresse';
+import { AddressTypeEnum } from '../../shared/Models/adresse';
 
 @Pipe({
   name: 'adresseType',
@@ -7,13 +7,13 @@ import { addressTypeEnum } from '../../shared/Models/adresse';
 export class AdresseTypePipe implements PipeTransform {
   transform(adresseTypeNumber: number): string {
     switch (adresseTypeNumber) {
-      case addressTypeEnum.Domicile:
+      case AddressTypeEnum.Domicile:
         return 'Domicile';
-      case addressTypeEnum.Travail:
+      case AddressTypeEnum.Travail:
         return 'Travail';
-      case addressTypeEnum.Facturation:
+      case AddressTypeEnum.Facturation:
         return 'Facturation';
-      case addressTypeEnum.Livraison:
+      case AddressTypeEnum.Livraison:
         return 'Livraison';
       default:
         return 'Non défini';
