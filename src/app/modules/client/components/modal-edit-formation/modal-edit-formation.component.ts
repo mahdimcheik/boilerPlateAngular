@@ -18,6 +18,7 @@ export class ModalEditFormationComponent {
   @Input() updateOrAdd: 'update' | 'add' = 'update';
   @Output() actionEmitter = new EventEmitter<void>();
   title!: string;
+  @Input() isVisibleModalAddFormation: boolean = false;
 
   authService = inject(AuthService);
   formationService = inject(FormationService);
@@ -26,6 +27,8 @@ export class ModalEditFormationComponent {
   userForm!: FormGroup;
 
   ngOnInit(): void {
+    console.log('popup edit formation ');
+
     if (this.updateOrAdd == 'update') {
       // pour primeng drop down options
       this.title = 'Editer la formation suivante';

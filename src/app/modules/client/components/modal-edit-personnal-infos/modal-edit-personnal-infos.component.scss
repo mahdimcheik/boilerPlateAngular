@@ -1,0 +1,31 @@
+@import "../../../../../variables.scss";
+.control {
+  display: flex;
+  gap: 10px;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  .float {
+    width: 90%;
+    .input-field {
+      margin-top: 10px;
+      height: 2.5rem;
+      border-radius: 5px;
+      flex-grow: 5;
+      width: 100%;
+    }
+  }
+}
+
+.error {
+  color: var(--red-800);
+}
+
+.asterix {
+  color: red;
+}

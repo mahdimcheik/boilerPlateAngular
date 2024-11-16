@@ -1,6 +1,9 @@
 <div class="list-info">
   <div class="nom-prenom-age-genre">
-    <p-button label="Editer"></p-button>
+    <p-button
+      icon="pi pi-pen-to-square"
+      (onClick)="isVisibleModalEditPerso = true"
+    ></p-button>
     <app-line-binary-data
       [key]="'Nom'"
       [value]="fullName() | titlecase"
@@ -15,6 +18,11 @@
       [key]="'Genre'"
       [value]="userConnected().gender | genderTransform"
       [order]="false"
+    ></app-line-binary-data>
+    <app-line-binary-data
+      [key]="'Metier'"
+      [value]="userConnected().title ?? 'Non déclaré'"
+      [order]="true"
     ></app-line-binary-data>
   </div>
   <div class="image">
@@ -37,17 +45,16 @@
   </div>
 </p-fieldset>
 
-<p-sidebar
-  (onHide)="hideAddForm()"
+<app-modal-edit-formation
+  (actionEmitter)="hideAddForm()"
+  [updateOrAdd]="'add'"
+  [isVisibleModalAddFormation]="isVisibleModalAddFormation"
   *ngIf="isVisibleModalAddFormation"
-  [(visible)]="isVisibleModalAddFormation"
-  position="right"
-  [style]="{
-    width: '50vw'
-  }"
->
-  <app-modal-edit-formation
-    (actionEmitter)="hideAddForm()"
-    [updateOrAdd]="'add'"
-  ></app-modal-edit-formation>
-</p-sidebar>
+></app-modal-edit-formation>
+
+<app-modal-edit-personnal-infos
+  [visible]="isVisibleModalEditPerso"
+  [user]="userConnected()"
+  *ngIf="isVisibleModalEditPerso"
+  (actionEmitter)="isVisibleModalEditPerso = false"
+></app-modal-edit-personnal-infos>

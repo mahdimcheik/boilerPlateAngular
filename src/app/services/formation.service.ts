@@ -49,4 +49,20 @@ export class FormationService {
         })
       );
   }
+
+  deleteFormation(formationId: string): Observable<ResponseDTO> {
+    return this.http
+      .delete<ResponseDTO>(
+        `https://localhost:7113/formation?formationId=${formationId}`
+      )
+      .pipe(
+        tap((res) => {
+          const newList = this.listFormations().filter(
+            (x) => x.id != formationId
+          );
+          this.listFormations.set(newList);
+          //this.listFormations.set([...this.listFormations(), (res.data as FormationResponseDTO)]);
+        })
+      );
+  }
 }

@@ -21,6 +21,7 @@ export class PersonnalInfosComponent implements OnInit {
   @Input() value!: string;
   @Input() order!: boolean;
   isVisibleModalAddFormation: boolean = false;
+  @Input() isVisibleModalEditPerso: boolean = false;
 
   userConnected = inject(AuthService).userConnected;
   formationService = inject(FormationService);

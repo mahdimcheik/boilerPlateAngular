@@ -29,21 +29,13 @@
   </div>
 </div>
 
-<p-sidebar
-  (onHide)="hideEditForm()"
-  *ngIf="isVisibleFormEditCourse"
-  [(visible)]="isVisibleFormEditCourse"
-  position="right"
-  [style]="{
-    width: '50vw'
-  }"
->
-  <app-modal-edit-formation
-    [updateOrAdd]="'update'"
-    [formationTochange]="formation"
-    (actionEmitter)="hideEditForm()"
-  ></app-modal-edit-formation>
-</p-sidebar>
+<app-modal-edit-formation
+  [isVisibleModalAddFormation]="isVisibleFormEditFormation"
+  *ngIf="isVisibleFormEditFormation"
+  [updateOrAdd]="'update'"
+  [formationTochange]="formation"
+  (actionEmitter)="hideEditForm()"
+></app-modal-edit-formation>
 
 <app-modal-validate
   question="Vous voulez supprimer cette formation?"

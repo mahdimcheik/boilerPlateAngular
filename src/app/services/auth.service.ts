@@ -6,6 +6,7 @@ import {
   UserCreateDTO,
   UserLoginDTO,
   UserResponseDTO,
+  UserUpdateDTO,
 } from '../shared/Models/user/user';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
@@ -132,5 +133,11 @@ export class AuthService {
     this.userConnected.set({} as UserResponseDTO);
     this.localStorageService.setToken('');
     this.token.set('');
+  }
+
+  updatePersonnalInfos(userUpdated: UserUpdateDTO): Observable<ResponseDTO> {
+    return this.http
+      .patch<ResponseDTO>(`https://localhost:7113/users/update`, userUpdated)
+      .pipe(tap((res) => this.userConnected.set(res.data)));
   }
 }

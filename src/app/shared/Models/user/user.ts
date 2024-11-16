@@ -6,19 +6,41 @@ export type UserCreateDTO = {
   confirmPassword: string;
   firstName: string;
   lastName: string;
+  title?: string;
+  dateOfBirth: Date;
+  description?: string;
+  genre?: EnumGender;
 };
+
+export type UserUpdateDTO = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  title?: string;
+  dateOfBirth: Date;
+  description?: string;
+  genre: EnumGender;
+};
+
 export type UserChangePasswordDTO = {
   userId: string;
   resetToken: string;
   password?: string;
   passwordConfirmation?: string;
 };
+
 export enum EnumGender {
-  Homme,
-  Femme,
-  NonBinaire,
-  Autre,
+  Homme = 0,
+  Femme = 1,
+  NonBinaire = 2,
+  Autre = 3,
 }
+
+export type GenderDropDown = {
+  id: string;
+  name: string;
+  value: number;
+};
 
 export type UserResponseDTO = {
   id: string;
@@ -30,6 +52,8 @@ export type UserResponseDTO = {
   lastLogginAt: Date;
   gender: EnumGender;
   emailConfirmed: boolean;
+  title?: string;
+  description?: string;
   roles: string[];
 };
 
@@ -37,16 +61,6 @@ export type UserLoginDTO = {
   email: string;
   password: string;
 };
-
-// export type ResponseLoginDTO = {
-//   message: string;
-//   status: number;
-//   data: {
-//     token: string;
-//     user: UserResponseDTO;
-//   };
-
-// };
 
 export type ResponseDTO = {
   message: string;

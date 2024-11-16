@@ -12,17 +12,17 @@ import { firstValueFrom } from 'rxjs';
 export class FormationComponent {
   @Input() formation!: FormationResponseDTO;
   @Input() editModeOn: boolean = true;
-  isVisibleFormEditCourse = false;
+  isVisibleFormEditFormation = false;
   popupDeleteVisible = false;
 
   formationService = inject(FormationService);
 
   showEditForm() {
-    this.isVisibleFormEditCourse = true;
+    this.isVisibleFormEditFormation = true;
   }
 
   hideEditForm() {
-    this.isVisibleFormEditCourse = false;
+    this.isVisibleFormEditFormation = false;
   }
 
   showPopUpDelete() {
@@ -33,11 +33,13 @@ export class FormationComponent {
   }
 
   editForm(formation: FormationResponseDTO) {
-    this.isVisibleFormEditCourse = false;
+    this.isVisibleFormEditFormation = false;
   }
 
   async deleteFormation() {
-    // await firstValueFrom(this.formationService.);
+    await firstValueFrom(
+      this.formationService.deleteFormation(this.formation.id)
+    );
     this.popupDeleteVisible = false;
   }
 }

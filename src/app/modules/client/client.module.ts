@@ -24,6 +24,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ModalEditAdresseComponent } from './components/modal-edit-adresse/modal-edit-adresse.component';
 import { ModalValidateComponent } from '../../shared/components/modal-validate/modal-validate.component';
 import { ModalEditFormationComponent } from './components/modal-edit-formation/modal-edit-formation.component';
+import { ModalEditPersonnalInfosComponent } from './components/modal-edit-personnal-infos/modal-edit-personnal-infos.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ModalEditFormationComponent } from './components/modal-edit-formation/m
     AddresseComponent,
     ModalEditAdresseComponent,
     ModalEditFormationComponent,
+    ModalEditPersonnalInfosComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +56,7 @@ import { ModalEditFormationComponent } from './components/modal-edit-formation/m
     ReactiveFormsModule,
     DropdownModule,
     ModalValidateComponent,
+    CalendarModule,
   ],
 })
 export class ClientModule {}
