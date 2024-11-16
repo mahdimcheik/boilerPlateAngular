@@ -16,6 +16,8 @@ export class FileUploadComponent {
   constructor() {}
 
   onFileSelected(event: any) {
+    console.log('event upload ', event);
+
     const file: File = event.target.files[0];
 
     if (file) {

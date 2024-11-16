@@ -8,7 +8,7 @@ import {
   UserUpdateDTO,
 } from '../../../../shared/Models/user/user';
 import { AuthService } from '../../../../services/auth.service';
-import { firstValueFrom } from 'rxjs';
+import { catchError, firstValueFrom, of } from 'rxjs';
 
 @Component({
   selector: 'app-modal-edit-personnal-infos',
@@ -21,6 +21,9 @@ export class ModalEditPersonnalInfosComponent {
   @Input() visible: boolean = false;
   selectedGender!: GenderDropDown;
   @Input() title!: string;
+
+  file?: File;
+  fileName?: string;
 
   authService = inject(AuthService);
   fb = inject(FormBuilder);
@@ -77,9 +80,15 @@ export class ModalEditPersonnalInfosComponent {
         ? this.userForm.value['title']
         : this.user.title,
     };
+
+    if (this.fileName && this.file != null) {
+      await firstValueFrom(this.authService.updateAvatar(this.file));
+    }
+
     await firstValueFrom(
       this.authService.updatePersonnalInfos(newUser as UserUpdateDTO)
     );
+
     this.actionEmitter.emit();
   }
   cancel() {
@@ -87,5 +96,11 @@ export class ModalEditPersonnalInfosComponent {
   }
   genderChosen() {
     console.log(this.selectedGender);
+  }
+
+  receiveFile(event: { file: File; fileName: string }) {
+    console.log('files ', event);
+    this.file = event.file;
+    this.fileName = event.fileName;
   }
 }

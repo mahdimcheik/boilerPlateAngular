@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit, inject, signal } from '@angular/core';
 import {
   ResponseDTO,
@@ -139,5 +139,20 @@ export class AuthService {
     return this.http
       .patch<ResponseDTO>(`https://localhost:7113/users/update`, userUpdated)
       .pipe(tap((res) => this.userConnected.set(res.data)));
+  }
+
+  updateAvatar(file: File): Observable<ResponseDTO> {
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      const headers = new HttpHeaders();
+      return this.http.post<ResponseDTO>(
+        `https://localhost:7113/users/upload-avatar`,
+        formData,
+        {
+          headers: headers,
+        }
+      );
+    } else return of();
   }
 }
