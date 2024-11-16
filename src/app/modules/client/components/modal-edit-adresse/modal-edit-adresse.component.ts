@@ -28,6 +28,7 @@ import { finalize, firstValueFrom } from 'rxjs';
 })
 export class ModalEditAdresseComponent implements OnInit {
   @Input() adresseTochange!: AdresseDTO;
+  @Input() visible: boolean = false;
   @Input() updateOrAdd: 'update' | 'add' = 'update';
   @Output() actionEmitter = new EventEmitter<void>();
   selectedType!: AddressDropDown;

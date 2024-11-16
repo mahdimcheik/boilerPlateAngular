@@ -19,11 +19,7 @@ export class ModalEditPersonnalInfosComponent {
   @Input() user!: UserResponseDTO;
   @Output() actionEmitter = new EventEmitter<void>();
   @Input() visible: boolean = false;
-  selectedGender: GenderDropDown = {
-    id: '2',
-    name: 'Non-binaire',
-    value: EnumGender.NonBinaire,
-  };
+  selectedGender!: GenderDropDown;
   title!: string;
 
   authService = inject(AuthService);
@@ -55,22 +51,28 @@ export class ModalEditPersonnalInfosComponent {
   userForm!: FormGroup;
 
   ngOnInit(): void {
+    this.selectedGender =
+      this.typesGenderList.find((x) => x.value == this.user.gender) ??
+      this.typesGenderList[3];
+    console.log('received gender', this.selectedGender);
+
     this.userForm = this.fb.group({
       firstName: [this.user.firstName, [Validators.required]],
       lastName: [this.user.lastName, [Validators.required]],
-      dateOfBirth: ['', [Validators.required]],
-      gender: [this.selectedGender, [Validators.required]],
+      dateOfBirth: [new Date(this.user.dateOfBirth), [Validators.required]],
+      gender: [this.selectedGender],
       title: [this.user.title],
     });
-    // this.userForm.setValue({gender : 'gender'});
   }
   async submit() {
+    console.log('sent gender ', this.selectedGender);
+
     const newUser = {
       ...this.user,
       firstName: this.userForm.value['firstName'],
       lastName: this.userForm.value['lastName'],
       dateOfBirth: this.userForm.value['dateOfBirth'],
-      genre: this.selectedGender.value,
+      gender: this.userForm.value['gender'].value,
       title: this.userForm.value['title']
         ? this.userForm.value['title']
         : this.user.title,
@@ -82,5 +84,8 @@ export class ModalEditPersonnalInfosComponent {
   }
   cancel() {
     this.actionEmitter.emit();
+  }
+  genderChosen() {
+    console.log(this.selectedGender);
   }
 }

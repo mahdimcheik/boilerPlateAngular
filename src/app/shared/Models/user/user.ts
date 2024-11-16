@@ -9,7 +9,7 @@ export type UserCreateDTO = {
   title?: string;
   dateOfBirth: Date;
   description?: string;
-  genre?: EnumGender;
+  gender?: EnumGender;
 };
 
 export type UserUpdateDTO = {
@@ -19,7 +19,7 @@ export type UserUpdateDTO = {
   title?: string;
   dateOfBirth: Date;
   description?: string;
-  genre: EnumGender;
+  gender: EnumGender;
 };
 
 export type UserChangePasswordDTO = {

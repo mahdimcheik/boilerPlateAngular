@@ -15,7 +15,7 @@ export class AddresseComponent implements OnInit {
 
   classIcon!: string;
 
-  isVisibleFormEditCourse = false;
+  isVisibleFormEditFormation = false;
   popupDeleteVisible = false;
 
   ngOnInit(): void {
@@ -48,11 +48,11 @@ export class AddresseComponent implements OnInit {
   }
 
   showEditForm() {
-    this.isVisibleFormEditCourse = true;
+    this.isVisibleFormEditFormation = true;
   }
 
   hideEditForm() {
-    this.isVisibleFormEditCourse = false;
+    this.isVisibleFormEditFormation = false;
   }
 
   showPopUpDelete() {
@@ -63,6 +63,6 @@ export class AddresseComponent implements OnInit {
   }
 
   editForm(adresse: AdresseDTO) {
-    this.isVisibleFormEditCourse = false;
+    this.isVisibleFormEditFormation = false;
   }
 }

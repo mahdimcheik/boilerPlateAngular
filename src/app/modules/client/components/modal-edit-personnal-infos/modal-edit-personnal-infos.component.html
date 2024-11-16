@@ -75,6 +75,7 @@
         variant="filled"
         optionLabel="name"
         placeholder="Votre genre"
+        (onChange)="genderChosen()"
       />
     </div>
     <div
@@ -88,14 +89,9 @@
 
     <div class="float">
       <label for="dateOfBirth"
-        >Fin<span class="asterix">*</span>{{ " " }}</label
+        >Date de naissance<span class="asterix">*</span>{{ " " }}</label
       >
-      <!-- <input
-        pInputDate
-        id="dateOfBirth"
-        formControlName="dateOfBirth"
-        type="date"
-      /> -->
+
       <p-calendar
         id="dateOfBirth"
         dateFormat="dd/mm/yy"

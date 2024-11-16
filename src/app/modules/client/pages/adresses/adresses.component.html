@@ -10,17 +10,8 @@
   </div>
 </p-fieldset>
 
-<p-sidebar
-  (onHide)="hideAddForm()"
-  *ngIf="isVisibleFormAddAdress"
-  [(visible)]="isVisibleFormAddAdress"
-  position="right"
-  [style]="{
-    width: '50vw'
-  }"
->
-  <app-modal-edit-adresse
-    (actionEmitter)="hideAddForm()"
-    [updateOrAdd]="'add'"
-  ></app-modal-edit-adresse>
-</p-sidebar>
+<app-modal-edit-adresse
+  (actionEmitter)="hideAddForm()"
+  [visible]="isVisibleFormAddAdress"
+  [updateOrAdd]="'add'"
+></app-modal-edit-adresse>

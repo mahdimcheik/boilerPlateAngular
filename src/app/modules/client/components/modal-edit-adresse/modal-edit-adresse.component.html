@@ -1,133 +1,145 @@
-<form
-  [formGroup]="userForm"
-  class="form"
-  (ngSubmit)="userForm.valid && submit()"
-  #form="ngForm"
+<p-sidebar
+  (onHide)="cancel()"
+  [(visible)]="visible"
+  position="right"
+  [style]="{
+    width: '50vw'
+  }"
 >
-  <h2 class="title">{{ title }}</h2>
-  <div class="float">
-    <label for="streetNumber">N° de rue<span class="asterix">*</span></label>
-    <input
-      pInputText
-      id="streetNumber"
-      formControlName="streetNumber"
-      class="input-field"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['streetNumber'].errors"
+  <form
+    [formGroup]="userForm"
+    class="form"
+    (ngSubmit)="userForm.valid && submit()"
+    #form="ngForm"
   >
-    <div [hidden]="!userForm.controls['streetNumber'].errors['required']">
-      Ce champs est obligatoire
+    <h2 class="title">{{ title }}</h2>
+    <div class="float">
+      <label for="streetNumber">N° de rue<span class="asterix">*</span></label>
+      <input
+        pInputText
+        id="streetNumber"
+        formControlName="streetNumber"
+        class="input-field"
+      />
     </div>
-  </div>
-  <div class="float">
-    <label for="street">Rue<span class="asterix">*</span></label>
-    <input
-      pInputText
-      id="street"
-      formControlName="street"
-      class="input-field"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['street'].errors"
-  >
-    <div [hidden]="!userForm.controls['street'].errors['required']">
-      Ce champs est obligatoire
-    </div>
-  </div>
-  <div class="float">
-    <label for="streetLine2"
-      >Complement d'adresse<span class="asterix">*</span></label
-    >
-    <input
-      pInputText
-      id="streetLine2"
-      formControlName="streetLine2"
-      class="input-field"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['streetLine2'].errors"
-  >
     <div
       class="error"
-      [hidden]="!userForm.controls['streetLine2'].errors['required']"
+      *ngIf="form.submitted && userForm.controls['streetNumber'].errors"
     >
-      Ce champs est obligatoire
+      <div [hidden]="!userForm.controls['streetNumber'].errors['required']">
+        Ce champs est obligatoire
+      </div>
     </div>
-  </div>
-  <div class="float">
-    <label for="city">Ville<span class="asterix">*</span></label>
-    <input pInputText id="city" formControlName="city" class="input-field" />
-  </div>
-  <div class="error" *ngIf="form.submitted && userForm.controls['city'].errors">
-    <div [hidden]="!userForm.controls['city'].errors['required']">
-      Ce champs est obligatoire
+    <div class="float">
+      <label for="street">Rue<span class="asterix">*</span></label>
+      <input
+        pInputText
+        id="street"
+        formControlName="street"
+        class="input-field"
+      />
     </div>
-  </div>
-
-  <div class="float">
-    <label for="postalCode">Code postal<span class="asterix">*</span></label>
-    <input
-      pInputText
-      id="postalCode"
-      formControlName="postalCode"
-      class="input-field"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['postalCode'].errors"
-  >
-    <div [hidden]="!userForm.controls['postalCode'].errors['required']">
-      Ce champs est obligatoire
-    </div>
-  </div>
-
-  <div class="float">
-    <label for="addressType"
-      >Type d'adresse<span class="asterix">*</span>{{ " " }}</label
+    <div
+      class="error"
+      *ngIf="form.submitted && userForm.controls['street'].errors"
     >
-    <p-dropdown
-      id="addressType"
-      [options]="typesAdresseList"
-      formControlName="addressType"
-      variant="filled"
-      optionLabel="name"
-      placeholder="Type d'adresse"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['addressType'].errors"
-  >
-    <div [hidden]="!userForm.controls['addressType'].errors['required']">
-      Ce champs est obligatoire
+      <div [hidden]="!userForm.controls['street'].errors['required']">
+        Ce champs est obligatoire
+      </div>
     </div>
-  </div>
+    <div class="float">
+      <label for="streetLine2"
+        >Complement d'adresse<span class="asterix">*</span></label
+      >
+      <input
+        pInputText
+        id="streetLine2"
+        formControlName="streetLine2"
+        class="input-field"
+      />
+    </div>
+    <div
+      class="error"
+      *ngIf="form.submitted && userForm.controls['streetLine2'].errors"
+    >
+      <div
+        class="error"
+        [hidden]="!userForm.controls['streetLine2'].errors['required']"
+      >
+        Ce champs est obligatoire
+      </div>
+    </div>
+    <div class="float">
+      <label for="city">Ville<span class="asterix">*</span></label>
+      <input pInputText id="city" formControlName="city" class="input-field" />
+    </div>
+    <div
+      class="error"
+      *ngIf="form.submitted && userForm.controls['city'].errors"
+    >
+      <div [hidden]="!userForm.controls['city'].errors['required']">
+        Ce champs est obligatoire
+      </div>
+    </div>
 
-  <div class="control">
-    <p-button
-      [type]="'button'"
-      label="Annuler"
-      icon="pi pi-times"
-      iconPos="right"
-      color=""
-      severity="danger"
-      (onClick)="cancel()"
-    />
-    <p-button
-      [type]="'submit'"
-      label="Validez"
-      icon="pi pi-check"
-      iconPos="right"
-      color=""
-      severity="primary"
-    />
-  </div>
-</form>
+    <div class="float">
+      <label for="postalCode">Code postal<span class="asterix">*</span></label>
+      <input
+        pInputText
+        id="postalCode"
+        formControlName="postalCode"
+        class="input-field"
+      />
+    </div>
+    <div
+      class="error"
+      *ngIf="form.submitted && userForm.controls['postalCode'].errors"
+    >
+      <div [hidden]="!userForm.controls['postalCode'].errors['required']">
+        Ce champs est obligatoire
+      </div>
+    </div>
+
+    <div class="float">
+      <label for="addressType"
+        >Type d'adresse<span class="asterix">*</span>{{ " " }}</label
+      >
+      <p-dropdown
+        id="addressType"
+        [options]="typesAdresseList"
+        formControlName="addressType"
+        variant="filled"
+        optionLabel="name"
+        placeholder="Type d'adresse"
+      />
+    </div>
+    <div
+      class="error"
+      *ngIf="form.submitted && userForm.controls['addressType'].errors"
+    >
+      <div [hidden]="!userForm.controls['addressType'].errors['required']">
+        Ce champs est obligatoire
+      </div>
+    </div>
+
+    <div class="control">
+      <p-button
+        [type]="'button'"
+        label="Annuler"
+        icon="pi pi-times"
+        iconPos="right"
+        color=""
+        severity="danger"
+        (onClick)="cancel()"
+      />
+      <p-button
+        [type]="'submit'"
+        label="Validez"
+        icon="pi pi-check"
+        iconPos="right"
+        color=""
+        severity="primary"
+      />
+    </div>
+  </form>
+</p-sidebar>

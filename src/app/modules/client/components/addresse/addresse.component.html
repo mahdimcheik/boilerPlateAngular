@@ -28,20 +28,11 @@
   </div>
 </div>
 
-<p-sidebar
-  (onHide)="hideEditForm()"
-  *ngIf="isVisibleFormEditCourse"
-  [(visible)]="isVisibleFormEditCourse"
-  position="right"
-  [style]="{
-    width: '50vw'
-  }"
->
-  <app-modal-edit-adresse
-    [adresseTochange]="adresse"
-    (actionEmitter)="hideEditForm()"
-  ></app-modal-edit-adresse>
-</p-sidebar>
+<app-modal-edit-adresse
+  [visible]="isVisibleFormEditFormation"
+  [adresseTochange]="adresse"
+  (actionEmitter)="hideEditForm()"
+></app-modal-edit-adresse>
 
 <app-modal-validate
   [visible]="popupDeleteVisible"
