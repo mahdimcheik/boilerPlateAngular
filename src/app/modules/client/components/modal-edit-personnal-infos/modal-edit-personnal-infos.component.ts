@@ -20,7 +20,7 @@ export class ModalEditPersonnalInfosComponent {
   @Output() actionEmitter = new EventEmitter<void>();
   @Input() visible: boolean = false;
   selectedGender!: GenderDropDown;
-  title!: string;
+  @Input() title!: string;
 
   authService = inject(AuthService);
   fb = inject(FormBuilder);

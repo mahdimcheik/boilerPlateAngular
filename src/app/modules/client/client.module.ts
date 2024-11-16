@@ -26,6 +26,8 @@ import { ModalValidateComponent } from '../../shared/components/modal-validate/m
 import { ModalEditFormationComponent } from './components/modal-edit-formation/modal-edit-formation.component';
 import { ModalEditPersonnalInfosComponent } from './components/modal-edit-personnal-infos/modal-edit-personnal-infos.component';
 import { CalendarModule } from 'primeng/calendar';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { CalendarModule } from 'primeng/calendar';
     ModalEditAdresseComponent,
     ModalEditFormationComponent,
     ModalEditPersonnalInfosComponent,
+    FileUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +60,7 @@ import { CalendarModule } from 'primeng/calendar';
     DropdownModule,
     ModalValidateComponent,
     CalendarModule,
+    FileUploadModule,
   ],
 })
 export class ClientModule {}

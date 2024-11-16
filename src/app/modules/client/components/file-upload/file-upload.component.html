@@ -1,0 +1,19 @@
+<div class="upload">
+  <p-button
+    label="Téléverser"
+    icon="pi pi-upload"
+    (onClick)="fileUpload.click()"
+  ></p-button>
+  <ng-container *ngIf="imageUrl">
+    <img [src]="imageUrl" alt="" width="75" height="75" />
+  </ng-container>
+
+  <input
+    [hidden]="true"
+    type="file"
+    class="file-input"
+    (change)="onFileSelected($event)"
+    #fileUpload
+    [accept]="'image/png, image/jpeg, image/bitmap'"
+  />
+</div>

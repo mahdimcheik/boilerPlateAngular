@@ -38,6 +38,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/variables.scss",
               "node_modules/primeng/resources/primeng.min.css",
               {
                 "input": "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
@@ -131,6 +132,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/variables.scss",
               "node_modules/primeng/resources/primeng.min.css",
               {
                 "input": "node_modules/primeng/resources/themes/lara-light-blue/theme.css",

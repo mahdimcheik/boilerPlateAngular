@@ -55,6 +55,7 @@
 <app-modal-edit-personnal-infos
   [visible]="isVisibleModalEditPerso"
   [user]="userConnected()"
+  [title]="'Mettre à jour votre profil'"
   *ngIf="isVisibleModalEditPerso"
   (actionEmitter)="isVisibleModalEditPerso = false"
 ></app-modal-edit-personnal-infos>
