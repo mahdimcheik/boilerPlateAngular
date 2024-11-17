@@ -8,6 +8,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ButtonModule } from 'primeng/button';
 import { ModalCreateAppoitmentComponent } from './components/modal-create-appoitment/modal-create-appoitment.component';
 import { DialogModule } from 'primeng/dialog';
+import { CustomNavbarComponent } from './components/custom-navbar/custom-navbar.component';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,7 @@ import { DialogModule } from 'primeng/dialog';
     ProfilComponent,
     CalendarComponent,
     ModalCreateAppoitmentComponent,
+    CustomNavbarComponent,
   ],
   imports: [
     CommonModule,
@@ -22,6 +25,7 @@ import { DialogModule } from 'primeng/dialog';
     FullCalendarModule,
     ButtonModule,
     DialogModule,
+    SidebarModule,
   ],
 })
 export class TeacherModule {}

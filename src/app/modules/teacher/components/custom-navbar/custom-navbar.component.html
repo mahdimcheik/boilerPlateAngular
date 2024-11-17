@@ -1,0 +1,43 @@
+<div class="custom-navbar mobile">
+  <div class="top-mobile">
+    <p-button icon="pi pi-bars" (onClick)="sidebarVisible = true"></p-button>
+  </div>
+  <p-sidebar [(visible)]="sidebarVisible">
+    <div class="sidenav">
+      <p-button
+        class="nav-button"
+        *ngFor="let link of links"
+        (click)="hideNavbar()"
+      >
+        <div class="link-btn">
+          <i [ngClass]="link.icon"></i>
+          <span>{{ link.label }}</span>
+        </div>
+      </p-button>
+      <!-- <p-button
+        *ngFor="let link of links"
+        [icon]="link.icon"
+        [label]="link.label"
+        styleClass="nav-button"
+      ></p-button> -->
+    </div>
+  </p-sidebar>
+</div>
+<div
+  class="desktop"
+  (click)="toggle()"
+  (mouseenter)="showLabel = true"
+  (mouseleave)="showLabel = false"
+>
+  <p-button
+    class="nav-button-desktop"
+    [style]="{ paddingLeft: '10px' }"
+    *ngFor="let link of links"
+    (click)="hideNavbar()"
+  >
+    <div class="link-btn" [style]="{ width: showLabel ? '150px' : '10px' }">
+      <i [ngClass]="link.icon" [style]="{ width: '30px' }"></i>
+      <span *ngIf="showLabel">{{ link.label }}</span>
+    </div>
+  </p-button>
+</div>
