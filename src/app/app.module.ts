@@ -28,6 +28,7 @@ import { RippleModule } from 'primeng/ripple';
 import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
 import { AdresseTypePipe } from './utilities/pipes/adresse-type.pipe';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AdresseTypePipe } from './utilities/pipes/adresse-type.pipe';
     RippleModule,
     CommonModule,
     MenuModule,
+    FullCalendarModule,
   ],
   providers: [
     provideAnimations(),

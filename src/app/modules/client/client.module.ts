@@ -61,6 +61,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     ModalValidateComponent,
     CalendarModule,
     FileUploadModule,
+    ButtonModule,
   ],
 })
 export class ClientModule {}
