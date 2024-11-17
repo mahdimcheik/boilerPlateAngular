@@ -86,7 +86,12 @@
 
     <div class="float">
       <label for="startAt">Début<span class="asterix">*</span>{{ " " }}</label>
-      <input id="startAt" formControlName="startAt" type="date" />
+      <!-- <input id="startAt" formControlName="startAt" type="date" /> -->
+      <p-calendar
+        id="startAt"
+        dateFormat="dd/mm/yy"
+        formControlName="startAt"
+      />
     </div>
     <div
       class="error"
@@ -99,7 +104,8 @@
 
     <div class="float">
       <label for="endAt">Fin<span class="asterix">*</span>{{ " " }}</label>
-      <input id="endAt" formControlName="endAt" type="date" />
+      <!-- <input id="endAt" formControlName="endAt" type="date" /> -->
+      <p-calendar id="endAt" dateFormat="dd/mm/yy" formControlName="endAt" />
     </div>
     <div
       class="error"

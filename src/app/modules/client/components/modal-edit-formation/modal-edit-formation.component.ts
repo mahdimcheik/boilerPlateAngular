@@ -39,8 +39,8 @@ export class ModalEditFormationComponent {
         company: [this.formationTochange.company, [Validators.required]],
         city: [this.formationTochange.city, [Validators.required]],
         country: [this.formationTochange.country, [Validators.required]],
-        startAt: [this.formationTochange.startAt],
-        endAt: [this.formationTochange.endAt],
+        startAt: [new Date(this.formationTochange.startAt)],
+        endAt: [new Date(this.formationTochange.endAt)],
       });
     } else if (this.updateOrAdd == 'add') {
       this.title = 'Ajouter une formation';
