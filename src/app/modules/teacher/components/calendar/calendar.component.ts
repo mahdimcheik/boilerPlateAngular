@@ -40,10 +40,11 @@ type CustomEvent = {
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
+  isVisibleModalCreate: boolean = false;
+
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
-
-  events: EventInput[] = [];
+  events: EventInput[] = [{ title: 'Meeting1', start: new Date() }];
   displayModal: boolean = false;
   dateStart!: Date;
   dateEnd!: Date;
@@ -54,9 +55,9 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     const booked = draggedEvent.extendedProps.booked;
     return dropInfo.start >= now && !booked;
   };
-  handleEventClick(eventClickArg: EventClickArg) {
+  onEventClick = (eventClickArg: EventClickArg) => {
     console.log('eventClickArg', eventClickArg);
-  }
+  };
   onDrop = (eventDropArg: EventDropArg) => {
     console.log(
       'Event drop',
@@ -65,7 +66,16 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       eventDropArg.delta
     );
   };
-  onDateSelect = (selectionInfo: DateSelectArg) => {};
+  onDateSelect = (selectionInfo: DateSelectArg) => {
+    console.log('date selected ', selectionInfo);
+    this.events.push({
+      title: 'new events',
+      start: selectionInfo.start,
+      end: selectionInfo.end,
+    });
+    this.showCreateModal();
+    this.events = [...this.events];
+  };
   canStartDrag = (selectionInfo: any) => {
     return selectionInfo.start > new Date();
   };
@@ -141,13 +151,20 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 
     eventContent: this.renderEventContent, // template appoitment
     select: this.onDateSelect,
-    eventClick: this.handleEventClick.bind(this),
+    eventClick: this.onEventClick,
     // drag and drop
     selectAllow: this.canStartDrag, // can start drag event ?
     eventAllow: this.canDrop, // can drop ?
     eventDrop: this.onDrop, // drop
-    events: [{ title: 'Meeting', start: new Date(), description: 'lolus' }],
+    events: this.events,
   };
+
+  showCreateModal() {
+    this.isVisibleModalCreate = true;
+  }
+  hideCreateModal() {
+    this.isVisibleModalCreate = false;
+  }
 
   ngOnInit(): void {}
 

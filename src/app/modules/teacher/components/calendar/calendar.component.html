@@ -16,9 +16,10 @@
     </p-button>
   </div>
 </div>
-<full-calendar [options]="calendarOptions" #calendar>
-  <!-- <ng-template #eventContent let-arg>
-    <b>Lol {{ arg.timeText }}</b>
-    <i>{{ arg.event.title }}</i>
-  </ng-template> -->
+<full-calendar [options]="calendarOptions" #calendar [events]="events">
 </full-calendar>
+
+<app-modal-create-appoitment
+  [visible]="isVisibleModalCreate"
+  (actionEmitter)="hideCreateModal()"
+></app-modal-create-appoitment>
