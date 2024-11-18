@@ -19,20 +19,11 @@ export class SlotService {
       .get<ResponseDTO>(`https://localhost:7113/slot?userId=${userId}`)
       .pipe(
         map((res) => {
-          console.log('results events ', res);
           var slots = res.data as SlotResponseDTO[];
           if (slots == null || slots.length == 0) return [];
-          return slots.map((slot) => {
-            return {
-              start: new Date(slot.startAt),
-              end: new Date(slot.endAt),
-              title: 'No title',
-              extendedProps: {
-                price: slot.price,
-                reduction: slot.reduction,
-              },
-            } as EventInput;
-          });
+          return slots.map((slot) =>
+            this.convertSlotResponseToEventInput(slot)
+          );
         }),
         tap((res) => this.visibleEvents.set(res))
       );
@@ -43,8 +34,6 @@ export class SlotService {
       .post<ResponseDTO>(`https://localhost:7113/slot`, slotCreateDTO)
       .pipe(
         tap((res) => {
-          console.log('result after add appt', res);
-
           this.visibleEvents().push(
             this.convertSlotResponseToEventInput(res.data)
           );
@@ -61,6 +50,7 @@ export class SlotService {
       extendedProps: {
         price: slot.price,
         reduction: slot.reduction,
+        id: slot.id,
       },
     };
   }

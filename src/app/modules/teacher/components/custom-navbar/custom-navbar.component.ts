@@ -42,7 +42,6 @@ export class CustomNavbarComponent {
 
   hideNavbar() {
     this.sidebarVisible = false;
-    console.log(this.sidebarVisible);
   }
   toggle() {
     this.showLabel = !this.showLabel;

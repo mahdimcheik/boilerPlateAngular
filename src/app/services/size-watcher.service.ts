@@ -21,7 +21,6 @@ export class SizeWatcherService {
       distinctUntilChanged(),
       tap(() => {
         this.windowWidth$.next(window.innerWidth);
-        console.log(this.windowWidth$.value);
       })
     )
     .subscribe();

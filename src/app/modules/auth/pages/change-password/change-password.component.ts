@@ -38,8 +38,6 @@ export class ChangePasswordComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    console.log('data router ', this.activatedRoute.snapshot);
-
     let userId = this.activatedRoute.snapshot.queryParams['userId'];
     let resetToken = this.activatedRoute.snapshot.queryParams['resetToken'];
     this.userForm.setValue({
@@ -51,7 +49,6 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   async submit() {
-    console.log(this.userForm.errors);
     await firstValueFrom(
       this.authService
         .resetPassword(this.userForm.value as UserChangePasswordDTO)

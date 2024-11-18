@@ -23,8 +23,6 @@ export class AdresseService {
       .pipe(tap((res) => this.listAddresses.set(res.data as AdresseDTO[])));
   }
   updateAddresse(adresseDTO: AdresseDTO): Observable<ResponseDTO> {
-    console.log('adresse ', adresseDTO);
-
     return this.http
       .put<ResponseDTO>(`https://localhost:7113/address`, adresseDTO)
       .pipe(
@@ -32,8 +30,6 @@ export class AdresseService {
           let newAdress = this.listAddresses().findIndex(
             (x) => x.id == adresseDTO.id
           );
-          // newAdress.city = (res.data as AdresseDTO).city;
-          // console.log('new adress ', newAdress);
           this.listAddresses()[newAdress] = adresseDTO;
 
           this.listAddresses.update((oldList) => [...oldList]);

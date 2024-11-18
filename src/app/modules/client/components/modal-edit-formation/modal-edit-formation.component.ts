@@ -27,8 +27,6 @@ export class ModalEditFormationComponent {
   userForm!: FormGroup;
 
   ngOnInit(): void {
-    console.log('popup edit formation ');
-
     if (this.updateOrAdd == 'update') {
       // pour primeng drop down options
       this.title = 'Editer la formation suivante';
@@ -76,7 +74,6 @@ export class ModalEditFormationComponent {
           .addFormation(newFormation)
           .pipe(finalize(() => this.actionEmitter.emit()))
       );
-      console.log('form user ', this.userForm.value);
     }
   }
   cancel() {

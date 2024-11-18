@@ -36,9 +36,7 @@ export class PersonnalInfosComponent implements OnInit {
     );
   }
 
-  run() {
-    console.log('runner');
-  }
+  run() {}
 
   hideAddForm() {
     this.isVisibleModalAddFormation = false;

@@ -18,9 +18,19 @@
     <div class="content">
       <h2>Résumé de votre créneau</h2>
       <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
+
+      <div class="dat-from-to">
+        <h4>De : {{ start | date : "HH:mm" }}</h4>
+        <p-calendar [timeOnly]="true" [(ngModel)]="start"></p-calendar>
+      </div>
+
+      <div class="dat-from-to">
+        <h4>à : {{ end | date : "HH:mm" }}</h4>
+        <p-calendar [timeOnly]="true" [(ngModel)]="end"></p-calendar>
+      </div>
     </div>
 
-    <div class="control">
+    <div class="control" autofocus>
       <p-button
         [style]="{ minWidth: '130px' }"
         label="Annuler"
@@ -29,6 +39,7 @@
         severity="danger"
       ></p-button>
       <p-button
+        autofocus="true"
         [style]="{ minWidth: '130px' }"
         label="Créer"
         icon="pi pi-check"

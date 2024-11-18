@@ -36,9 +36,10 @@ export class AuthService {
   constructor() {}
 
   register(userDTO: UserCreateDTO): Observable<ResponseRegister> {
-    return this.http
-      .post<ResponseRegister>(`${environment.BACK_URL}/Users/register`, userDTO)
-      .pipe(tap((res) => console.log(res)));
+    return this.http.post<ResponseRegister>(
+      `${environment.BACK_URL}/Users/register`,
+      userDTO
+    );
   }
 
   login(userLoginDTO: UserLoginDTO): Observable<ResponseDTO> {
@@ -77,11 +78,8 @@ export class AuthService {
     // set user from localstoarage
     this.userConnected.set(this.localStorageService.getUser());
     this.token.set(this.localStorageService.getToken());
-    console.log('token ', this.token());
-    console.log('user ', this.userConnected());
 
     if (this.token()) {
-      console.log('token on ');
       return this.http
         .get<ResponseDTO>(`${environment.BACK_URL}/users/my-informations`)
         .pipe(
@@ -94,38 +92,27 @@ export class AuthService {
             );
             this.localStorageService.setUser(this.userConnected());
             this.localStorageService.setToken(this.token());
-            console.log('mes infos ', res);
           })
         );
     }
-    console.log('token off ');
 
     return of().pipe(tap(() => this.reset()));
   }
 
   forgotPassword(input: { email: string }): Observable<ResponseDTO> {
-    return this.http
-      .post<ResponseDTO>(`${environment.BACK_URL}/forgot-password`, input)
-      .pipe(
-        tap((res) => {
-          console.log(res);
-        })
-      );
+    return this.http.post<ResponseDTO>(
+      `${environment.BACK_URL}/forgot-password`,
+      input
+    );
   }
 
   resetPassword(
     changePassword: UserChangePasswordDTO
   ): Observable<ResponseDTO> {
-    return this.http
-      .post<ResponseDTO>(
-        `${environment.BACK_URL}/password-reset`,
-        changePassword
-      )
-      .pipe(
-        tap((res) => {
-          console.log(res);
-        })
-      );
+    return this.http.post<ResponseDTO>(
+      `${environment.BACK_URL}/password-reset`,
+      changePassword
+    );
   }
 
   reset(): void {

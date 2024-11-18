@@ -24,7 +24,6 @@ export class ForgetPasswordComponent {
   });
 
   submit() {
-    console.log(this.userForm.errors);
     this.authService
       .forgotPassword(this.userForm.value as { email: string })
       .pipe(
@@ -34,7 +33,6 @@ export class ForgetPasswordComponent {
             this.message.set(res.message);
           }
         })
-      )
-      .subscribe((res) => console.log('in page', res));
+      );
   }
 }

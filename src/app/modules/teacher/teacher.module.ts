@@ -13,6 +13,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { SidenavChachaComponent } from './components/sidenav-chacha/sidenav-chacha.component';
 import { provideRouter } from '@angular/router';
 import localeFr from '@angular/common/locales/fr';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -32,6 +34,9 @@ registerLocaleData(localeFr, 'fr');
     ButtonModule,
     DialogModule,
     SidebarModule,
+    CalendarModule,
+    CommonModule,
+    FormsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })

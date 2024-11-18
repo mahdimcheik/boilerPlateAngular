@@ -57,7 +57,6 @@ export class ModalEditPersonnalInfosComponent {
     this.selectedGender =
       this.typesGenderList.find((x) => x.value == this.user.gender) ??
       this.typesGenderList[3];
-    console.log('received gender', this.selectedGender);
 
     this.userForm = this.fb.group({
       firstName: [this.user.firstName, [Validators.required]],
@@ -68,8 +67,6 @@ export class ModalEditPersonnalInfosComponent {
     });
   }
   async submit() {
-    console.log('sent gender ', this.selectedGender);
-
     const newUser = {
       ...this.user,
       firstName: this.userForm.value['firstName'],
@@ -94,12 +91,9 @@ export class ModalEditPersonnalInfosComponent {
   cancel() {
     this.actionEmitter.emit();
   }
-  genderChosen() {
-    console.log(this.selectedGender);
-  }
+  genderChosen() {}
 
   receiveFile(event: { file: File; fileName: string }) {
-    console.log('files ', event);
     this.file = event.file;
     this.fileName = event.fileName;
   }

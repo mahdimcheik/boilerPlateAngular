@@ -33,6 +33,7 @@ type CustomEvent = {
   start: Date;
   end: Date;
   extendedProps: {
+    id: string;
     firstName: string;
     lastName: string;
     imgUrl: string;
@@ -58,24 +59,16 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   dateStart!: Date;
   dateEnd!: Date;
   currentDate!: Date;
-  selectedSlot: EventInput = { start: new Date(), end: new Date() };
+  selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
+  selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
 
   canDrop = (dropInfo: MinimalEvent, draggedEvent: any) => {
     const now = new Date();
     const booked = draggedEvent.extendedProps.booked;
     return dropInfo.start >= now && !booked;
   };
-  onEventClick = (eventClickArg: EventClickArg) => {
-    console.log('eventClickArg', eventClickArg);
-  };
-  onDrop = (eventDropArg: EventDropArg) => {
-    console.log(
-      'Event drop',
-      eventDropArg.oldEvent.end,
-      eventDropArg.oldEvent.start,
-      eventDropArg.delta
-    );
-  };
+  onEventClick = (eventClickArg: EventClickArg) => {};
+  onDrop = (eventDropArg: EventDropArg) => {};
   onDateSelect = (selectionInfo: DateSelectArg) => {
     this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
 

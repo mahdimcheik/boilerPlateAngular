@@ -42,10 +42,9 @@ export class RegisterComponent {
   );
 
   submit() {
-    console.log(this.userForm.errors);
     this.authService
       .register(this.userForm.value as UserCreateDTO)
       .pipe()
-      .subscribe((res) => console.log('in page', res));
+      .subscribe();
   }
 }

@@ -31,8 +31,6 @@ export function passwordValidator(
         weakPassword: 'Mot de passe faible',
       };
     }
-    // check if date end is before date begin
-    console.log('passwords : ', value1, value2);
 
     if (value1 !== value2)
       return {

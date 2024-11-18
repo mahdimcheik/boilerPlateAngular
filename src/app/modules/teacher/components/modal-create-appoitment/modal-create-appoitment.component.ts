@@ -28,7 +28,6 @@ export class ModalCreateAppoitmentComponent implements OnInit {
   slotService = inject(SlotService);
 
   ngOnInit(): void {
-    console.log('Event from modal', this.appoitment);
     this.start = this.appoitment.start as Date;
     this.end = this.appoitment.end as Date;
   }
