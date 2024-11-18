@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  inject,
   OnInit,
   signal,
   ViewChild,
@@ -19,6 +20,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import frLocale from '@fullcalendar/core/locales/fr';
 import interactionPlugin from '@fullcalendar/interaction';
+import { SlotService } from '../../../../services/slot.service';
+import { firstValueFrom, reduce, tap } from 'rxjs';
+import { AuthService } from '../../../../services/auth.service';
+import { SlotResponseDTO } from '../../../../shared/Models/slot';
 
 type MinimalEvent = {
   start: Date;
@@ -40,6 +45,9 @@ type CustomEvent = {
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
+  slotService = inject(SlotService);
+  userConnected = inject(AuthService).userConnected; // signal
+
   isVisibleModalCreate: boolean = false;
 
   @ViewChild('calendar')
@@ -80,6 +88,12 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     return selectionInfo.start > new Date();
   };
 
+  loadSlot() {
+    this.slotService
+      .getSlotByCreator(this.userConnected().id)
+      .subscribe((res) => (this.events = res));
+  }
+
   // template slot
   renderEventContent = (arg: EventContentArg) => {
     let html = `<div class="custom-event">
@@ -96,8 +110,11 @@ export class CalendarComponent implements OnInit, AfterViewInit {
                         <div class="sujet">Sujet : ${
                           (arg.event.extendedProps as any).subject
                         }</div>
+
                         `
-                        : 'Créneau disponible'
+                        : `Créneau disponible <div>Prix :${
+                            (arg.event.extendedProps as any).price
+                          }</div>`
                     }</div>
                   </div>`;
     let arrayOfDomNodes = [];
@@ -166,7 +183,9 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.isVisibleModalCreate = false;
   }
 
-  ngOnInit(): void {}
+  async ngOnInit(): Promise<void> {
+    this.loadSlot();
+  }
 
   ngAfterViewInit(): void {
     const calendarApi = this.calendarComponent.getApi();
