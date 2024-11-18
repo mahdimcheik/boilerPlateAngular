@@ -16,10 +16,12 @@
     </p-button>
   </div>
 </div>
-<full-calendar [options]="calendarOptions" #calendar [events]="events">
+<full-calendar [options]="calendarOptions" #calendar [events]="visibleEvents()">
 </full-calendar>
 
 <app-modal-create-appoitment
+  *ngIf="isVisibleModalCreate"
+  [appoitment]="selectedSlot"
   [visible]="isVisibleModalCreate"
   (actionEmitter)="hideCreateModal()"
 ></app-modal-create-appoitment>

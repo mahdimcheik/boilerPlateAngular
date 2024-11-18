@@ -46,17 +46,19 @@ type CustomEvent = {
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
   slotService = inject(SlotService);
+  visibleEvents = this.slotService.visibleEvents; // signal
   userConnected = inject(AuthService).userConnected; // signal
 
   isVisibleModalCreate: boolean = false;
 
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
-  events: EventInput[] = [{ title: 'Meeting1', start: new Date() }];
+  events: EventInput[] = [];
   displayModal: boolean = false;
   dateStart!: Date;
   dateEnd!: Date;
   currentDate!: Date;
+  selectedSlot: EventInput = { start: new Date(), end: new Date() };
 
   canDrop = (dropInfo: MinimalEvent, draggedEvent: any) => {
     const now = new Date();
@@ -75,23 +77,16 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     );
   };
   onDateSelect = (selectionInfo: DateSelectArg) => {
-    console.log('date selected ', selectionInfo);
-    this.events.push({
-      title: 'new events',
-      start: selectionInfo.start,
-      end: selectionInfo.end,
-    });
+    this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
+
     this.showCreateModal();
-    this.events = [...this.events];
   };
   canStartDrag = (selectionInfo: any) => {
     return selectionInfo.start > new Date();
   };
 
   loadSlot() {
-    this.slotService
-      .getSlotByCreator(this.userConnected().id)
-      .subscribe((res) => (this.events = res));
+    this.slotService.getSlotByCreator(this.userConnected().id).subscribe();
   }
 
   // template slot

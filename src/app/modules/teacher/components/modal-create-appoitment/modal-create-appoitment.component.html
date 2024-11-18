@@ -8,92 +8,32 @@
 >
   <div class="modal">
     <div class="container-img-forgot">
+      <h2>Validez le créneau d'ouverture</h2>
       <img
         class="img-fluid forgot-img"
-        src="/assets/svgs/validate-slot.svg"
+        src="/assets/svgs/open-slot.svg"
         alt=""
       />
     </div>
-    <h1>Validez le créneau d'ouverture</h1>
     <div class="content">
-      <p>
-        Ahoy, aventurier en quête de sagesse ! Vous êtes sur le point de
-        franchir les portes d'une aventure épique : la création d'un créneau de
-        mentorat.
-      </p>
-
-      <div class="form-mentorat">
-        <h2>Choisisez le mode de mentorat</h2>
-        <!-- <form [formGroup]="formulaire">
-          <select formControlName="mode" (change)="updateMode()">
-            <option value="presentiel">Présentiel</option>
-            <option value="visio">Visio</option>
-          </select>
-        </form> -->
-      </div>
-
-      <div class="content-resume">
-        <h2>Résumé de votre créneau</h2>
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/date-slot.svg"
-            alt=""
-          />
-
-          <h3>
-            Date :
-            <!-- <span>{{
-              formattedSlotInfo?.dateBegin | date : "dd MMMM yyyy" : "" : "fr"
-            }}</span> -->
-          </h3>
-        </div>
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/duration.svg"
-            alt=""
-          />
-
-          <h3>
-            De
-            <!-- <span>
-              {{ formattedSlotInfo?.dateBegin | date : "HH:mm" : "" : "fr" }} à
-              {{ formattedSlotInfo?.dateEnd | date : "HH:mm" : "" : "fr" }}
-              ({{ formattedSlotInfo?.formattedDuration }})</span
-            > -->
-          </h3>
-        </div>
-
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/visio.svg"
-            alt=""
-          />
-
-          <h3>
-            Le créneau selectionné est
-            <!-- <span>
-              {{
-                formattedSlotInfo?.visio ? " en Visio" : "en Présentiel"
-              }}</span
-            > -->
-          </h3>
-        </div>
-      </div>
+      <h2>Résumé de votre créneau</h2>
+      <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
     </div>
 
     <div class="control">
       <p-button
-        class="btn-general black"
+        [style]="{ minWidth: '130px' }"
         label="Annuler"
+        icon="pi pi-times"
         (onClick)="cancel()"
+        severity="danger"
       ></p-button>
       <p-button
-        class="btn-general pink"
-        label="Créer le créneau"
+        [style]="{ minWidth: '130px' }"
+        label="Créer"
+        icon="pi pi-check"
         (onClick)="validate()"
+        severity="success"
       ></p-button>
     </div>
   </div>

@@ -8,3 +8,12 @@ export type SlotResponseDTO = {
   reduction: number;
   type: number;
 };
+
+export type SlotCreateDTO = {
+  startAt: Date;
+  endAt: Date;
+  createdAt: Date;
+  price: number;
+  reduction: number;
+  type: number;
+};
