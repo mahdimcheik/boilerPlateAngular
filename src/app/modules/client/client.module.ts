@@ -28,6 +28,12 @@ import { ModalEditPersonnalInfosComponent } from './components/modal-edit-person
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MenubarModule } from 'primeng/menubar';
+import { BadgeModule } from 'primeng/badge';
+import { AvatarModule } from 'primeng/avatar';
+import { MenuModule } from 'primeng/menu';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +50,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     ModalEditFormationComponent,
     ModalEditPersonnalInfosComponent,
     FileUploadComponent,
+    NavbarComponent,
+    ThemeSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +70,10 @@ import { FileUploadModule } from 'primeng/fileupload';
     CalendarModule,
     FileUploadModule,
     ButtonModule,
+    MenubarModule,
+    BadgeModule,
+    AvatarModule,
+    MenuModule,
   ],
 })
 export class ClientModule {}

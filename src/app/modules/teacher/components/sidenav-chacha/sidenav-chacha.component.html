@@ -1,0 +1,33 @@
+<div class="top">
+  <p-button
+    icon="pi pi-bars"
+    [text]="true"
+    (onClick)="toggleMobileMenu()"
+  ></p-button>
+</div>
+<div
+  class="sidebar"
+  [class.expanded]="isHovered"
+  (mouseenter)="toggleHover(true)"
+  (mouseleave)="toggleHover(false)"
+>
+  <ul class="menu">
+    <li *ngFor="let item of menuItems" class="menu-item">
+      <i class="{{ item.icon }}"></i>
+      <span *ngIf="isHovered" class="menu-label">{{ item.label }}</span>
+    </li>
+  </ul>
+</div>
+<p-sidebar
+  [(visible)]="sidebarVisible"
+  [style]="{ width: '210px', paddingRight: '0', marginRight: '0' }"
+>
+  <div class="sidebar-mobile">
+    <ul class="menu">
+      <li *ngFor="let item of menuItems" class="menu-item">
+        <i class="{{ item.icon }}"></i>
+        <span class="menu-label">{{ item.label }}</span>
+      </li>
+    </ul>
+  </div>
+</p-sidebar>

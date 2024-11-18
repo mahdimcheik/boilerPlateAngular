@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
-import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +16,6 @@ import { MessageService } from 'primeng/api';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TokenInterceptor } from './utilities/interceptors/token.interceptor';
 import { errorHandlerInterceptor } from './utilities/interceptors/error-handler.interceptor';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { LandingComponent } from './landing/landing.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenubarModule } from 'primeng/menubar';
@@ -33,9 +31,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 @NgModule({
   declarations: [
     AppComponent,
-    ThemeSelectorComponent,
+
     HomeComponent,
-    NavbarComponent,
     LandingComponent,
     AdresseTypePipe,
   ],

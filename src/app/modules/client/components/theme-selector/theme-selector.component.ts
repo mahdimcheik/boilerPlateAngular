@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Theme, ThemeService } from '../../services/theme.service';
-import { LocalstorageService } from '../../services/localstorage.service';
+import { Theme, ThemeService } from '../../../../services/theme.service';
+import { LocalstorageService } from '../../../../services/localstorage.service';
 
 @Component({
   selector: 'app-theme-selector',
@@ -9,7 +9,13 @@ import { LocalstorageService } from '../../services/localstorage.service';
 })
 export class ThemeSelectorComponent implements OnInit {
   themes!: Theme[];
-  themeService: ThemeService = inject(ThemeService);
+  private _themeService: ThemeService = inject(ThemeService);
+  public get themeService(): ThemeService {
+    return this._themeService;
+  }
+  public set themeService(value: ThemeService) {
+    this._themeService = value;
+  }
   localstorageService = inject(LocalstorageService);
 
   activeTheme!: Theme;

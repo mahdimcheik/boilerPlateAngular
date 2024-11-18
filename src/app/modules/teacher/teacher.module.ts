@@ -10,6 +10,7 @@ import { ModalCreateAppoitmentComponent } from './components/modal-create-appoit
 import { DialogModule } from 'primeng/dialog';
 import { CustomNavbarComponent } from './components/custom-navbar/custom-navbar.component';
 import { SidebarModule } from 'primeng/sidebar';
+import { SidenavChachaComponent } from './components/sidenav-chacha/sidenav-chacha.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SidebarModule } from 'primeng/sidebar';
     CalendarComponent,
     ModalCreateAppoitmentComponent,
     CustomNavbarComponent,
+    SidenavChachaComponent,
   ],
   imports: [
     CommonModule,

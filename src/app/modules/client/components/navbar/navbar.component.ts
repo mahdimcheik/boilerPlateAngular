@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TitleCasePipe } from '@angular/common';
 
