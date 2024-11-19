@@ -15,6 +15,10 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
 import { BadgeModule } from 'primeng/badge';
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { AccountCreatedSuccesfulyComponent } from './pages/account-created-succesfuly/account-created-succesfuly.component';
+import { EmailConfirmationSuccessComponent } from './pages/email-confirmation-success/email-confirmation-success.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { BadgeModule } from 'primeng/badge';
     ChangePasswordComponent,
     ModalComponent,
     LayoutAuthComponent,
+    AccountCreatedSuccesfulyComponent,
+    EmailConfirmationSuccessComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +43,8 @@ import { BadgeModule } from 'primeng/badge';
     ButtonModule,
     InputTextModule,
     BadgeModule,
+    CalendarModule,
+    DropdownModule,
   ],
 })
 export class AuthModule {}

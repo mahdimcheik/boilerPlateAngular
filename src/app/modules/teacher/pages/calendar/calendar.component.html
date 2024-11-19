@@ -25,3 +25,18 @@
   [visible]="isVisibleModalCreate"
   (actionEmitter)="hideCreateModal()"
 ></app-modal-create-appoitment>
+
+<app-modal-delete-appointment
+  *ngIf="isVisibleModalDelete"
+  [appoitment]="selectedAppoitment"
+  [visible]="isVisibleModalDelete"
+  (actionEmitter)="isVisibleModalDelete = false"
+></app-modal-delete-appointment>
+
+<app-modal-update-appointment
+  *ngIf="isVisibleModalUpdate"
+  [appoitment]="selectedAppoitment"
+  [newSlot]="selectedSlot"
+  [visible]="isVisibleModalUpdate"
+  (actionEmitter)="isVisibleModalUpdate = false"
+></app-modal-update-appointment>

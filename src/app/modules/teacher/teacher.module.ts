@@ -15,6 +15,8 @@ import { provideRouter } from '@angular/router';
 import localeFr from '@angular/common/locales/fr';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
+import { ModalUpdateAppointmentComponent } from './components/modal-update-appointment/modal-update-appointment.component';
+import { ModalDeleteAppointmentComponent } from './components/modal-delete-appointment/modal-delete-appointment.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -26,6 +28,8 @@ registerLocaleData(localeFr, 'fr');
     ModalCreateAppoitmentComponent,
     CustomNavbarComponent,
     SidenavChachaComponent,
+    ModalUpdateAppointmentComponent,
+    ModalDeleteAppointmentComponent,
   ],
   imports: [
     CommonModule,

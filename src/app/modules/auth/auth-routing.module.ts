@@ -9,6 +9,8 @@ import {
   canNotRegisterGuard,
 } from '../../utilities/guards/can-login.guard';
 import { LayoutAuthComponent } from './pages/layout-auth/layout-auth.component';
+import { AccountCreatedSuccesfulyComponent } from './pages/account-created-succesfuly/account-created-succesfuly.component';
+import { EmailConfirmationSuccessComponent } from './pages/email-confirmation-success/email-confirmation-success.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
         path: 'reset-password',
         component: ChangePasswordComponent,
         canActivate: [canNotLoginGuard],
+      },
+      {
+        path: 'account-created',
+        component: AccountCreatedSuccesfulyComponent,
+      },
+      {
+        path: 'email-confirmation-success',
+        component: EmailConfirmationSuccessComponent,
       },
     ],
   },

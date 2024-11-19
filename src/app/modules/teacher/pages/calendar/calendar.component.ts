@@ -3,7 +3,6 @@ import {
   Component,
   inject,
   OnInit,
-  signal,
   ViewChild,
 } from '@angular/core';
 import {
@@ -19,11 +18,12 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import frLocale from '@fullcalendar/core/locales/fr';
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin, {
+  EventResizeDoneArg,
+  EventResizeStopArg,
+} from '@fullcalendar/interaction';
 import { SlotService } from '../../../../services/slot.service';
-import { firstValueFrom, reduce, tap } from 'rxjs';
 import { AuthService } from '../../../../services/auth.service';
-import { SlotResponseDTO } from '../../../../shared/Models/slot';
 
 type MinimalEvent = {
   start: Date;
@@ -51,6 +51,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   userConnected = inject(AuthService).userConnected; // signal
 
   isVisibleModalCreate: boolean = false;
+  isVisibleModalUpdate: boolean = false;
+  isVisibleModalDelete: boolean = false;
 
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
@@ -62,13 +64,29 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
   selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
 
-  canDrop = (dropInfo: MinimalEvent, draggedEvent: any) => {
+  canDrop = (dropInfo: any, draggedEvent: any) => {
     const now = new Date();
-    const booked = draggedEvent.extendedProps.booked;
-    return dropInfo.start >= now && !booked;
+    return dropInfo.start >= now && draggedEvent.start >= now;
   };
-  onEventClick = (eventClickArg: EventClickArg) => {};
-  onDrop = (eventDropArg: EventDropArg) => {};
+  onEventClick = (eventClickArg: EventClickArg) => {
+    this.selectedAppoitment = eventClickArg.event as EventInput;
+    this.isVisibleModalDelete = true;
+  };
+  onResize = (eventResizeArg: EventResizeDoneArg) => {
+    this.selectedAppoitment = eventResizeArg.oldEvent as EventInput;
+    this.selectedSlot = eventResizeArg.event as EventInput;
+
+    this.isVisibleModalUpdate = true;
+  };
+  onDrop = (eventDropArg: EventDropArg) => {
+    console.log('event drop', eventDropArg);
+    this.selectedSlot = {
+      start: eventDropArg.event.start as Date,
+      end: eventDropArg.event.end as Date,
+    };
+    this.selectedAppoitment = eventDropArg.oldEvent as EventInput;
+    this.isVisibleModalUpdate = true;
+  };
   onDateSelect = (selectionInfo: DateSelectArg) => {
     this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
 
@@ -153,7 +171,10 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     nowIndicator: true,
     allDayText: 'Heures',
     droppable: false,
+    eventResizableFromStart: true,
 
+    eventResizeStop(arg) {},
+    eventResize: this.onResize,
     eventContent: this.renderEventContent, // template appoitment
     select: this.onDateSelect,
     eventClick: this.onEventClick,
@@ -161,6 +182,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     selectAllow: this.canStartDrag, // can start drag event ?
     eventAllow: this.canDrop, // can drop ?
     eventDrop: this.onDrop, // drop
+
     events: this.events,
   };
 
@@ -170,7 +192,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   hideCreateModal() {
     this.isVisibleModalCreate = false;
   }
-
   async ngOnInit(): Promise<void> {
     this.loadSlot();
   }
@@ -195,6 +216,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     //   this.today = signal('today');
     // }, 10);
   }
+
   next(): void {
     this.calendarComponent.getApi().next();
     this.updateViewDates();

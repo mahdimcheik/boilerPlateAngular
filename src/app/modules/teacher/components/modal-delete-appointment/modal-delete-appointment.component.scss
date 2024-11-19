@@ -1,0 +1,30 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .container-img-forgot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .control {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+}
+h2,
+h3,
+h4 {
+  padding: 0;
+  margin: 10px 0;
+}

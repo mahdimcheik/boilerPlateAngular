@@ -1,18 +1,24 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   RequiredValidator,
   Validators,
 } from '@angular/forms';
 import { Password } from 'primeng/password';
-import { max } from 'rxjs';
+import { finalize, max } from 'rxjs';
 import {
   passwordStrengthValidator,
   passwordValidator,
 } from '../../../../shared/validators/confirmPasswordValidator';
 import { AuthService } from '../../../../services/auth.service';
-import { UserCreateDTO } from '../../../../shared/Models/user/user';
+import {
+  EnumGender,
+  GenderDropDown,
+  UserCreateDTO,
+} from '../../../../shared/Models/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,30 +27,68 @@ import { UserCreateDTO } from '../../../../shared/Models/user/user';
 })
 export class RegisterComponent {
   authService = inject(AuthService);
+  fb = inject(FormBuilder);
+  router = inject(Router);
 
-  userForm = new FormGroup(
+  typesGenderList = [
     {
-      email: new FormControl<string>('', [
-        Validators.email,
-        Validators.required,
-      ]),
-      password: new FormControl<string>('', [
-        Validators.required,
-        Validators.minLength(8),
-        passwordStrengthValidator,
-      ]),
-      confirmPassword: new FormControl<string>('', [Validators.required]),
-      firstName: new FormControl<string>('', [Validators.required]),
-      lastName: new FormControl<string>('', [Validators.required]),
-      phoneNumber: new FormControl<string>(''),
+      id: '0',
+      name: 'Homme',
+      value: EnumGender.Homme,
+    },
+    {
+      id: '1',
+      name: 'Femme',
+      value: EnumGender.Femme,
+    },
+    {
+      id: '2',
+      name: 'Non-binaire',
+      value: EnumGender.NonBinaire,
+    },
+    {
+      id: '3',
+      name: 'Autre',
+      value: EnumGender.Autre,
+    },
+  ];
+  selectedGender!: GenderDropDown;
+
+  userForm = this.fb.group(
+    {
+      email: ['', [Validators.email, Validators.required]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          passwordStrengthValidator,
+        ],
+      ],
+      confirmPassword: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      phoneNumber: [''],
+      dateOfBirth: [new Date(), [Validators.required]],
+      gender: [this.selectedGender, [Validators.required]],
     },
     { validators: [passwordValidator('password', 'confirmPassword')] }
   );
 
   submit() {
+    const newUser = {
+      ...this.userForm.value,
+      gender: this.userForm.value['gender']?.value,
+    } as UserCreateDTO;
+    console.log('new user ', newUser);
+
     this.authService
-      .register(this.userForm.value as UserCreateDTO)
-      .pipe()
+      .register(newUser)
+      .pipe(
+        finalize(() => {
+          this.router.navigateByUrl('auth/account-created');
+        })
+      )
       .subscribe();
   }
 }

@@ -110,8 +110,46 @@
       id="phoneNumber"
       formControlName="phoneNumber"
       class="input-field"
-      type="number"
+      type="text"
     />
+  </div>
+
+  <div class="float">
+    <label for="dateOfBirth"
+      >Date de naissance<span class="asterix">*</span></label
+    >
+    <p-calendar
+      id="dateOfBirth"
+      dateFormat="dd/mm/yy"
+      formControlName="dateOfBirth"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['dateOfBirth'].errors"
+  >
+    <div [hidden]="!userForm.controls['dateOfBirth'].errors['required']">
+      Ce champs est obligatoire
+    </div>
+  </div>
+  <div class="float">
+    <label for="gender">Genre<span class="asterix">*</span></label>
+    <p-dropdown
+      id="gender"
+      [options]="typesGenderList"
+      formControlName="gender"
+      variant="filled"
+      optionLabel="name"
+      placeholder="Votre genre"
+    />
+  </div>
+  <div
+    class="error"
+    *ngIf="form.submitted && userForm.controls['gender'].errors"
+  >
+    <div [hidden]="!userForm.controls['gender'].errors['required']">
+      Ce champs est obligatoire
+    </div>
   </div>
 
   <div class="control">

@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../environments/environment.development';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RedirectCommand, Router } from '@angular/router';
 
 type ResponseRegister = {
   succeeded: boolean;
@@ -27,8 +27,7 @@ export class AuthService {
   private localStorageService = inject(LocalstorageService);
   private messageService = inject(MessageService);
 
-  // userConnected$ = new BehaviorSubject<UserResponseDTO>({} as UserResponseDTO);
-  // token$ = new BehaviorSubject<string>('');
+  router = inject(Router);
 
   userConnected = signal({} as UserResponseDTO);
   token = signal<string>('');
@@ -61,6 +60,12 @@ export class AuthService {
             summary: 'Bienvenu ! ',
             detail: res.message ?? 'Youpi!!!',
           });
+          if (this.userConnected().roles.includes('Admin')) {
+            this.router.navigateByUrl('teacher');
+          }
+          if (this.userConnected().roles.includes('Student')) {
+            this.router.navigateByUrl('client');
+          }
         })
       );
   }
@@ -72,6 +77,7 @@ export class AuthService {
       summary: 'Au revoir ! ',
       detail: 'vous êtes déconnecté',
     });
+    this.router.navigateByUrl('auth/login');
   }
 
   getprofile(): Observable<ResponseDTO> {

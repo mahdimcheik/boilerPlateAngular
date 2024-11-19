@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, of, tap } from 'rxjs';
 import { ResponseDTO } from '../shared/Models/user/user';
-import { SlotCreateDTO, SlotResponseDTO } from '../shared/Models/slot';
+import {
+  SlotCreateDTO,
+  SlotResponseDTO,
+  SlotUpdateDTO,
+} from '../shared/Models/slot';
 import { EventInput } from '@fullcalendar/core/index.js';
 
 @Injectable({
@@ -38,6 +42,26 @@ export class SlotService {
             this.convertSlotResponseToEventInput(res.data)
           );
           this.visibleEvents.set([...this.visibleEvents()]);
+        })
+      );
+  }
+
+  updateSlotByCreator(slotUpdateDTO: SlotUpdateDTO): Observable<ResponseDTO> {
+    return this.http
+      .put<ResponseDTO>(`https://localhost:7113/slot`, slotUpdateDTO)
+      .pipe(
+        tap((res) => {
+          let relatedAppointmentIndex = this.visibleEvents().findIndex(
+            (x) => x.extendedProps?.['id'] == slotUpdateDTO.id
+          );
+
+          if (relatedAppointmentIndex != null) {
+            this.visibleEvents()[relatedAppointmentIndex] =
+              this.convertSlotResponseToEventInput(res.data);
+          }
+
+          this.visibleEvents.set([...this.visibleEvents()]);
+          // this.visibleEvents.update(this.visibleEvents);
         })
       );
   }

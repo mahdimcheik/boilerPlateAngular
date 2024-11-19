@@ -17,3 +17,13 @@ export type SlotCreateDTO = {
   reduction: number;
   type: number;
 };
+
+export type SlotUpdateDTO = {
+  id: string;
+  startAt: Date;
+  endAt: Date;
+  createdAt: Date;
+  price: number;
+  reduction: number;
+  type: number;
+};
