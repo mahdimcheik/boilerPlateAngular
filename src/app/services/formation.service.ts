@@ -44,7 +44,6 @@ export class FormationService {
           );
           this.listFormations()[newFormationIndex] = res.data;
           this.listFormations.update(this.listFormations);
-          this.listFormations.update(this.listFormations);
           //this.listFormations.set([...this.listFormations(), (res.data as FormationResponseDTO)]);
         })
       );

@@ -1,4 +1,5 @@
 @import "../../../../../variables.scss";
+$primary-color1: #3498db;
 .sidebar {
   padding-top: 65px;
   width: 60px;
@@ -10,7 +11,7 @@
   left: 0;
   z-index: 20;
   background-color: $primary-color;
-  color: $primary-color-text;
+  // color: $primary-color-text;
 }
 
 .sidebar.expanded {
@@ -24,6 +25,9 @@
 }
 
 .menu-item {
+  color: $primary-color-text;
+  background-color: rgba($color: $primary-color, $alpha: 0.5);
+
   display: flex;
   align-items: center;
   padding: 15px;
@@ -32,8 +36,7 @@
 }
 
 .menu-item:hover {
-  background-color: #34495e;
-  // color: $secondary-color-text;
+  background-color: rgba($color: $primary-color, $alpha: 0.5);
 }
 
 .menu-item i {
