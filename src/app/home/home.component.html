@@ -1,3 +1,54 @@
-<a [routerLink]="'auth/register'">register!</a>
-<a [routerLink]="'auth/login'">login!</a>
-<a (click)="getprofile()">login!</a>
+<!-- <header class="header">
+  <div class="container">
+    <div class="logo">Learn<span>Hub</span></div>
+    <nav class="nav">
+      <a href="#courses">Courses</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+      <button class="btn btn-primary">Sign Up</button>
+    </nav>
+  </div>
+</header> -->
+<app-navbar></app-navbar>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Master New Skills Online</h1>
+      <p>
+        Learn at your own pace with top instructors from around the world. Build
+        your future today!
+      </p>
+      <button class="btn btn-secondary">Get Started</button>
+    </div>
+    <div class="hero-image">
+      <img src="assets/Education.svg" alt="Learning illustration" />
+    </div>
+  </div>
+</section>
+
+<section id="courses" class="courses">
+  <div class="container">
+    <h2>Our Popular Courses</h2>
+    <div class="course-list">
+      <div class="course-card">
+        <h3>Web Development</h3>
+        <p>Build responsive websites and dynamic applications.</p>
+      </div>
+      <div class="course-card">
+        <h3>Graphic Design</h3>
+        <p>Learn to design visually stunning graphics.</p>
+      </div>
+      <div class="course-card">
+        <h3>Data Science</h3>
+        <p>Analyze and interpret complex data to make decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 LearnHub. All rights reserved.</p>
+  </div>
+</footer>

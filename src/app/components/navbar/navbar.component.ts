@@ -1,13 +1,29 @@
-import { Component, computed, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, NgModule } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { TitleCasePipe } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+import { BadgeModule } from 'primeng/badge';
+import { AvatarModule } from 'primeng/avatar';
+import { MenuModule } from 'primeng/menu';
+import { FormsModule, NgModel } from '@angular/forms';
+import { MenubarModule } from 'primeng/menubar';
+import { ThemeSelectorComponent } from '../theme-selector/theme-selector.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
+  standalone: true,
+  imports: [
+    AvatarModule,
+    BadgeModule,
+    MenuModule,
+    CommonModule,
+    FormsModule,
+    MenubarModule,
+    ThemeSelectorComponent,
+  ],
 })
 export class NavbarComponent {
   authService = inject(AuthService);

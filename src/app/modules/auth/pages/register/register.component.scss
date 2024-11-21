@@ -7,8 +7,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  // justify-content: center;
   gap: 2rem;
   .float {
     width: 90%;
@@ -20,6 +20,14 @@
       width: 100%;
     }
   }
+  .double-field {
+    width: 90%;
+    display: flex;
+    gap: 10px;
+    .half-label {
+      width: 50%;
+    }
+  }
 }
 
 .error {
@@ -28,4 +36,17 @@
 
 .asterix {
   color: red;
+}
+
+@media screen and (width < 990px) {
+  .form {
+    .double-field {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      .half-label {
+        width: 100%;
+      }
+    }
+  }
 }

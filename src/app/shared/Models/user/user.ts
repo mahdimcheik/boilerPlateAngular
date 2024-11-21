@@ -10,6 +10,7 @@ export type UserCreateDTO = {
   dateOfBirth: Date;
   description?: string;
   gender?: EnumGender;
+  phoneNumber: string;
 };
 
 export type UserUpdateDTO = {

@@ -27,6 +27,8 @@ import { CommonModule } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
 import { AdresseTypePipe } from './utilities/pipes/adresse-type.pipe';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CommonModule,
     MenuModule,
     FullCalendarModule,
+    NavbarComponent,
+    ThemeSelectorComponent,
   ],
   providers: [
     provideAnimations(),

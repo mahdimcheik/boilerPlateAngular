@@ -4,18 +4,21 @@
 
   img {
     width: 50%;
-    height: calc(100vh - 70px);
+    height: 100vh;
     object-fit: cover;
   }
   div.layout-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50%;
-    height: calc(100vh - 70px);
+    height: 100vh;
     padding: 1rem;
     overflow-y: auto;
   }
 }
 
-@media screen and (width < 600px) {
+@media screen and (width < 990px) {
   .main {
     img {
       display: none;

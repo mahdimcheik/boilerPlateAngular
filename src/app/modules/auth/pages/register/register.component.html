@@ -114,14 +114,15 @@
     />
   </div>
 
-  <div class="float">
-    <label for="dateOfBirth"
+  <div class="double-field">
+    <label for="dateOfBirth" class="half-label"
       >Date de naissance<span class="asterix">*</span></label
     >
     <p-calendar
       id="dateOfBirth"
       dateFormat="dd/mm/yy"
       formControlName="dateOfBirth"
+      [styleClass]="'dropdown'"
     />
   </div>
   <div
@@ -132,8 +133,10 @@
       Ce champs est obligatoire
     </div>
   </div>
-  <div class="float">
-    <label for="gender">Genre<span class="asterix">*</span></label>
+  <div class="double-field">
+    <label for="gender" class="half-label"
+      >Genre<span class="asterix">*</span></label
+    >
     <p-dropdown
       id="gender"
       [options]="typesGenderList"
@@ -141,6 +144,7 @@
       variant="filled"
       optionLabel="name"
       placeholder="Votre genre"
+      [styleClass]="'dropdown'"
     />
   </div>
   <div

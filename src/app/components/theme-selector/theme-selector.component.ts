@@ -1,11 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Theme, ThemeService } from '../../../../services/theme.service';
-import { LocalstorageService } from '../../../../services/localstorage.service';
+import { LocalstorageService } from '../../services/localstorage.service';
+import { Theme, ThemeService } from '../../services/theme.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-theme-selector',
   templateUrl: './theme-selector.component.html',
   styleUrl: './theme-selector.component.scss',
+  standalone: true,
+  imports: [DropdownModule, FormsModule],
 })
 export class ThemeSelectorComponent implements OnInit {
   themes!: Theme[];

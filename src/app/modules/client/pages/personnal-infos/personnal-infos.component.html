@@ -26,7 +26,13 @@
     ></app-line-binary-data>
   </div>
   <div class="image">
-    <img [src]="userConnected().imgUrl" width="200" height="200" alt="" />
+    <!-- <img [src]="userConnected().imgUrl" width="200" height="200" alt="" /> -->
+    <p-image
+      [src]="userConnected().imgUrl"
+      alt="Image"
+      width="200"
+      [preview]="true"
+    />
   </div>
 </div>
 
