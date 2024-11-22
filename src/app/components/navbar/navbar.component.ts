@@ -29,7 +29,7 @@ export class NavbarComponent {
   authService = inject(AuthService);
   router = inject(Router);
   userConnected = this.authService.userConnected;
-  items: MenuItem[] | undefined;
+  // items: MenuItem[] | undefined;
   userItems = computed(() => {
     if (this.userConnected().email) {
       return [
@@ -38,6 +38,7 @@ export class NavbarComponent {
             this.userConnected().lastName
           }`,
           icon: 'pi pi-user',
+          command: () => this.router.navigateByUrl('profile/me'),
         },
         {
           label: 'Déconnexion',
@@ -60,62 +61,60 @@ export class NavbarComponent {
       ];
     }
   }); //: MenuItem[] | undefined;
+  items = computed(() => {
+    return this.userConnected().roles &&
+      this.userConnected()?.roles.includes('Admin')
+      ? [
+          {
+            label: 'Home',
+            icon: 'pi pi-home',
+            command: () => this.router.navigateByUrl(''),
+          },
+          {
+            label: 'Profil',
+            icon: 'pi pi-star',
+            command: () => this.router.navigateByUrl(''),
+          },
 
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Home',
-        icon: 'pi pi-home',
-      },
-      {
-        label: 'Features',
-        icon: 'pi pi-star',
-      },
-      {
-        label: 'Projects',
-        icon: 'pi pi-search',
-        items: [
           {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-            shortcut: '⌘+S',
+            label: 'Dashboard',
+            icon: 'pi pi-calendar',
+            command: () => this.router.navigateByUrl('contactus'),
           },
           {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-            shortcut: '⌘+B',
+            label: 'A Propos',
+            icon: 'pi pi-search',
+            command: () => this.router.navigateByUrl('aboutus'),
           },
           {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-            shortcut: '⌘+U',
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            command: () => this.router.navigateByUrl('contactus'),
+          },
+        ]
+      : [
+          {
+            label: 'Home',
+            icon: 'pi pi-home',
+            command: () => this.router.navigateByUrl(''),
           },
           {
-            separator: true,
+            label: 'Profil',
+            icon: 'pi pi-star',
+            command: () => this.router.navigateByUrl(''),
           },
           {
-            label: 'Templates',
-            icon: 'pi pi-palette',
-            items: [
-              {
-                label: 'Apollo',
-                icon: 'pi pi-palette',
-                badge: '2',
-              },
-              {
-                label: 'Ultima',
-                icon: 'pi pi-palette',
-                badge: '3',
-              },
-            ],
+            label: 'A Propos',
+            icon: 'pi pi-search',
+            command: () => this.router.navigateByUrl('aboutus'),
           },
-        ],
-      },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        badge: '3',
-      },
-    ];
-  }
+          {
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            command: () => this.router.navigateByUrl('contactus'),
+          },
+        ];
+  });
+
+  ngOnInit() {}
 }

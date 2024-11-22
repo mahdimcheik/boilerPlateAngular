@@ -1,4 +1,4 @@
-<p-menubar [model]="items" class="main" [style]="{ height: '54px' }">
+<p-menubar [model]="items()" class="main" [style]="{ height: '54px' }">
   <ng-template pTemplate="item" let-item let-root="root">
     <a pRipple class="p-menuitem-link">
       <span [class]="item.icon"></span>

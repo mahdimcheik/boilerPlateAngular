@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ClientRoutingModule } from './client-routing.module';
 import { LayoutClientComponent } from './pages/layout-client/layout-client.component';
 import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
@@ -34,6 +33,7 @@ import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
 import { MenuModule } from 'primeng/menu';
 import { ImageModule } from 'primeng/image';
+import { ProfileRoutingModule } from './profile-routing.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { ImageModule } from 'primeng/image';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule,
+    ProfileRoutingModule,
     FormsModule,
     RatingModule,
     TabMenuModule,
@@ -76,4 +76,4 @@ import { ImageModule } from 'primeng/image';
     ImageModule,
   ],
 })
-export class ClientModule {}
+export class ProfileModule {}

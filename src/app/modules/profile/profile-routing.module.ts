@@ -6,18 +6,8 @@ import { AdressesComponent } from './pages/adresses/adresses.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: LayoutClientComponent,
-    children: [
-      {
-        path: '',
-        component: PersonnalInfosComponent,
-      },
-      {
-        path: 'adresses',
-        component: AdressesComponent,
-      },
-    ],
   },
 ];
 
@@ -25,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ClientRoutingModule {}
+export class ProfileRoutingModule {}

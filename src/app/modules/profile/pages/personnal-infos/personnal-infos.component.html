@@ -1,6 +1,7 @@
 <div class="list-info">
   <div class="nom-prenom-age-genre">
     <p-button
+      *ngIf="isOwner()"
       icon="pi pi-pen-to-square"
       (onClick)="isVisibleModalEditPerso = true"
     ></p-button>
@@ -11,24 +12,24 @@
     ></app-line-binary-data>
     <app-line-binary-data
       [key]="'Age'"
-      [value]="'' + (userConnected().dateOfBirth | dobToAge)"
+      [value]="'' + (userToDisplay().dateOfBirth | dobToAge)"
       [order]="true"
     ></app-line-binary-data>
     <app-line-binary-data
       [key]="'Genre'"
-      [value]="userConnected().gender | genderTransform"
+      [value]="userToDisplay().gender | genderTransform"
       [order]="false"
     ></app-line-binary-data>
     <app-line-binary-data
       [key]="'Metier'"
-      [value]="userConnected().title ?? 'Non déclaré'"
+      [value]="userToDisplay().title ?? 'Non déclaré'"
       [order]="true"
     ></app-line-binary-data>
   </div>
   <div class="image">
     <!-- <img [src]="userConnected().imgUrl" width="200" height="200" alt="" /> -->
     <p-image
-      [src]="userConnected().imgUrl"
+      [src]="userToDisplay().imgUrl"
       alt="Image"
       width="200"
       [preview]="true"
@@ -38,6 +39,7 @@
 
 <p-fieldset [legend]="'Formations'">
   <p-button
+    *ngIf="isOwner()"
     [icon]="'pi pi-plus'"
     (onClick)="showModalEditFormation()"
   ></p-button>
@@ -51,6 +53,22 @@
   </div>
 </p-fieldset>
 
+<p-fieldset [legend]="'Adresses'">
+  <p-button
+    *ngIf="isOwner()"
+    [icon]="'pi pi-plus'"
+    (onClick)="showModalEditFormation()"
+  ></p-button>
+  <p-divider></p-divider>
+  <div class="Adresses">
+    <app-addresse
+      *ngFor="let adresse of listAdresses()"
+      [editModeOn]="true"
+      [adresse]="adresse"
+    ></app-addresse>
+  </div>
+</p-fieldset>
+
 <app-modal-edit-formation
   (actionEmitter)="hideAddForm()"
   [updateOrAdd]="'add'"
@@ -60,7 +78,7 @@
 
 <app-modal-edit-personnal-infos
   [visible]="isVisibleModalEditPerso"
-  [user]="userConnected()"
+  [user]="userToDisplay()"
   [title]="'Mettre à jour votre profil'"
   *ngIf="isVisibleModalEditPerso"
   (actionEmitter)="isVisibleModalEditPerso = false"

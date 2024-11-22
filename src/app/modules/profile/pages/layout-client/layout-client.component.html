@@ -2,35 +2,38 @@
 <div class="container">
   <div class="sidebar-left">
     <div class="profile-image">
-      <img [src]="userConnected().imgUrl" alt="profile image" />
+      <img [src]="UserToshow().imgUrl" alt="profile image" />
     </div>
     <div class="details">
       <h3>Qui je suis?</h3>
       <span class="resume-perso"
-        >{{ userConnected().firstName | titlecase }}
-        {{ userConnected().lastName | titlecase }}</span
+        >{{ UserToshow().firstName | titlecase }}
+        {{ UserToshow().lastName | titlecase }}</span
       >
       <span class="resume-perso">Acteur</span>
       <span class="resume-perso">{{
-        userConnected().dateOfBirth | dobToAge
+        UserToshow().dateOfBirth | dobToAge
       }}</span>
     </div>
   </div>
   <article class="main-article scrollbar-off">
     <header class="presentation">
       <h1 class="title">
-        {{ userConnected().firstName | titlecase }}
-        {{ userConnected().lastName | titlecase }}
+        {{ UserToshow().firstName | titlecase }}
+        {{ UserToshow().lastName | titlecase }}
       </h1>
-      <h2 class="fonction">{{ userConnected().title }}</h2>
+      <h2 class="fonction">{{ UserToshow().title }}</h2>
     </header>
     <div class="outlet">
-      <nav class="navbar-outlet">
+      <!-- <nav class="navbar-outlet">
         <app-outlet-navbar></app-outlet-navbar>
-      </nav>
+      </nav> -->
       <div class="body-outlet">
         <div class="page-outlet">
-          <router-outlet></router-outlet>
+          <!-- <router-outlet></router-outlet> -->
+          <app-personnal-infos
+            [userToDisplay]="UserToshow"
+          ></app-personnal-infos>
         </div>
         <div class="notifications">
           <p-fieldset legend="Notifications">

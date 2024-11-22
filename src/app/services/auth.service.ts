@@ -61,10 +61,9 @@ export class AuthService {
             detail: res.message ?? 'Youpi!!!',
           });
           if (this.userConnected().roles.includes('Admin')) {
-            this.router.navigateByUrl('teacher');
-          }
-          if (this.userConnected().roles.includes('Student')) {
-            this.router.navigateByUrl('client');
+            this.router.navigateByUrl('teacher/dashboard');
+          } else {
+            this.router.navigateByUrl('profile/me');
           }
         })
       );
@@ -103,6 +102,12 @@ export class AuthService {
     }
 
     return of().pipe(tap(() => this.reset()));
+  }
+
+  getprofileById(userId: string): Observable<ResponseDTO> {
+    return this.http.get<ResponseDTO>(
+      `${environment.BACK_URL}/users/public-informations?userId=${userId}`
+    );
   }
 
   forgotPassword(input: { email: string }): Observable<ResponseDTO> {
