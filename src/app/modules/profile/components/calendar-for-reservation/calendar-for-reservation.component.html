@@ -1,0 +1,22 @@
+<div class="control">
+  <div class="mode">
+    <p-button (onClick)="dayView()">Jour</p-button>
+    <p-button (onClick)="weekView()">Semaine</p-button>
+    <p-button (onClick)="monthView()">Mois</p-button>
+  </div>
+  <div class="navigation">
+    <p-button (onClick)="getToday()">Aujourd'hui</p-button>
+    <p-button (onClick)="prev()">
+      <i class="pi pi-angle-left"></i>
+    </p-button>
+    <p-button (onClick)="next()">
+      <i class="pi pi-angle-right"></i>
+    </p-button>
+  </div>
+</div>
+<full-calendar [options]="calendarOptions" #calendar [events]="visibleEvents()">
+</full-calendar>
+<app-modal-book-delete-appointment
+  [appoitment]="selectedAppoitment"
+  [isDelete]="true"
+></app-modal-book-delete-appointment>

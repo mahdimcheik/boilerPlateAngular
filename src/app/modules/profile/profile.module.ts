@@ -34,6 +34,12 @@ import { AvatarModule } from 'primeng/avatar';
 import { MenuModule } from 'primeng/menu';
 import { ImageModule } from 'primeng/image';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { ModalBookDeleteAppointmentComponent } from './components/modal-book-delete-appointment/modal-book-delete-appointment';
+import { DialogModule } from 'primeng/dialog';
+import { CalendarForReservationComponent } from './components/calendar-for-reservation/calendar-for-reservation.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { BookPageComponent } from './pages/book-page/book-page.component';
+import { ProfilPageComponent } from './pages/profil-page/profil-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +56,10 @@ import { ProfileRoutingModule } from './profile-routing.module';
     ModalEditFormationComponent,
     ModalEditPersonnalInfosComponent,
     FileUploadComponent,
+    ModalBookDeleteAppointmentComponent,
+    CalendarForReservationComponent,
+    BookPageComponent,
+    ProfilPageComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +84,8 @@ import { ProfileRoutingModule } from './profile-routing.module';
     MenuModule,
     NavbarComponent,
     ImageModule,
+    DialogModule,
+    FullCalendarModule,
   ],
 })
 export class ProfileModule {}

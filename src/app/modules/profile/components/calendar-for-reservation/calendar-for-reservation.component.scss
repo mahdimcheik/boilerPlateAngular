@@ -1,0 +1,12 @@
+.control {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: auto;
+
+  .mode,
+  .navigation {
+    display: flex;
+    gap: 10px;
+  }
+}

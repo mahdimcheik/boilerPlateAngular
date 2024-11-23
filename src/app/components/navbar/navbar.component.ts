@@ -73,13 +73,13 @@ export class NavbarComponent {
           {
             label: 'Profil',
             icon: 'pi pi-star',
-            command: () => this.router.navigateByUrl(''),
+            command: () => this.router.navigateByUrl('profile/me'),
           },
 
           {
             label: 'Dashboard',
             icon: 'pi pi-calendar',
-            command: () => this.router.navigateByUrl('contactus'),
+            command: () => this.router.navigateByUrl('teacher/dashboard'),
           },
           {
             label: 'A Propos',

@@ -11,7 +11,6 @@ import { DialogModule } from 'primeng/dialog';
 import { CustomNavbarComponent } from './components/custom-navbar/custom-navbar.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { SidenavChachaComponent } from './components/sidenav-chacha/sidenav-chacha.component';
-import { provideRouter } from '@angular/router';
 import localeFr from '@angular/common/locales/fr';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';

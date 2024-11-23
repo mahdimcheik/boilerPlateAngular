@@ -8,28 +8,19 @@
 >
   <div class="modal">
     <div class="container-img-forgot">
-      <h2>Validez le créneau d'ouverture</h2>
-      <img
-        class="img-fluid forgot-img"
-        src="/assets/svgs/Calendar-cuate.svg"
-        alt=""
-      />
+      <h2>
+        {{isDelete ? "Supprimer le créneau suivant" : "Résérver ce créneau"}}
+      </h2>
     </div>
     <div class="content">
-      <h2>Résumé de votre créneau</h2>
       <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
 
-      <div class="time-control">
-        <div class="dat-from-to">
-          <h4>De : {{ start | date : "HH:mm" }}</h4>
-          <p-calendar [timeOnly]="true" [(ngModel)]="start"></p-calendar>
-        </div>
-
-        <div class="dat-from-to">
-          <h4>à : {{ end | date : "HH:mm" }}</h4>
-          <p-calendar [timeOnly]="true" [(ngModel)]="end"></p-calendar>
-        </div>
+      <div class="dat-from-to">
+        <h4>
+          De : {{ start | date : "HH:mm" }} à : {{ end | date : "HH:mm" }}
+        </h4>
       </div>
+      <div class="dat-from-to"></div>
     </div>
 
     <div class="control" autofocus>
@@ -43,8 +34,8 @@
       <p-button
         autofocus="true"
         [style]="{ minWidth: '130px' }"
-        label="Créer"
-        icon="pi pi-check"
+        [label]="isDelete ? 'Supprimer' : 'Réserver'"
+        [icon]="isDelete? 'pi pi-check' : 'pi pi-check' "
         (onClick)="validate()"
         severity="success"
       ></p-button>

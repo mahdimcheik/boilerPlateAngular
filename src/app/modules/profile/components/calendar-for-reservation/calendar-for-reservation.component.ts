@@ -1,0 +1,194 @@
+import { Component, inject, ViewChild } from '@angular/core';
+import { SlotService } from '../../../../services/slot.service';
+import { AuthService } from '../../../../services/auth.service';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventContentArg,
+  EventDropArg,
+  EventInput,
+} from '@fullcalendar/core/index.js';
+import { EventResizeDoneArg } from '@fullcalendar/interaction/index.js';
+import listPlugin from '@fullcalendar/list';
+import frLocale from '@fullcalendar/core/locales/fr';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+@Component({
+  selector: 'app-calendar-for-reservation',
+  templateUrl: './calendar-for-reservation.component.html',
+  styleUrl: './calendar-for-reservation.component.scss',
+})
+export class CalendarForReservationComponent {
+  slotService = inject(SlotService);
+  visibleEvents = this.slotService.visibleEvents; // signal
+  userConnected = inject(AuthService).userConnected; // signal
+
+  isVisibleModalUpdate: boolean = false;
+  isVisibleModalDelete: boolean = false;
+
+  @ViewChild('calendar')
+  calendarComponent!: FullCalendarComponent;
+  events: EventInput[] = [];
+  displayModal: boolean = false;
+  dateStart!: Date;
+  dateEnd!: Date;
+  currentDate!: Date;
+  selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
+  selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
+
+  canDrop = (dropInfo: any, draggedEvent: any) => {
+    const now = new Date();
+    return dropInfo.start >= now && draggedEvent.start >= now;
+  };
+  onEventClick = (eventClickArg: EventClickArg) => {
+    this.selectedAppoitment = eventClickArg.event as EventInput;
+    this.isVisibleModalDelete = true;
+    console.log('event click', eventClickArg);
+  };
+  onResize = (eventResizeArg: EventResizeDoneArg) => {
+    this.selectedAppoitment = eventResizeArg.oldEvent as EventInput;
+    this.selectedSlot = eventResizeArg.event as EventInput;
+
+    this.isVisibleModalUpdate = true;
+  };
+  onDrop = (eventDropArg: EventDropArg) => {
+    console.log('event drop', eventDropArg);
+    this.selectedSlot = {
+      start: eventDropArg.event.start as Date,
+      end: eventDropArg.event.end as Date,
+    };
+    this.selectedAppoitment = eventDropArg.oldEvent as EventInput;
+    this.isVisibleModalUpdate = true;
+  };
+  onDateSelect = (selectionInfo: DateSelectArg) => {
+    this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
+  };
+  canStartDrag = (selectionInfo: any) => {
+    return selectionInfo.start > new Date();
+  };
+
+  loadSlot() {
+    this.slotService.getSlotByCreator(this.userConnected().id).subscribe();
+  }
+
+  // template slot
+  renderEventContent = (arg: EventContentArg) => {
+    let html = `<div class="custom-event">
+                    <b>${arg.event.title}</b>
+                    <div>${
+                      arg.event.extendedProps['booked']
+                        ? `<div class="slot-content"><img src=${
+                            (arg.event.extendedProps as any).imgUrl
+                          } width="24" height="24"/><span>${
+                            (arg.event.extendedProps as any).firstName
+                          } ${
+                            (arg.event.extendedProps as any).lastName
+                          }</span></div>
+                        <div class="sujet">Sujet : ${
+                          (arg.event.extendedProps as any).subject
+                        }</div>
+
+                        `
+                        : `Créneau disponible <div>Prix :${
+                            (arg.event.extendedProps as any).price
+                          }</div>`
+                    }</div>
+                  </div>`;
+    let arrayOfDomNodes = [];
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    arrayOfDomNodes.push(div.firstChild);
+    return { domNodes: arrayOfDomNodes };
+  };
+
+  calendarOptions: CalendarOptions = {
+    initialView: 'timeGridWeek',
+    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+    locale: frLocale,
+    headerToolbar: {
+      right: '',
+      left: '',
+      center: '',
+    },
+    views: {
+      dayGridMonth: {
+        titleFormat: { year: 'numeric', month: '2-digit', day: '2-digit' },
+      },
+      timeGridFiveDays: {
+        type: 'timeGrid',
+        duration: { days: 4 },
+      },
+
+      validRange: {
+        start: '2024-05-24',
+      },
+    },
+    weekends: true,
+    slotDuration: '00:15:00',
+    slotMinTime: '09:00',
+    slotMaxTime: '22:00',
+    allDaySlot: false,
+    navLinks: true,
+    eventOverlap: false,
+    weekNumbers: true,
+    selectMirror: true,
+    unselectAuto: true,
+    selectOverlap: false,
+    eventDurationEditable: true,
+    defaultTimedEventDuration: '01:00:00',
+    nowIndicator: true,
+    allDayText: 'Heures',
+    droppable: false,
+
+    eventContent: this.renderEventContent, // template appoitment
+    eventClick: this.onEventClick,
+    events: this.events,
+  };
+
+  async ngOnInit(): Promise<void> {
+    this.loadSlot();
+  }
+
+  ngAfterViewInit(): void {
+    const calendarApi = this.calendarComponent.getApi();
+    this.dateStart = calendarApi.view.currentStart;
+    this.dateEnd = calendarApi.view.currentEnd;
+    this.currentDate = calendarApi.getDate();
+  }
+  // manually add buttons controlling the calendar
+  updateViewDates() {
+    const calendarApi = this.calendarComponent.getApi();
+    this.dateStart = calendarApi.view.currentStart;
+    this.dateEnd = calendarApi.view.currentEnd;
+    this.currentDate = calendarApi.getDate();
+  }
+
+  next(): void {
+    this.calendarComponent.getApi().next();
+    this.updateViewDates();
+  }
+  prev(): void {
+    this.calendarComponent.getApi().prev();
+    this.updateViewDates();
+  }
+  getToday(): void {
+    this.calendarComponent.getApi().today();
+    this.updateViewDates();
+  }
+  weekView() {
+    this.calendarComponent.getApi().changeView('timeGridWeek');
+    this.updateViewDates();
+  }
+  monthView() {
+    this.calendarComponent.getApi().changeView('dayGridMonth');
+    this.updateViewDates();
+  }
+  dayView() {
+    this.calendarComponent.getApi().changeView('timeGridDay');
+    this.updateViewDates();
+  }
+}
