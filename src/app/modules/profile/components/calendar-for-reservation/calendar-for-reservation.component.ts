@@ -16,6 +16,7 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-calendar-for-reservation',
@@ -25,10 +26,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 export class CalendarForReservationComponent {
   slotService = inject(SlotService);
   visibleEvents = this.slotService.visibleEvents; // signal
-  userConnected = inject(AuthService).userConnected; // signal
 
-  isVisibleModalUpdate: boolean = false;
-  isVisibleModalDelete: boolean = false;
+  isVisibleModalBookingDelete: boolean = false;
 
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
@@ -40,39 +39,14 @@ export class CalendarForReservationComponent {
   selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
   selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
 
-  canDrop = (dropInfo: any, draggedEvent: any) => {
-    const now = new Date();
-    return dropInfo.start >= now && draggedEvent.start >= now;
-  };
   onEventClick = (eventClickArg: EventClickArg) => {
     this.selectedAppoitment = eventClickArg.event as EventInput;
-    this.isVisibleModalDelete = true;
+    this.isVisibleModalBookingDelete = true;
     console.log('event click', eventClickArg);
-  };
-  onResize = (eventResizeArg: EventResizeDoneArg) => {
-    this.selectedAppoitment = eventResizeArg.oldEvent as EventInput;
-    this.selectedSlot = eventResizeArg.event as EventInput;
-
-    this.isVisibleModalUpdate = true;
-  };
-  onDrop = (eventDropArg: EventDropArg) => {
-    console.log('event drop', eventDropArg);
-    this.selectedSlot = {
-      start: eventDropArg.event.start as Date,
-      end: eventDropArg.event.end as Date,
-    };
-    this.selectedAppoitment = eventDropArg.oldEvent as EventInput;
-    this.isVisibleModalUpdate = true;
-  };
-  onDateSelect = (selectionInfo: DateSelectArg) => {
-    this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
-  };
-  canStartDrag = (selectionInfo: any) => {
-    return selectionInfo.start > new Date();
   };
 
   loadSlot() {
-    this.slotService.getSlotByCreator(this.userConnected().id).subscribe();
+    this.slotService.getSlotByCreator(environment.TEACHER_ID).subscribe();
   }
 
   // template slot

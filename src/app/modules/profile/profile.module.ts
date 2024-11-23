@@ -40,6 +40,7 @@ import { CalendarForReservationComponent } from './components/calendar-for-reser
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { BookPageComponent } from './pages/book-page/book-page.component';
 import { ProfilPageComponent } from './pages/profil-page/profil-page.component';
+import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ProfilPageComponent } from './pages/profil-page/profil-page.component';
     CalendarForReservationComponent,
     BookPageComponent,
     ProfilPageComponent,
+    BookingPageComponent,
   ],
   imports: [
     CommonModule,

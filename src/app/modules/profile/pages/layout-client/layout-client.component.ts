@@ -15,23 +15,11 @@ import { UserResponseDTO } from '../../../../shared/Models/user/user';
   templateUrl: './layout-client.component.html',
   styleUrl: './layout-client.component.scss',
 })
-export class LayoutClientComponent implements OnInit {
+export class LayoutClientComponent {
   authService = inject(AuthService);
   route = inject(ActivatedRoute);
 
-  UserToshow = signal<UserResponseDTO>({} as UserResponseDTO); //= this.authService.userConnected;
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      const userId: string = params['id'] ?? '';
-      console.log(userId);
-
-      if (userId !== 'me') {
-        this.authService.getprofileById(userId).subscribe((res) => {
-          this.UserToshow.set(res.data);
-        });
-      } else {
-        this.UserToshow.set(this.authService.userConnected());
-      }
-    });
-  }
+  UserToshow = signal<UserResponseDTO>(
+    this.authService.userConnected() as UserResponseDTO
+  );
 }

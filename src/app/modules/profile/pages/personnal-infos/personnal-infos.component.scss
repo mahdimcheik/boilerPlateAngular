@@ -1,6 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
 .list-info {
   display: flex;
-  gap: 5px;
+  gap: 20px;
   width: 100%;
   align-items: center;
   .nom-prenom-age-genre {
@@ -23,12 +29,6 @@
     }
   }
 }
-.formations {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
 @media screen and (max-width: 990px) {
   .list-info {
@@ -41,14 +41,5 @@
     .nom-prenom-age-genre {
       width: 100%;
     }
-    .image {
-    }
   }
-}
-.legend-fieldset {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
 }

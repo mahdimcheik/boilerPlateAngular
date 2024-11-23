@@ -55,78 +55,11 @@ $padding: 16px;
     }
   }
 }
-
-// Main content styling
-article.main-article {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.main-article {
+  width: 100%;
   height: calc(100vh - 56px);
   overflow-y: auto;
   padding: $padding;
-
-  .presentation {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: $padding;
-    margin-bottom: $padding;
-
-    .title {
-      font-size: 2em;
-      color: $primary-color;
-      margin: 0;
-    }
-
-    .fonction {
-      font-size: 1.2em;
-      color: $accent-color;
-    }
-
-    h3 {
-      font-size: 1em;
-      color: #888;
-    }
-  }
-
-  .outlet {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    color: $secondary-color-text;
-
-    .navbar-outlet {
-      background-color: $primary-color;
-      color: $primary-color-text;
-      padding: $padding;
-      font-size: 1.1em;
-      margin-bottom: $padding;
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .body-outlet {
-      padding: $padding;
-      background-color: $secondary-color;
-      border-radius: 8px;
-      display: flex;
-      gap: 10px;
-      .page-outlet {
-        flex-grow: 1;
-      }
-      .notifications {
-        padding: 10px 5px;
-
-        h3 {
-          margin: 0 0 5px 0;
-        }
-
-        .list-notifications {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-      }
-    }
-  }
 }
 
 @media (max-width: 990px) {

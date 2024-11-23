@@ -16,35 +16,8 @@
       }}</span>
     </div>
   </div>
+
   <article class="main-article scrollbar-off">
-    <header class="presentation">
-      <h1 class="title">
-        {{ UserToshow().firstName | titlecase }}
-        {{ UserToshow().lastName | titlecase }}
-      </h1>
-      <h2 class="fonction">{{ UserToshow().title }}</h2>
-    </header>
-    <div class="outlet">
-      <!-- <nav class="navbar-outlet">
-        <app-outlet-navbar></app-outlet-navbar>
-      </nav> -->
-      <div class="body-outlet">
-        <div class="page-outlet">
-          <!-- <router-outlet></router-outlet> -->
-          <app-personnal-infos
-            [userToDisplay]="UserToshow"
-          ></app-personnal-infos>
-        </div>
-        <div class="notifications">
-          <p-fieldset legend="Notifications">
-            <div class="list-notifications">
-              <app-notification></app-notification>
-              <app-notification></app-notification>
-              <app-notification></app-notification>
-            </div>
-          </p-fieldset>
-        </div>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </article>
 </div>

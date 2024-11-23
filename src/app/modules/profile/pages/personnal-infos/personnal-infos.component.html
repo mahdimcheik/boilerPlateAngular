@@ -1,81 +1,82 @@
-<div class="list-info">
-  <div class="nom-prenom-age-genre">
+<div class="container">
+  <div class="list-info">
+    <div class="nom-prenom-age-genre">
+      <p-button
+        *ngIf="isOwner()"
+        icon="pi pi-pen-to-square"
+        (onClick)="isVisibleModalEditPerso = true"
+      ></p-button>
+      <app-line-binary-data
+        [key]="'Nom'"
+        [value]="fullName() | titlecase"
+        [order]="false"
+      ></app-line-binary-data>
+      <app-line-binary-data
+        [key]="'Age'"
+        [value]="'' + (userToDisplay().dateOfBirth | dobToAge)"
+        [order]="true"
+      ></app-line-binary-data>
+      <app-line-binary-data
+        [key]="'Genre'"
+        [value]="userToDisplay().gender | genderTransform"
+        [order]="false"
+      ></app-line-binary-data>
+      <app-line-binary-data
+        [key]="'Metier'"
+        [value]="userToDisplay().title ?? 'Non déclaré'"
+        [order]="true"
+      ></app-line-binary-data>
+    </div>
+    <div class="image">
+      <!-- <img [src]="userConnected().imgUrl" width="200" height="200" alt="" /> -->
+      <p-image
+        [src]="userToDisplay().imgUrl"
+        alt="Image"
+        width="200"
+        [preview]="true"
+      />
+    </div>
+  </div>
+
+  <p-fieldset [legend]="'Formations'">
     <p-button
       *ngIf="isOwner()"
-      icon="pi pi-pen-to-square"
-      (onClick)="isVisibleModalEditPerso = true"
+      [icon]="'pi pi-plus'"
+      (onClick)="showModalEditFormation()"
     ></p-button>
-    <app-line-binary-data
-      [key]="'Nom'"
-      [value]="fullName() | titlecase"
-      [order]="false"
-    ></app-line-binary-data>
-    <app-line-binary-data
-      [key]="'Age'"
-      [value]="'' + (userToDisplay().dateOfBirth | dobToAge)"
-      [order]="true"
-    ></app-line-binary-data>
-    <app-line-binary-data
-      [key]="'Genre'"
-      [value]="userToDisplay().gender | genderTransform"
-      [order]="false"
-    ></app-line-binary-data>
-    <app-line-binary-data
-      [key]="'Metier'"
-      [value]="userToDisplay().title ?? 'Non déclaré'"
-      [order]="true"
-    ></app-line-binary-data>
-  </div>
-  <div class="image">
-    <!-- <img [src]="userConnected().imgUrl" width="200" height="200" alt="" /> -->
-    <p-image
-      [src]="userToDisplay().imgUrl"
-      alt="Image"
-      width="200"
-      [preview]="true"
-    />
-  </div>
+    <p-divider></p-divider>
+    <div class="formations">
+      <app-formation
+        *ngFor="let formation of listFormations()"
+        [editModeOn]="true"
+        [formation]="formation"
+      ></app-formation>
+    </div>
+  </p-fieldset>
+
+  <p-fieldset [legend]="'Adresses'">
+    <p-button
+      *ngIf="isOwner()"
+      [icon]="'pi pi-plus'"
+      (onClick)="showModalEditFormation()"
+    ></p-button>
+    <p-divider></p-divider>
+    <div class="Adresses">
+      <app-addresse
+        *ngFor="let adresse of listAdresses()"
+        [editModeOn]="true"
+        [adresse]="adresse"
+      ></app-addresse>
+    </div>
+  </p-fieldset>
+
+  <app-modal-edit-formation
+    (actionEmitter)="hideAddForm()"
+    [updateOrAdd]="'add'"
+    [isVisibleModalAddFormation]="isVisibleModalAddFormation"
+    *ngIf="isVisibleModalAddFormation"
+  ></app-modal-edit-formation>
 </div>
-
-<p-fieldset [legend]="'Formations'">
-  <p-button
-    *ngIf="isOwner()"
-    [icon]="'pi pi-plus'"
-    (onClick)="showModalEditFormation()"
-  ></p-button>
-  <p-divider></p-divider>
-  <div class="formations">
-    <app-formation
-      *ngFor="let formation of listFormations()"
-      [editModeOn]="true"
-      [formation]="formation"
-    ></app-formation>
-  </div>
-</p-fieldset>
-
-<p-fieldset [legend]="'Adresses'">
-  <p-button
-    *ngIf="isOwner()"
-    [icon]="'pi pi-plus'"
-    (onClick)="showModalEditFormation()"
-  ></p-button>
-  <p-divider></p-divider>
-  <div class="Adresses">
-    <app-addresse
-      *ngFor="let adresse of listAdresses()"
-      [editModeOn]="true"
-      [adresse]="adresse"
-    ></app-addresse>
-  </div>
-</p-fieldset>
-
-<app-modal-edit-formation
-  (actionEmitter)="hideAddForm()"
-  [updateOrAdd]="'add'"
-  [isVisibleModalAddFormation]="isVisibleModalAddFormation"
-  *ngIf="isVisibleModalAddFormation"
-></app-modal-edit-formation>
-
 <app-modal-edit-personnal-infos
   [visible]="isVisibleModalEditPerso"
   [user]="userToDisplay()"

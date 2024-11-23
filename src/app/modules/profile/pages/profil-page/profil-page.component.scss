@@ -1,0 +1,69 @@
+$primary-color: var(--primary-color);
+$primary-color-text: var(--primary-color-text);
+$secondary-color: var(--surface-b);
+$secondary-color-text: var(--text-color-secondary);
+$accent-color: var(--primaryDark);
+$padding: 16px;
+// Main content styling
+article.main-article {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  width: 100%;
+
+  .presentation {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: $padding;
+    margin-bottom: $padding;
+
+    .title {
+      font-size: 2em;
+      color: $primary-color;
+      margin: 0;
+    }
+
+    .fonction {
+      font-size: 1.2em;
+      color: $accent-color;
+    }
+
+    h3 {
+      font-size: 1em;
+      color: #888;
+    }
+  }
+
+  .outlet {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: $secondary-color-text;
+    width: 100%;
+
+    .body-outlet {
+      padding: $padding;
+      background-color: $secondary-color;
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+      .page-outlet {
+        flex-grow: 1;
+      }
+      .notifications {
+        padding: 10px 5px;
+
+        h3 {
+          margin: 0 0 5px 0;
+        }
+
+        .list-notifications {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    }
+  }
+}
