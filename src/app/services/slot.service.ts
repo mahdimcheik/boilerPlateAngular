@@ -18,9 +18,15 @@ export class SlotService {
 
   constructor() {}
 
-  getSlotByCreator(userId: string): Observable<EventInput[]> {
+  getSlotByCreator(
+    userId: string,
+    fromDate: string,
+    toDate: string
+  ): Observable<EventInput[]> {
     return this.http
-      .get<ResponseDTO>(`https://localhost:7113/slot?userId=${userId}`)
+      .get<ResponseDTO>(
+        `https://localhost:7113/slot?userId=${userId}&fromDate=${fromDate}&toDate=${toDate}`
+      )
       .pipe(
         map((res) => {
           var slots = res.data as SlotResponseDTO[];

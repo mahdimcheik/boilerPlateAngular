@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
 
 import { LayoutClientComponent } from './pages/layout-client/layout-client.component';
 import { FormsModule } from '@angular/forms';
@@ -41,6 +41,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { BookPageComponent } from './pages/book-page/book-page.component';
 import { ProfilPageComponent } from './pages/profil-page/profil-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -89,5 +92,6 @@ import { BookingPageComponent } from './pages/booking-page/booking-page.componen
     DialogModule,
     FullCalendarModule,
   ],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })
 export class ProfileModule {}

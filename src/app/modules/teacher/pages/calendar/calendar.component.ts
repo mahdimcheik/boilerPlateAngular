@@ -58,8 +58,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   calendarComponent!: FullCalendarComponent;
   events: EventInput[] = [];
   displayModal: boolean = false;
-  dateStart!: Date;
-  dateEnd!: Date;
+  dateStart!: string;
+  dateEnd!: string;
   currentDate!: Date;
   selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
   selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
@@ -97,7 +97,9 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   };
 
   loadSlot() {
-    this.slotService.getSlotByCreator(this.userConnected().id).subscribe();
+    this.slotService
+      .getSlotByCreator(this.userConnected().id, this.dateStart, this.dateEnd)
+      .subscribe();
   }
 
   // template slot
@@ -193,25 +195,23 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.isVisibleModalCreate = false;
   }
   async ngOnInit(): Promise<void> {
-    this.loadSlot();
+    // this.loadSlot();
   }
 
   ngAfterViewInit(): void {
     const calendarApi = this.calendarComponent.getApi();
-    this.dateStart = calendarApi.view.currentStart;
-    this.dateEnd = calendarApi.view.currentEnd;
+    this.dateStart = calendarApi.view.currentStart.toUTCString();
+    this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
-    // setTimeout(() => {
-    //   this.today = signal('today');
-    // }, 10);
+    this.loadSlot();
   }
   // manually add buttons controlling the calendar
   updateViewDates() {
     const calendarApi = this.calendarComponent.getApi();
-    this.dateStart = calendarApi.view.currentStart;
-    this.dateEnd = calendarApi.view.currentEnd;
+    this.dateStart = calendarApi.view.currentStart.toUTCString();
+    this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
-    // this.loadSlots();
+    this.loadSlot();
     // setTimeout(() => {
     //   this.today = signal('today');
     // }, 10);

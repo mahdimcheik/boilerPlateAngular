@@ -33,8 +33,8 @@ export class CalendarForReservationComponent {
   calendarComponent!: FullCalendarComponent;
   events: EventInput[] = [];
   displayModal: boolean = false;
-  dateStart!: Date;
-  dateEnd!: Date;
+  dateStart!: string;
+  dateEnd!: string;
   currentDate!: Date;
   selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
   selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
@@ -46,7 +46,9 @@ export class CalendarForReservationComponent {
   };
 
   loadSlot() {
-    this.slotService.getSlotByCreator(environment.TEACHER_ID).subscribe();
+    this.slotService
+      .getSlotByCreator(environment.TEACHER_ID, this.dateStart, this.dateEnd)
+      .subscribe();
   }
 
   // template slot
@@ -129,15 +131,15 @@ export class CalendarForReservationComponent {
 
   ngAfterViewInit(): void {
     const calendarApi = this.calendarComponent.getApi();
-    this.dateStart = calendarApi.view.currentStart;
-    this.dateEnd = calendarApi.view.currentEnd;
+    this.dateStart = calendarApi.view.currentStart.toUTCString();
+    this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
   }
   // manually add buttons controlling the calendar
   updateViewDates() {
     const calendarApi = this.calendarComponent.getApi();
-    this.dateStart = calendarApi.view.currentStart;
-    this.dateEnd = calendarApi.view.currentEnd;
+    this.dateStart = calendarApi.view.currentStart.toUTCString();
+    this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
   }
 

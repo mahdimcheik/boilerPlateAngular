@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,13 +23,15 @@ import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { MenuModule } from 'primeng/menu';
 import { AdresseTypePipe } from './utilities/pipes/adresse-type.pipe';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
+import localeFr from '@angular/common/locales/fr';
 
+registerLocaleData(localeFr);
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +68,7 @@ import { ThemeSelectorComponent } from './components/theme-selector/theme-select
     provideHttpClient(
       withInterceptors([TokenInterceptor, errorHandlerInterceptor])
     ),
+    { provide: LOCALE_ID, useValue: 'fr' },
   ],
   bootstrap: [AppComponent],
 })

@@ -69,6 +69,7 @@ export class ModalEditFormationComponent {
       const newFormation = {
         ...this.userForm.value,
       };
+
       await firstValueFrom(
         this.formationService
           .addFormation(newFormation)
