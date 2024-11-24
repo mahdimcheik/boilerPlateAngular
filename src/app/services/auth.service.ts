@@ -8,16 +8,23 @@ import {
   UserResponseDTO,
   UserUpdateDTO,
 } from '../shared/Models/user/user';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../environments/environment.development';
-import { ActivatedRoute, RedirectCommand, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 type ResponseRegister = {
   succeeded: boolean;
   errors: string[];
 };
+
+export interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +42,12 @@ export class AuthService {
   token = signal<string>('');
 
   constructor() {}
+
+  getUsers(first: number, rows: number): Observable<ResponseDTO> {
+    return this.http.get<ResponseDTO>(
+      `${environment.BACK_URL}/Users/all?first=${first}&rows=${rows}`
+    );
+  }
 
   register(userDTO: UserCreateDTO): Observable<ResponseRegister> {
     return this.http.post<ResponseRegister>(

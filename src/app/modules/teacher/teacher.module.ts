@@ -16,6 +16,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { ModalUpdateAppointmentComponent } from './components/modal-update-appointment/modal-update-appointment.component';
 import { ModalDeleteAppointmentComponent } from './components/modal-delete-appointment/modal-delete-appointment.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserLiComponent } from './components/user-li/user-li.component';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -29,6 +33,8 @@ registerLocaleData(localeFr, 'fr');
     SidenavChachaComponent,
     ModalUpdateAppointmentComponent,
     ModalDeleteAppointmentComponent,
+    UsersComponent,
+    UserLiComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +46,8 @@ registerLocaleData(localeFr, 'fr');
     CalendarModule,
     CommonModule,
     FormsModule,
+    TableModule,
+    PaginatorModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })
