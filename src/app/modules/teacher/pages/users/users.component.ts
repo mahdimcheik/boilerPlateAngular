@@ -24,5 +24,9 @@ export class UsersComponent implements OnInit {
     console.log(event);
     this.first = event.first;
     this.rows = event.rows;
+    this.authService.getUsers(this.first, this.rows).subscribe((x) => {
+      this.totalCount = x.data.totalCount;
+      this.users = x.data.users;
+    });
   }
 }
