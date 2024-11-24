@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { map, Observable, of, switchMap, tap } from 'rxjs';
 import { ResponseDTO } from '../shared/Models/user/user';
 import {
   SlotCreateDTO,
@@ -14,6 +14,9 @@ import { EventInput } from '@fullcalendar/core/index.js';
 })
 export class SlotService {
   visibleEvents = signal([] as EventInput[]);
+  selectedEvent = signal({} as EventInput);
+  start = signal(new Date());
+  end = signal(new Date());
   private http = inject(HttpClient);
 
   constructor() {}
@@ -72,6 +75,49 @@ export class SlotService {
       );
   }
 
+  deleteSlotByCreator(slotId: string): Observable<ResponseDTO> {
+    return this.http
+      .delete<ResponseDTO>(`https://localhost:7113/slot?slotId=${slotId}`)
+      .pipe(
+        tap(() => {
+          this.visibleEvents.set([
+            ...this.visibleEvents().filter(
+              (x) => x.extendedProps?.['id'] != slotId
+            ),
+          ]);
+        })
+      );
+  }
+
+  bookSlot(slotId: string): Observable<ResponseDTO> {
+    return this.http.post<ResponseDTO>(`https://localhost:7113/slot/book`, {
+      slotId,
+    });
+  }
+
+  unbookReservationByTeacher(slotId: string): Observable<ResponseDTO> {
+    return this.http
+      .delete<ResponseDTO>(
+        `https://localhost:7113/slot/unbook?slotId=${slotId}`
+      )
+      .pipe(
+        tap(() => {
+          let relatedAppointmentIndex = this.visibleEvents().findIndex(
+            (x) => x.extendedProps?.['id'] == slotId
+          );
+
+          if (relatedAppointmentIndex != null) {
+            this.visibleEvents()[relatedAppointmentIndex] = {
+              ...this.visibleEvents()[relatedAppointmentIndex],
+              extendedProps: { id: slotId },
+            } as EventInput;
+          }
+
+          this.visibleEvents.set([...this.visibleEvents()]);
+        })
+      );
+  }
+
   convertSlotResponseToEventInput(slot: SlotResponseDTO) {
     return {
       start: new Date(slot.startAt),
@@ -81,6 +127,10 @@ export class SlotService {
         price: slot.price,
         reduction: slot.reduction,
         id: slot.id,
+        studentFirstName: slot.studentFirstName,
+        studentLastName: slot.studentLastName,
+        studentImgUrl: slot.studentImgUrl,
+        studentId: slot.studentId,
       },
     };
   }

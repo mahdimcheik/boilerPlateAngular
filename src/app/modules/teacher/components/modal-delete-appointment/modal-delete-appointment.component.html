@@ -8,7 +8,14 @@
 >
   <div class="modal">
     <div class="container-img-forgot">
-      <h2>Supprimer le créneau suivant</h2>
+      <h2>
+        {{appoitment.extendedProps?.["studentId"] ? "Annuler la résérvation" : "Supprimer le créneau suivant"}}
+      </h2>
+      <h3 *ngIf="appoitment.extendedProps?.['studentId']">
+        Prévue pour :
+        {{appoitment.extendedProps?.["studentFirstName"] | titlecase}}
+        {{appoitment.extendedProps?.["studentLastName"] | titlecase}}
+      </h3>
     </div>
     <div class="content">
       <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
@@ -32,7 +39,7 @@
       <p-button
         autofocus="true"
         [style]="{ minWidth: '130px' }"
-        label="Modifier"
+        [label]="!appoitment.extendedProps?.['studentId']? 'Oui, supprimer': 'Oui, Annuler'"
         icon="pi pi-check"
         (onClick)="validate()"
         severity="success"

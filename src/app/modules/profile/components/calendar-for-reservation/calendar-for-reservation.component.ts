@@ -125,15 +125,14 @@ export class CalendarForReservationComponent {
     events: this.events,
   };
 
-  async ngOnInit(): Promise<void> {
-    this.loadSlot();
-  }
+  async ngOnInit(): Promise<void> {}
 
   ngAfterViewInit(): void {
     const calendarApi = this.calendarComponent.getApi();
     this.dateStart = calendarApi.view.currentStart.toUTCString();
     this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
+    this.loadSlot();
   }
   // manually add buttons controlling the calendar
   updateViewDates() {

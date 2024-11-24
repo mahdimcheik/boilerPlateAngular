@@ -70,6 +70,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   };
   onEventClick = (eventClickArg: EventClickArg) => {
     this.selectedAppoitment = eventClickArg.event as EventInput;
+    this.slotService.selectedEvent.set(this.selectedAppoitment);
     this.isVisibleModalDelete = true;
   };
   onResize = (eventResizeArg: EventResizeDoneArg) => {
@@ -107,13 +108,13 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     let html = `<div class="custom-event">
                     <b>${arg.event.title}</b>
                     <div>${
-                      arg.event.extendedProps['booked']
+                      arg.event.extendedProps?.['studentId']
                         ? `<div class="slot-content"><img src=${
-                            (arg.event.extendedProps as any).imgUrl
+                            (arg.event.extendedProps as any).studentImgUrl
                           } width="24" height="24"/><span>${
-                            (arg.event.extendedProps as any).firstName
+                            (arg.event.extendedProps as any).studentFirstName
                           } ${
-                            (arg.event.extendedProps as any).lastName
+                            (arg.event.extendedProps as any).studentLastName
                           }</span></div>
                         <div class="sujet">Sujet : ${
                           (arg.event.extendedProps as any).subject

@@ -18,12 +18,11 @@ export class ModalDeleteAppointmentComponent {
     end: new Date(),
     extendedProps: {},
   };
-  @Input() updateOrAdd: 'update' | 'drop' | 'resize' = 'drop'; // how smart i am
   start!: Date;
   end!: Date;
 
   slotService = inject(SlotService);
-  visibleEvents = this.slotService.visibleEvents; // signal
+  visibleEvents = this.slotService.visibleEvents;
 
   ngOnInit(): void {
     this.start = this.appoitment.start as Date;
@@ -34,18 +33,16 @@ export class ModalDeleteAppointmentComponent {
     this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
   }
   validate() {
-    const newAppoitment: SlotUpdateDTO = {
-      startAt: this.start,
-      endAt: this.end,
-      createdAt: new Date(),
-      price: 10,
-      reduction: 10,
-      type: 0,
-      id: this.appoitment.extendedProps?.['id'] ?? '',
-    } as SlotUpdateDTO;
-    this.slotService
-      .updateSlotByCreator(newAppoitment as SlotUpdateDTO)
-      .pipe(finalize(() => this.cancel()))
-      .subscribe();
+    if (this.appoitment.extendedProps?.['studentId']) {
+      this.slotService
+        .unbookReservationByTeacher(this.appoitment.extendedProps?.['id'])
+        .pipe(finalize(() => this.cancel()))
+        .subscribe();
+    } else {
+      this.slotService
+        .deleteSlotByCreator(this.appoitment.extendedProps?.['id'])
+        .pipe(finalize(() => this.cancel()))
+        .subscribe();
+    }
   }
 }

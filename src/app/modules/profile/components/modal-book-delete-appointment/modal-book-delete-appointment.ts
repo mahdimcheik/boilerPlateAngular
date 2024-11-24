@@ -35,17 +35,8 @@ export class ModalBookDeleteAppointmentComponent {
     this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
   }
   validate() {
-    const newAppoitment: SlotUpdateDTO = {
-      startAt: this.start,
-      endAt: this.end,
-      createdAt: new Date(),
-      price: 10,
-      reduction: 10,
-      type: 0,
-      id: this.appoitment.extendedProps?.['id'] ?? '',
-    } as SlotUpdateDTO;
     this.slotService
-      .updateSlotByCreator(newAppoitment as SlotUpdateDTO)
+      .bookSlot(this.appoitment.extendedProps?.['id'])
       .pipe(finalize(() => this.cancel()))
       .subscribe();
   }

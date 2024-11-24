@@ -30,6 +30,7 @@ export class AuthService {
   router = inject(Router);
 
   userConnected = signal({} as UserResponseDTO);
+  userToDisplay = signal({} as UserResponseDTO);
   teacherDetails = signal({} as UserResponseDTO);
   token = signal<string>('');
 
@@ -145,7 +146,12 @@ export class AuthService {
   updatePersonnalInfos(userUpdated: UserUpdateDTO): Observable<ResponseDTO> {
     return this.http
       .patch<ResponseDTO>(`https://localhost:7113/users/update`, userUpdated)
-      .pipe(tap((res) => this.userConnected.set(res.data)));
+      .pipe(
+        tap((res) => {
+          this.userConnected.set(res.data);
+          this.userToDisplay.set(res.data);
+        })
+      );
   }
 
   updateAvatar(file: File): Observable<ResponseDTO> {

@@ -7,6 +7,10 @@ export type SlotResponseDTO = {
   price: number;
   reduction: number;
   type: number;
+  studentId?: string;
+  studentFirstName?: string;
+  studentLastName?: string;
+  studentImgUrl?: string;
 };
 
 export type SlotCreateDTO = {

@@ -1,10 +1,10 @@
 <article class="main-article scrollbar-off">
   <header class="presentation">
     <h1 class="title">
-      {{ UserToshow().firstName | titlecase }}
-      {{ UserToshow().lastName | titlecase }}
+      {{ userToDisplay().firstName | titlecase }}
+      {{ userToDisplay().lastName | titlecase }}
     </h1>
-    <h2 class="fonction">{{ UserToshow().title }}</h2>
+    <h2 class="fonction">{{ userToDisplay().title }}</h2>
   </header>
   <div class="outlet">
     <!-- <nav class="navbar-outlet">
@@ -13,7 +13,9 @@
     <div class="body-outlet">
       <div class="page-outlet">
         <!-- <router-outlet></router-outlet> -->
-        <app-personnal-infos [userToDisplay]="UserToshow"></app-personnal-infos>
+        <app-personnal-infos
+          [userToDisplay]="userToDisplay"
+        ></app-personnal-infos>
       </div>
       <div class="notifications">
         <p-fieldset legend="Notifications">

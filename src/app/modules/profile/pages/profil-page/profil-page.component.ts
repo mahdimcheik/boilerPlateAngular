@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserResponseDTO } from '../../../../shared/Models/user/user';
@@ -11,8 +11,8 @@ import { UserResponseDTO } from '../../../../shared/Models/user/user';
 export class ProfilPageComponent {
   authService = inject(AuthService);
   route = inject(ActivatedRoute);
+  userToDisplay = this.authService.userToDisplay;
 
-  UserToshow = signal<UserResponseDTO>({} as UserResponseDTO); //= this.authService.userConnected;
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const userId: string = params['id'] ?? '';
@@ -20,10 +20,10 @@ export class ProfilPageComponent {
 
       if (userId !== 'me') {
         this.authService.getprofileById(userId).subscribe((res) => {
-          this.UserToshow.set(res.data);
+          this.userToDisplay.set(res.data);
         });
       } else {
-        this.UserToshow.set(this.authService.userConnected());
+        this.userToDisplay.set(this.authService.userConnected());
       }
     });
   }

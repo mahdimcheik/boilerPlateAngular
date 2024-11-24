@@ -16,10 +16,6 @@ import { UserResponseDTO } from '../../../../shared/Models/user/user';
   styleUrl: './layout-client.component.scss',
 })
 export class LayoutClientComponent {
-  authService = inject(AuthService);
+  UserToshow = inject(AuthService).userToDisplay;
   route = inject(ActivatedRoute);
-
-  UserToshow = signal<UserResponseDTO>(
-    this.authService.userConnected() as UserResponseDTO
-  );
 }
