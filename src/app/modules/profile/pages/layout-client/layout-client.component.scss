@@ -10,8 +10,8 @@ $padding: 16px;
 //   --primary-color: #60a5fa;
 //   --primary-color-text: #030712;
 
-// Main container styling
-.container {
+// Main container-app styling
+.container-app {
   display: flex;
   width: 100%;
   height: calc(100vh - 56px);
@@ -63,7 +63,7 @@ $padding: 16px;
 }
 
 @media (max-width: 990px) {
-  .container {
+  .container-app {
     flex-direction: column;
   }
 
