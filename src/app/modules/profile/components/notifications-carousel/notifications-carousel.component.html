@@ -1,0 +1,11 @@
+<p-carousel
+  [value]="notifications"
+  [numVisible]="3"
+  [numScroll]="1"
+  [responsiveOptions]="responsiveOptions"
+  orientation="vertical"
+>
+  <ng-template pTemplate="item" let-notif>
+    <app-notification [notification]="notif"></app-notification>
+  </ng-template>
+</p-carousel>

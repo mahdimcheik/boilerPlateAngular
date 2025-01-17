@@ -30,7 +30,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import localeFr from '@angular/common/locales/fr';
-
 registerLocaleData(localeFr);
 @NgModule({
   declarations: [

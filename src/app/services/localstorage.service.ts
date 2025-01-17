@@ -25,5 +25,11 @@ export class LocalstorageService {
   getToken(): string {
     return localStorage.getItem('token') || '';
   }
+  getRefreshToken(): string {
+    return localStorage.getItem('refreshToken') || '';
+  }
+  setRefreshToken(token: string) {
+    localStorage.setItem('refreshToken', token);
+  }
   constructor() {}
 }

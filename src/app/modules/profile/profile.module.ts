@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { OutletNavbarComponent } from './components/outlet-navbar/outlet-navbar.component';
-import { PersonnalInfosComponent } from './pages/personnal-infos/personnal-infos.component';
+import { PersonnalInfosComponent } from './pages/layout-client/personnal-infos/personnal-infos.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { LineBinaryDataComponent } from '../../shared/components/line-binary-data/line-binary-data.component';
 import { AdressesComponent } from './pages/adresses/adresses.component';
@@ -42,7 +42,9 @@ import { BookPageComponent } from './pages/book-page/book-page.component';
 import { ProfilPageComponent } from './pages/profil-page/profil-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import localeFr from '@angular/common/locales/fr';
+import { CarouselModule } from 'primeng/carousel';
 
+import { NotificationsCarouselComponent } from './components/notifications-carousel/notifications-carousel.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -65,6 +67,7 @@ registerLocaleData(localeFr);
     BookPageComponent,
     ProfilPageComponent,
     BookingPageComponent,
+    NotificationsCarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -91,6 +94,7 @@ registerLocaleData(localeFr);
     ImageModule,
     DialogModule,
     FullCalendarModule,
+    CarouselModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })

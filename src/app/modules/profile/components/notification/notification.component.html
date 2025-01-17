@@ -1,11 +1,10 @@
 <div class="notifcation">
-  <h4>title</h4>
+  <h4>{{ notification.title }}</h4>
   <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat,
-    provident!
+    {{ notification.description }}
   </p>
   <div class="date-control">
-    <span class="date">25 octobre, 10:30</span>
+    <span class="date">{{ notification.date | date }}</span>
     <i class="pi pi-book control"></i>
   </div>
 </div>

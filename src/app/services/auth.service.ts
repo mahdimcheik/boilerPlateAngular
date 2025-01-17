@@ -8,7 +8,7 @@ import {
   UserResponseDTO,
   UserUpdateDTO,
 } from '../shared/Models/user/user';
-import { Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../environments/environment.development';
@@ -39,6 +39,7 @@ export class AuthService {
   userConnected = signal({} as UserResponseDTO);
   userToDisplay = signal({} as UserResponseDTO);
   teacherDetails = signal({} as UserResponseDTO);
+  refreshAccessToken = signal<string | null>(null);
   token = signal<string>('');
 
   constructor() {}
@@ -67,19 +68,70 @@ export class AuthService {
           this.token.set(
             (res.data as { token: string; user: UserResponseDTO }).token
           );
+          this.refreshAccessToken.set(
+            (
+              res.data as {
+                refreshToken: string;
+                user: UserResponseDTO;
+                token: string;
+              }
+            ).refreshToken
+          );
           this.localStorageService.setUser(this.userConnected());
           this.localStorageService.setToken(this.token());
+          this.localStorageService.setRefreshToken(
+            this.refreshAccessToken() ?? ''
+          );
 
           this.messageService.add({
             severity: 'success',
             summary: 'Bienvenu ! ',
             detail: res.message ?? 'Youpi!!!',
           });
+          const eventSource = new EventSource(
+            `${environment.BACK_URL}/sse/${this.userConnected().id}`
+          );
+
+          eventSource.onmessage = (event) => {
+            console.log('event', event);
+            this.userConnected.set(JSON.parse(event.data));
+          };
+
           if (this.userConnected().roles.includes('Admin')) {
             this.router.navigateByUrl('teacher/dashboard');
           } else {
             this.router.navigateByUrl('profile/me');
           }
+        })
+      );
+  }
+  refreshToken() {
+    // Call your backend refresh token endpoint
+    return this.http
+      .post<{ accessToken: string; refreshToken: string }>(
+        `${environment.BACK_URL}/Users/refresh-token`,
+        {
+          refreshToken: this.localStorageService.getRefreshToken(),
+          token: this.localStorageService.getToken(),
+        }
+      )
+      .pipe(
+        tap((tokens) => {
+          console.log('response refresh token', tokens);
+
+          // Update tokens in localStorage
+          this.localStorageService.setToken(tokens.accessToken);
+          this.localStorageService.setRefreshToken(tokens.refreshToken);
+
+          // Update the access token in memory
+          this.refreshAccessToken.set(tokens.accessToken);
+          this.token.set(tokens.accessToken);
+          console.log('new token from interceptor', this.token());
+        }),
+        catchError((err) => {
+          // Handle refresh token errors
+          this.logout();
+          throw err;
         })
       );
   }
@@ -107,11 +159,11 @@ export class AuthService {
             this.userConnected.set(
               (res.data as { token: string; user: UserResponseDTO }).user
             );
-            this.token.set(
-              (res.data as { token: string; user: UserResponseDTO }).token
-            );
+            // this.token.set(
+            //   (res.data as { token: string; user: UserResponseDTO }).token
+            // );
             this.localStorageService.setUser(this.userConnected());
-            this.localStorageService.setToken(this.token());
+            // this.localStorageService.setToken(this.token());
           })
         );
     }
