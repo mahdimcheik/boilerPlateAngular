@@ -43,7 +43,7 @@ import { ProfilPageComponent } from './pages/profil-page/profil-page.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import localeFr from '@angular/common/locales/fr';
 import { CarouselModule } from 'primeng/carousel';
-
+import { ScrollerModule } from 'primeng/scroller';
 import { NotificationsCarouselComponent } from './components/notifications-carousel/notifications-carousel.component';
 registerLocaleData(localeFr);
 
@@ -95,6 +95,7 @@ registerLocaleData(localeFr);
     DialogModule,
     FullCalendarModule,
     CarouselModule,
+    ScrollerModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })

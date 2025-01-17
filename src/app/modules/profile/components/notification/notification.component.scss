@@ -2,8 +2,9 @@
 .notifcation {
   border: 1px solid $primary-color;
   padding: 5px 8px;
+  margin: 10px;
   border-radius: 5px;
-  width: 250px;
+  width: calc(100% - 20px);
   h4 {
     margin: 0;
   }

@@ -1,11 +1,17 @@
-<p-carousel
-  [value]="notifications"
-  [numVisible]="3"
-  [numScroll]="1"
-  [responsiveOptions]="responsiveOptions"
-  orientation="vertical"
->
-  <ng-template pTemplate="item" let-notif>
-    <app-notification [notification]="notif"></app-notification>
-  </ng-template>
-</p-carousel>
+<div class="vertical-carousel">
+  <p-scroller
+    [items]="notifications"
+    [itemSize]="50"
+    [showLoader]="true"
+    [delay]="250"
+    orientation="vertical"
+    [lazy]="true"
+    (onLazyLoad)="onLazyLoad($event)"
+    styleClass="border border-surface"
+    [style]="{ width: '100%', height: '500px' }"
+  >
+    <ng-template let-item pTemplate="item">
+      <app-notification [notification]="item"></app-notification>
+    </ng-template>
+  </p-scroller>
+</div>

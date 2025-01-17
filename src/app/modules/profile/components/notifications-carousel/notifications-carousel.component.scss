@@ -1,0 +1,7 @@
+.vertical-carousel {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 500px;
+  width: 250px;
+}

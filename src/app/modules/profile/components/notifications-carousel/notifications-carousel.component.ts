@@ -49,29 +49,30 @@ export class NotificationsCarouselComponent implements OnInit {
       description: 'Vous avez reçu une nouvelle notification',
       date: new Date(),
     },
+    {
+      id: '4',
+      title: 'Nouvelle notification',
+      description: 'Vous avez reçu une nouvelle notification',
+      date: new Date(),
+    },
+    {
+      id: '5',
+      title: 'Nouvelle notification',
+      description: 'Vous avez reçu une nouvelle notification',
+      date: new Date(),
+    },
+    {
+      id: '6',
+      title: 'Nouvelle notification',
+      description: 'Vous avez reçu une nouvelle notification',
+      date: new Date(),
+    },
   ];
   ngOnInit(): void {
     console.log(' test', this.notifications);
+  }
 
-    this.notifications = [
-      {
-        id: '1',
-        title: 'Nouvelle notification',
-        description: 'Vous avez reçu une nouvelle notification',
-        date: new Date(),
-      },
-      {
-        id: '2',
-        title: 'Nouvelle notification',
-        description: 'Vous avez reçu une nouvelle notification',
-        date: new Date(),
-      },
-      {
-        id: '3',
-        title: 'Nouvelle notification',
-        description: 'Vous avez reçu une nouvelle notification',
-        date: new Date(),
-      },
-    ];
+  onLazyLoad(event: any) {
+    console.log(event);
   }
 }
