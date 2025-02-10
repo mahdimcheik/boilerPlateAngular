@@ -3,12 +3,14 @@
   display: flex;
   gap: 10px;
 }
+
 .form {
   width: 100%;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   height: 100%;
-  // justify-content: center;
+  overflow: auto;
   gap: 2rem;
   .float {
     width: 90%;
