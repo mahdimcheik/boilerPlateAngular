@@ -187,7 +187,7 @@ export class AuthService {
 
   forgotPassword(input: { email: string }): Observable<ResponseDTO> {
     return this.http.post<ResponseDTO>(
-      `${environment.BACK_URL}/forgot-password`,
+      `${environment.BACK_URL}/users/forgot-password`,
       input
     );
   }
@@ -196,7 +196,7 @@ export class AuthService {
     changePassword: UserChangePasswordDTO
   ): Observable<ResponseDTO> {
     return this.http.post<ResponseDTO>(
-      `${environment.BACK_URL}/password-reset`,
+      `${environment.BACK_URL}/users/reset-password`,
       changePassword
     );
   }
