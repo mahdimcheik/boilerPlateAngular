@@ -5,21 +5,21 @@
 @import "primeicons/primeicons.css";
 @import "./variables.scss";
 
-$primary-color: var(--primary-color);
-$primary-color-text: var(--primary-color-text);
-$secondary-color: var(--surface-b);
-$secondary-color-text: var(--text-color-secondary);
-$accent-color: var(--primaryDark);
-$text-color: var(
-  --text-color
-); // fonctionne avec surface et proche de $secondary-color-text
-$padding: 16px;
-$surface-a: var(--surface-a);
-$surface-b: var(--surface-b);
-$surface-c: var(--surface-c);
-$surface-d: var(--surface-d);
-$surface-e: var(--surface-e);
-$surface-f: var(--surface-f);
+// $primary-color: var(--primary-color);
+// $primary-color-text: var(--primary-color-text);
+// $secondary-color: var(--surface-b);
+// $secondary-color-text: var(--text-color-secondary);
+// $accent-color: var(--primaryDark);
+// $text-color: var(
+//   --text-color
+// ); // fonctionne avec surface et proche de $secondary-color-text
+// $padding: 16px;
+// $surface-a: var(--surface-a);
+// $surface-b: var(--surface-b);
+// $surface-c: var(--surface-c);
+// $surface-d: var(--surface-d);
+// $surface-e: var(--surface-e);
+// $surface-f: var(--surface-f);
 
 html {
   width: 100%;
@@ -46,3 +46,31 @@ body {
 .dropdown {
   min-width: 100%;
 }
+// buttons
+.p-button-primary {
+  outline: 2px solid $primary-color;
+  padding: 4px;
+}
+.p-button-secondary {
+  outline: 2px solid $secondary-color-text;
+  padding: 4px;
+}
+
+.p-button-cancel {
+  outline: 2px solid $secondary-color-text;
+  padding: 4px;
+}
+.p-button-success {
+  outline: 2px solid $primary-color;
+  padding: 4px;
+}
+.p-button-warning {
+  outline: 2px solid $surface-a;
+  padding: 4px;
+}
+.p-button-info {
+  outline: 2px solid $surface-a;
+  padding: 4px;
+}
+
+// inputs

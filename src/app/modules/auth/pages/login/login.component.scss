@@ -2,6 +2,10 @@
   display: flex;
   gap: 10px;
 }
+.register-forgot {
+  display: flex;
+  gap: 1rem;
+}
 .form {
   width: 100%;
   display: flex;
@@ -20,7 +24,6 @@
     }
   }
 }
-
 .error {
   color: var(--red-800);
 }

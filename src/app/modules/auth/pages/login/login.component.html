@@ -8,7 +8,12 @@
 
   <div class="float">
     <label for="email">Email</label>
-    <input pInputText id="email" formControlName="email" class="input-field" />
+    <input
+      pInputText
+      id="email"
+      formControlName="email"
+      class="input-field pl-2"
+    />
   </div>
   <div
     class="error"
@@ -30,7 +35,7 @@
       pInputText
       id="password"
       formControlName="password"
-      class="input-field"
+      class="input-field pl-2"
       type="password"
     />
   </div>
@@ -61,11 +66,13 @@
       label="Mot de passe oublié"
       [link]="true"
       [routerLink]="'/auth/forgot-password'"
+      severity="info"
     />
     <p-button
       label="Créez un compte"
       [link]="true"
       [routerLink]="'/auth/register'"
+      severity="info"
     />
   </div>
 </form>

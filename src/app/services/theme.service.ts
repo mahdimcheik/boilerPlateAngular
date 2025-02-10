@@ -54,7 +54,6 @@ export class ThemeService {
 
   changeTheme(activeTheme: Theme): void {
     const htmlLink = document.getElementById('app-theme') as HTMLLinkElement;
-
     htmlLink.href = activeTheme.value + '.css';
     this.activeTheme = activeTheme;
   }
