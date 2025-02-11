@@ -9,6 +9,7 @@ import {
 } from '../../../../shared/Models/user/user';
 import { AuthService } from '../../../../services/auth.service';
 import { catchError, firstValueFrom, of } from 'rxjs';
+import { SizeWatcherService } from '../../../../services/size-watcher.service';
 
 @Component({
   selector: 'app-modal-edit-personnal-infos',
@@ -21,6 +22,7 @@ export class ModalEditPersonnalInfosComponent {
   @Input() visible: boolean = false;
   selectedGender!: GenderDropDown;
   @Input() title!: string;
+  windowWidth$ = inject(SizeWatcherService).windowWidth$;
 
   file?: File;
   fileName?: string;

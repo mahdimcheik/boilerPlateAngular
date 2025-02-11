@@ -8,7 +8,7 @@
     [lazy]="true"
     (onLazyLoad)="onLazyLoad($event)"
     styleClass="border border-surface"
-    [style]="{ width: '100%', height: '500px' }"
+    [style]="{ height: '500px' }"
   >
     <ng-template let-item pTemplate="item">
       <app-notification [notification]="item"></app-notification>

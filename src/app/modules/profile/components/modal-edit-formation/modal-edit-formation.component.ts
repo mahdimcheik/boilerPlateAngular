@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
 import { FormationService } from '../../../../services/formation.service';
 import { finalize, firstValueFrom } from 'rxjs';
+import { SizeWatcherService } from '../../../../services/size-watcher.service';
 
 @Component({
   selector: 'app-modal-edit-formation',
@@ -19,6 +20,7 @@ export class ModalEditFormationComponent {
   @Output() actionEmitter = new EventEmitter<void>();
   title!: string;
   @Input() isVisibleModalAddFormation: boolean = false;
+  windowWidth$ = inject(SizeWatcherService).windowWidth$;
 
   authService = inject(AuthService);
   formationService = inject(FormationService);

@@ -5,6 +5,8 @@ import {
   Input,
   OnInit,
   Output,
+  Signal,
+  signal,
 } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import {
@@ -19,7 +21,9 @@ import {
   AdresseDTO,
 } from '../../../../shared/Models/adresse';
 import { AdresseService } from '../../../../services/adresse.service';
-import { finalize, firstValueFrom } from 'rxjs';
+import { finalize, firstValueFrom, Observable } from 'rxjs';
+import { SizeWatcherService } from '../../../../services/size-watcher.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 /// same component is used to add or update an address
 @Component({
   selector: 'app-modal-edit-adresse',
@@ -37,6 +41,7 @@ export class ModalEditAdresseComponent implements OnInit {
   authService = inject(AuthService);
   fb = inject(FormBuilder);
   adresseService = inject(AdresseService);
+  windowWidth$ = inject(SizeWatcherService).windowWidth$;
 
   typesAdresseList: AddressDropDown[] = [
     {

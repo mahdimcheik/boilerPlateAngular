@@ -10,8 +10,7 @@
         >{{ UserToshow().firstName | titlecase }}
         {{ UserToshow().lastName | titlecase }}</span
       >
-      <span class="resume-perso">Acteur</span>
-      <span class="resume-perso">{{
+      <span *ngIf="showAge()" class="resume-perso">{{
         UserToshow().dateOfBirth | dobToAge
       }}</span>
     </div>

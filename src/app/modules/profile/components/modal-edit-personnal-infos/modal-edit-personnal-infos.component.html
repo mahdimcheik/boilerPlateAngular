@@ -1,134 +1,136 @@
-<p-sidebar
-  [(visible)]="visible"
-  position="right"
-  [style]="{
-    width: '50vw'
+<ng-container *ngIf="windowWidth$ | async as windowWidth">
+  <p-sidebar
+    [(visible)]="visible"
+    position="right"
+    [style]="{
+    width:  (windowWidth < 600) ? '100vw' : '50vw',
   }"
-  (onHide)="cancel()"
->
-  <form
-    [formGroup]="userForm"
-    class="form"
-    (ngSubmit)="userForm.valid && submit()"
-    #form="ngForm"
+    (onHide)="cancel()"
   >
-    <h2 class="title">{{ title }}</h2>
-    <app-file-upload (fileEmitter)="receiveFile($event)"></app-file-upload>
-    <div class="float">
-      <label for="firstName">Prénom<span class="asterix">*</span></label>
-      <input
-        pInputText
-        id="firstName"
-        formControlName="firstName"
-        class="input-field"
-        variant="filled"
-      />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['firstName'].errors"
+    <form
+      [formGroup]="userForm"
+      class="form"
+      (ngSubmit)="userForm.valid && submit()"
+      #form="ngForm"
     >
-      <div [hidden]="!userForm.controls['firstName'].errors['required']">
-        Ce champs est obligatoire
+      <h2 class="title">{{ title }}</h2>
+      <app-file-upload (fileEmitter)="receiveFile($event)"></app-file-upload>
+      <div class="float">
+        <label for="firstName">Prénom<span class="asterix">*</span></label>
+        <input
+          pInputText
+          id="firstName"
+          formControlName="firstName"
+          class="input-field"
+          variant="filled"
+        />
       </div>
-    </div>
-    <div class="float">
-      <label for="lastName">Nom<span class="asterix">*</span></label>
-      <input
-        pInputText
-        id="lastName"
-        formControlName="lastName"
-        class="input-field"
-        variant="filled"
-      />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['lastName'].errors"
-    >
-      <div [hidden]="!userForm.controls['lastName'].errors['required']">
-        Ce champs est obligatoire
-      </div>
-    </div>
-
-    <div class="float">
-      <label for="title">Titre (optionnel)</label>
-      <input
-        pInputText
-        id="lastName"
-        formControlName="title"
-        class="input-field"
-        variant="filled"
-      />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['title'].errors"
-    >
-      <div [hidden]="!userForm.controls['title'].errors['required']">
-        Ce champs est obligatoire
-      </div>
-    </div>
-
-    <div class="float">
-      <label for="gender">Genre<span class="asterix">*</span></label>
-      <p-dropdown
-        id="gender"
-        [options]="typesGenderList"
-        formControlName="gender"
-        variant="filled"
-        optionLabel="name"
-        placeholder="Votre genre"
-        (onChange)="genderChosen()"
-        variant="filled"
-      />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['gender'].errors"
-    >
-      <div [hidden]="!userForm.controls['gender'].errors['required']">
-        Ce champs est obligatoire
-      </div>
-    </div>
-
-    <div class="float">
-      <label for="dateOfBirth"
-        >Date de naissance<span class="asterix">*</span>{{ " " }}</label
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['firstName'].errors"
       >
-
-      <p-calendar
-        id="dateOfBirth"
-        dateFormat="dd/mm/yy"
-        formControlName="dateOfBirth"
-      />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['dateOfBirth'].errors"
-    >
-      <div [hidden]="!userForm.controls['dateOfBirth'].errors['required']">
-        Ce champs est obligatoire
+        <div [hidden]="!userForm.controls['firstName'].errors['required']">
+          Ce champs est obligatoire
+        </div>
       </div>
-    </div>
-    <div class="control">
-      <p-button
-        [type]="'button'"
-        label="Annuler"
-        icon="pi pi-times"
-        iconPos="right"
-        color=""
-        severity="danger"
-        (onClick)="cancel()"
-      />
-      <p-button
-        [type]="'submit'"
-        label="Validez"
-        icon="pi pi-check"
-        iconPos="right"
-        color=""
-        severity="primary"
-      />
-    </div>
-  </form>
-</p-sidebar>
+      <div class="float">
+        <label for="lastName">Nom<span class="asterix">*</span></label>
+        <input
+          pInputText
+          id="lastName"
+          formControlName="lastName"
+          class="input-field"
+          variant="filled"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['lastName'].errors"
+      >
+        <div [hidden]="!userForm.controls['lastName'].errors['required']">
+          Ce champs est obligatoire
+        </div>
+      </div>
+
+      <div class="float">
+        <label for="title">Titre (optionnel)</label>
+        <input
+          pInputText
+          id="lastName"
+          formControlName="title"
+          class="input-field"
+          variant="filled"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['title'].errors"
+      >
+        <div [hidden]="!userForm.controls['title'].errors['required']">
+          Ce champs est obligatoire
+        </div>
+      </div>
+
+      <div class="float">
+        <label for="gender">Genre<span class="asterix">*</span></label>
+        <p-dropdown
+          id="gender"
+          [options]="typesGenderList"
+          formControlName="gender"
+          variant="filled"
+          optionLabel="name"
+          placeholder="Votre genre"
+          (onChange)="genderChosen()"
+          variant="filled"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['gender'].errors"
+      >
+        <div [hidden]="!userForm.controls['gender'].errors['required']">
+          Ce champs est obligatoire
+        </div>
+      </div>
+
+      <div class="float">
+        <label for="dateOfBirth"
+          >Date de naissance<span class="asterix">*</span>{{ " " }}</label
+        >
+
+        <p-calendar
+          id="dateOfBirth"
+          dateFormat="dd/mm/yy"
+          formControlName="dateOfBirth"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['dateOfBirth'].errors"
+      >
+        <div [hidden]="!userForm.controls['dateOfBirth'].errors['required']">
+          Ce champs est obligatoire
+        </div>
+      </div>
+      <div class="control">
+        <p-button
+          [type]="'button'"
+          label="Annuler"
+          icon="pi pi-times"
+          iconPos="right"
+          color=""
+          severity="danger"
+          (onClick)="cancel()"
+        />
+        <p-button
+          [type]="'submit'"
+          label="Validez"
+          icon="pi pi-check"
+          iconPos="right"
+          color=""
+          severity="primary"
+        />
+      </div>
+    </form>
+  </p-sidebar>
+</ng-container>
