@@ -1,7 +1,9 @@
+@import "../../../../../styles.scss";
 .main {
   display: flex;
   height: calc(100vh - 54px);
   overflow: hidden;
+  background-color: $surface-a;
 
   img {
     width: 50%;
