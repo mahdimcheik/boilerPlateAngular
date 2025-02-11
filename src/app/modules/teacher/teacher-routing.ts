@@ -4,11 +4,13 @@ import { LayoutTeacherComponent } from './pages/layout-teacher/layout-teacher.co
 import { CalendarComponent } from './pages/calendar/calendar.component';
 import { CalendarForReservationComponent } from '../profile/components/calendar-for-reservation/calendar-for-reservation.component';
 import { UsersComponent } from './pages/users/users.component';
+import { isAdminOnlyGuard } from '../../utilities/guards/is-admin-only.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutTeacherComponent,
+    canActivate: [isAdminOnlyGuard],
     children: [
       {
         path: 'dashboard',

@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-account-created-succesfuly',
   templateUrl: './account-created-succesfuly.component.html',
-  styleUrl: './account-created-succesfuly.component.scss'
+  styleUrl: './account-created-succesfuly.component.scss',
 })
-export class AccountCreatedSuccesfulyComponent {
-
-}
+export class AccountCreatedSuccesfulyComponent {}

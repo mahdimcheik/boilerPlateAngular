@@ -29,7 +29,7 @@ export class NavbarComponent {
   authService = inject(AuthService);
   router = inject(Router);
   userConnected = this.authService.userConnected;
-  // items: MenuItem[] | undefined;
+
   userItems = computed(() => {
     if (this.userConnected().email) {
       return [
@@ -60,7 +60,8 @@ export class NavbarComponent {
         },
       ];
     }
-  }); //: MenuItem[] | undefined;
+  });
+
   items = computed(() => {
     return this.userConnected().roles &&
       this.userConnected()?.roles.includes('Admin')
@@ -92,7 +93,9 @@ export class NavbarComponent {
             command: () => this.router.navigateByUrl('contactus'),
           },
         ]
-      : [
+      : this.userConnected().roles &&
+        this.userConnected()?.roles.includes('Student')
+      ? [
           {
             label: 'Home',
             icon: 'pi pi-home',
@@ -107,6 +110,18 @@ export class NavbarComponent {
             label: 'A Propos',
             icon: 'pi pi-search',
             command: () => this.router.navigateByUrl('aboutus'),
+          },
+          {
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            command: () => this.router.navigateByUrl('contactus'),
+          },
+        ]
+      : [
+          {
+            label: 'Home',
+            icon: 'pi pi-home',
+            command: () => this.router.navigateByUrl(''),
           },
           {
             label: 'Contact',

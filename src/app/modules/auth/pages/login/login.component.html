@@ -1,78 +1,85 @@
-<form
-  [formGroup]="userForm"
-  class="form"
-  (ngSubmit)="userForm.valid && submit()"
-  #form="ngForm"
->
-  <h2 class="title">Veuillez entrer vos identifiants</h2>
-
-  <div class="float">
-    <label for="email">Email</label>
-    <input
-      pInputText
-      id="email"
-      formControlName="email"
-      class="input-field pl-2"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['email'].errors"
-  >
-    <div
-      class="error"
-      [hidden]="!userForm.controls['email'].errors['required']"
+<div class="flex items-center justify-center h-screen">
+  <div class="content">
+    <form
+      [formGroup]="userForm"
+      class="form"
+      (ngSubmit)="userForm.valid && submit()"
+      #form="ngForm"
     >
-      L'email est requis
-    </div>
-    <div class="error" [hidden]="!userForm.controls['email'].errors['email']">
-      verifier le format de l'email
-    </div>
-  </div>
-  <div class="float">
-    <label for="password">Mot de passe</label>
-    <input
-      pInputText
-      id="password"
-      formControlName="password"
-      class="input-field pl-2"
-      type="password"
-    />
-  </div>
-  <div
-    class="error"
-    *ngIf="form.submitted && userForm.controls['password'].errors"
-  >
-    <div [hidden]="!userForm.controls['password'].errors['required']">
-      Le mot de passe est requis
-    </div>
-    <div [hidden]="!userForm.controls['password'].errors['minlength']">
-      Le mot de passe doit avoir au moins 8 caractères
-    </div>
-  </div>
+      <h2 class="title">Veuillez entrer vos identifiants</h2>
 
-  <div class="control">
-    <p-button
-      [type]="'submit'"
-      label="Connexion"
-      icon="pi pi-check"
-      iconPos="right"
-      color=""
-      severity="primary"
-    />
+      <div class="float">
+        <label for="email">Email</label>
+        <input
+          pInputText
+          id="email"
+          formControlName="email"
+          class="input-field pl-2"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['email'].errors"
+      >
+        <div
+          class="error"
+          [hidden]="!userForm.controls['email'].errors['required']"
+        >
+          L'email est requis
+        </div>
+        <div
+          class="error"
+          [hidden]="!userForm.controls['email'].errors['email']"
+        >
+          verifier le format de l'email
+        </div>
+      </div>
+      <div class="float">
+        <label for="password">Mot de passe</label>
+        <input
+          pInputText
+          id="password"
+          formControlName="password"
+          class="input-field pl-2"
+          type="password"
+        />
+      </div>
+      <div
+        class="error"
+        *ngIf="form.submitted && userForm.controls['password'].errors"
+      >
+        <div [hidden]="!userForm.controls['password'].errors['required']">
+          Le mot de passe est requis
+        </div>
+        <div [hidden]="!userForm.controls['password'].errors['minlength']">
+          Le mot de passe doit avoir au moins 8 caractères
+        </div>
+      </div>
+
+      <div class="control">
+        <p-button
+          [type]="'submit'"
+          label="Connexion"
+          icon="pi pi-check"
+          iconPos="right"
+          color=""
+          severity="primary"
+        />
+      </div>
+      <div class="register-forgot">
+        <p-button
+          label="Mot de passe oublié"
+          [link]="true"
+          [routerLink]="'/auth/forgot-password'"
+          severity="info"
+        />
+        <p-button
+          label="Créez un compte"
+          [link]="true"
+          [routerLink]="'/auth/register'"
+          severity="info"
+        />
+      </div>
+    </form>
   </div>
-  <div class="register-forgot">
-    <p-button
-      label="Mot de passe oublié"
-      [link]="true"
-      [routerLink]="'/auth/forgot-password'"
-      severity="info"
-    />
-    <p-button
-      label="Créez un compte"
-      [link]="true"
-      [routerLink]="'/auth/register'"
-      severity="info"
-    />
-  </div>
-</form>
+</div>

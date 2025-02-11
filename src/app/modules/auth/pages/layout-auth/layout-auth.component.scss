@@ -1,6 +1,7 @@
 .main {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 54px);
+  overflow: hidden;
 
   img {
     width: 50%;

@@ -16,16 +16,15 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutAuthComponent,
+    canActivate: [canNotLoginGuard],
     children: [
       {
         path: 'register',
         component: RegisterComponent,
-        canActivate: [canNotRegisterGuard],
       },
       {
         path: 'login',
         component: LoginComponent,
-        canActivate: [canNotLoginGuard],
       },
       {
         path: 'forgot-password',
@@ -34,7 +33,6 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ChangePasswordComponent,
-        canActivate: [canNotLoginGuard],
       },
       {
         path: 'account-created',

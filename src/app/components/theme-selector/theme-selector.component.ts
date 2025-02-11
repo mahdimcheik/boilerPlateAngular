@@ -27,14 +27,14 @@ export class ThemeSelectorComponent implements OnInit {
   activeTheme!: Theme;
 
   ngOnInit(): void {
-    // this.themes = this.themeService.allThemes;
-    // const theme = this.localstorageService.getTheme();
+    this.themes = this.themeService.allThemes;
+    const theme = this.localstorageService.getTheme();
     // if (theme?.id) {
     //   this.activeTheme = theme;
     //   this.themeService.activeTheme = theme;
     //   this.changeTheme();
     // }
-    // this.activeTheme = this.themeService.activeTheme;
+    this.activeTheme = this.themeService.activeTheme;
   }
 
   changeTheme() {

@@ -1,9 +1,10 @@
 @import "../../../../../variables.scss";
 $primary-color1: #3498db;
 .sidebar {
+  margin-top: 54px;
   padding-top: 65px;
   width: 60px;
-  height: 100vh;
+  height: calc(100vh - 54px);
   transition: width 0.3s ease;
   overflow: hidden;
   position: absolute;
