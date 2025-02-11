@@ -1,15 +1,16 @@
 @import "../../../../../variables.scss";
 .control {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 }
 .form {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $surface-a;
+  // background-color: $surface-a;
   gap: 2rem;
   .float {
     width: 90%;
@@ -29,4 +30,9 @@
 
 .asterix {
   color: red;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }

@@ -93,38 +93,47 @@
       </div>
     </div>
 
-    <div class="float">
-      <label for="startAt">Début<span class="asterix">*</span>{{ " " }}</label>
-      <!-- <input id="startAt" formControlName="startAt" type="date" /> -->
-      <p-calendar
-        id="startAt"
-        dateFormat="dd/mm/yy"
-        formControlName="startAt"
-      />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['startAt'].errors"
-    >
-      <div [hidden]="!userForm.controls['startAt'].errors['required']">
-        Ce champs est obligatoire
+    <div class="time">
+      <div class="float-time">
+        <label for="startAt"
+          >Début<span class="asterix">*</span>{{ " " }}</label
+        >
+        <!-- <input id="startAt" formControlName="startAt" type="date" /> -->
+        <p-calendar
+          id="startAt"
+          dateFormat="dd/mm/yy"
+          formControlName="startAt"
+          class="input-field"
+        />
+        <div
+          class="error"
+          *ngIf="form.submitted && userForm.controls['startAt'].errors"
+        >
+          <div [hidden]="!userForm.controls['startAt'].errors['required']">
+            Ce champs est obligatoire
+          </div>
+        </div>
+      </div>
+
+      <div class="float-time">
+        <label for="endAt">Fin<span class="asterix">*</span>{{ " " }}</label>
+        <!-- <input id="endAt" formControlName="endAt" type="date" /> -->
+        <p-calendar
+          id="endAt"
+          dateFormat="dd/mm/yy"
+          formControlName="endAt"
+          class="input-field"
+        />
+        <div
+          class="error"
+          *ngIf="form.submitted && userForm.controls['endAt'].errors"
+        >
+          <div [hidden]="!userForm.controls['endAt'].errors['required']">
+            Ce champs est obligatoire
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="float">
-      <label for="endAt">Fin<span class="asterix">*</span>{{ " " }}</label>
-      <!-- <input id="endAt" formControlName="endAt" type="date" /> -->
-      <p-calendar id="endAt" dateFormat="dd/mm/yy" formControlName="endAt" />
-    </div>
-    <div
-      class="error"
-      *ngIf="form.submitted && userForm.controls['endAt'].errors"
-    >
-      <div [hidden]="!userForm.controls['endAt'].errors['required']">
-        Ce champs est obligatoire
-      </div>
-    </div>
-
     <div class="control">
       <p-button
         [type]="'button'"

@@ -1,24 +1,50 @@
 @import "../../../../../variables.scss";
 .control {
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 }
 .form {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $surface-a;
+  // background-color: $surface-a;
   gap: 2rem;
   .float {
     width: 90%;
+    display: flex;
+    flex-direction: column;
     .input-field {
       margin-top: 10px;
       height: 2.5rem;
       border-radius: 5px;
       flex-grow: 5;
       width: 100%;
+    }
+  }
+  .time {
+    display: flex;
+    gap: 1rem;
+    .float-time {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .input-field {
+        margin-top: 10px;
+        height: auto;
+        border: none !important;
+        border-radius: 4px;
+        height: 1.5rem;
+        outline: 2px solid $secondary-color-text;
+        vertical-align: middle !important;
+        text-align: center;
+        flex-grow: 5;
+        width: 100%;
+      }
     }
   }
 }
@@ -29,4 +55,9 @@
 
 .asterix {
   color: red;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }

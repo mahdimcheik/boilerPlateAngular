@@ -68,7 +68,7 @@
     <p-button
       *ngIf="isOwner()"
       [icon]="'pi pi-plus'"
-      (onClick)="showModalEditFormation()"
+      (onClick)="showModalEditAddresse()"
     ></p-button>
     <span>Ajouter une adresse</span>
 
@@ -81,13 +81,6 @@
       ></app-addresse>
     </div>
   </p-fieldset>
-
-  <app-modal-edit-formation
-    (actionEmitter)="hideAddForm()"
-    [updateOrAdd]="'add'"
-    [isVisibleModalAddFormation]="isVisibleModalAddFormation"
-    *ngIf="isVisibleModalAddFormation"
-  ></app-modal-edit-formation>
 </div>
 
 <app-modal-edit-personnal-infos
@@ -97,3 +90,17 @@
   *ngIf="isVisibleModalEditPerso"
   (actionEmitter)="isVisibleModalEditPerso = false"
 ></app-modal-edit-personnal-infos>
+
+<app-modal-edit-formation
+  (actionEmitter)="hideAddForm()"
+  [updateOrAdd]="'add'"
+  [isVisibleModalAddFormation]="isVisibleModalAddFormation"
+  *ngIf="isVisibleModalAddFormation"
+></app-modal-edit-formation>
+
+<app-modal-edit-adresse
+  [visible]="isVisibleModalAddAdresse"
+  [updateOrAdd]="'add'"
+  (actionEmitter)="hideAddForm()"
+  *ngIf="isVisibleModalAddAdresse"
+></app-modal-edit-adresse>

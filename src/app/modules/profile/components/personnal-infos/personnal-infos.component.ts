@@ -27,6 +27,7 @@ export class PersonnalInfosComponent implements OnInit {
   @Input({ required: true }) userToDisplay!: WritableSignal<UserResponseDTO>;
   isVisibleModalAddFormation: boolean = false;
   @Input() isVisibleModalEditPerso: boolean = false;
+  isVisibleModalAddAdresse: boolean = false;
 
   formationService = inject(FormationService);
   adresseService = inject(AdresseService);
@@ -55,8 +56,12 @@ export class PersonnalInfosComponent implements OnInit {
 
   hideAddForm() {
     this.isVisibleModalAddFormation = false;
+    this.isVisibleModalAddAdresse = false;
   }
   showModalEditFormation() {
     this.isVisibleModalAddFormation = true;
+  }
+  showModalEditAddresse() {
+    this.isVisibleModalAddAdresse = true;
   }
 }

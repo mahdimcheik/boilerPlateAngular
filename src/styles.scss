@@ -56,6 +56,11 @@ body {
   outline: 2px solid $secondary-color-text;
   padding: 4px;
 }
+.p-button-danger {
+  outline-width: 2px;
+  outline-style: solid;
+  padding: 4px;
+}
 
 .p-button-cancel {
   outline: 2px solid $secondary-color-text;

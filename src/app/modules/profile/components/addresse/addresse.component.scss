@@ -7,7 +7,7 @@
   padding: 0 1rem;
   margin-top: 1rem;
   border-radius: 5px;
-  box-shadow: 1px 1px 1px $primary-color;
+  border: 2px solid $secondary-color-text;
 
   .card-skill-body {
     display: flex;
@@ -21,7 +21,7 @@
       }
       .date-place {
         display: flex;
-        color: $text-color; //$secondary-color-text;
+        color: $text-color;
         p {
           font-size: 13px;
           font-weight: 300;
