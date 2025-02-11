@@ -18,7 +18,6 @@ import { TokenInterceptor } from './utilities/interceptors/token.interceptor';
 import { errorHandlerInterceptor } from './utilities/interceptors/error-handler.interceptor';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { MenubarModule } from 'primeng/menubar';
-import { BadgeModule } from 'primeng/badge';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
@@ -29,6 +28,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import localeFr from '@angular/common/locales/fr';
+import { BadgeModule } from 'primeng/badge';
+
 registerLocaleData(localeFr);
 @NgModule({
   declarations: [AppComponent, HomeComponent, AdresseTypePipe],

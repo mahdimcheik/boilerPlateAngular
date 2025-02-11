@@ -97,3 +97,16 @@ body {
 .p-fieldset {
   outline: 2px solid $primary-color;
 }
+// badge
+.p-badge {
+  position: relative;
+  top: -14px;
+  left: -0.5rem;
+}
+.item-number {
+  position: relative;
+  font-size: 16px;
+  background-color: rgba(16, 14, 14, 1);
+  top: -0.5rem;
+  left: -12px;
+}
