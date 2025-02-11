@@ -19,7 +19,13 @@
         ></app-personnal-infos>
       </div>
       <div class="notifications">
-        <p-fieldset legend="Notifications">
+        <p-fieldset>
+          <ng-template pTemplate="header">
+            <div class="flex items-center gap-2 p-2 mx-6">
+              <span class="font-bold">Notifications</span>
+            </div>
+          </ng-template>
+
           <app-notifications-carousel></app-notifications-carousel>
         </p-fieldset>
       </div>

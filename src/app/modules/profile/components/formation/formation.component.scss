@@ -5,7 +5,8 @@
   align-items: center;
   height: 120px;
   border-radius: 5px;
-  box-shadow: 1px 1px 1px $primary-color;
+  border: 2px solid $secondary-color-text;
+  // box-shadow: 1px 1px 1px $primary-color;
 
   .card-skill-body {
     display: flex;

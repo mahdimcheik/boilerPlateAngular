@@ -1,21 +1,22 @@
 // Define colors, fonts, and spacing for easy customization
-$primary-color: var(--primary-color);
-$primary-color-text: var(--primary-color-text);
-$secondary-color: var(--surface-b);
-$secondary-color-text: var(--text-color-secondary);
-$accent-color: var(--primaryDark);
-$padding: 16px;
+// $primary-color: var(--primary-color);
+// $primary-color-text: var(--primary-color-text);
+// $secondary-color: var(--surface-b);
+// $secondary-color-text: var(--text-color-secondary);
+// $accent-color: var(--primaryDark);
+// $padding: 16px;
 // --text-color: rgba(255, 255, 255, 0.87);
 //   --text-color-secondary: rgba(255, 255, 255, 0.6);
 //   --primary-color: #60a5fa;
 //   --primary-color-text: #030712;
 
 // Main container-app styling
+@import "../../../../../styles.scss";
 .container-app {
   display: flex;
   width: 100%;
   height: calc(100vh - 56px);
-  background-color: $secondary-color;
+  background-color: $surface-a;
   font-family: Arial, sans-serif;
 }
 
