@@ -1,12 +1,10 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
-
 import { LayoutClientComponent } from './pages/layout-client/layout-client.component';
 import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { OutletNavbarComponent } from './components/outlet-navbar/outlet-navbar.component';
-import { PersonnalInfosComponent } from './pages/layout-client/personnal-infos/personnal-infos.component';
 import { FieldsetModule } from 'primeng/fieldset';
 import { LineBinaryDataComponent } from '../../shared/components/line-binary-data/line-binary-data.component';
 import { AdressesComponent } from './pages/adresses/adresses.component';
@@ -45,6 +43,7 @@ import localeFr from '@angular/common/locales/fr';
 import { CarouselModule } from 'primeng/carousel';
 import { ScrollerModule } from 'primeng/scroller';
 import { NotificationsCarouselComponent } from './components/notifications-carousel/notifications-carousel.component';
+import { PersonnalInfosComponent } from './components/personnal-infos/personnal-infos.component';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -95,7 +94,7 @@ registerLocaleData(localeFr);
     DialogModule,
     FullCalendarModule,
     CarouselModule,
-    ScrollerModule
+    ScrollerModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })

@@ -9,12 +9,11 @@ import {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { FormationResponseDTO } from '../../../../../shared/Models/formation';
-import { AuthService } from '../../../../../services/auth.service';
-import { FormationService } from '../../../../../services/formation.service';
+import { FormationService } from '../../../../services/formation.service';
+import { AdresseService } from '../../../../services/adresse.service';
+import { AuthService } from '../../../../services/auth.service';
+import { UserResponseDTO } from '../../../../shared/Models/user/user';
 import { firstValueFrom } from 'rxjs';
-import { AdresseService } from '../../../../../services/adresse.service';
-import { UserResponseDTO } from '../../../../../shared/Models/user/user';
 
 @Component({
   selector: 'app-personnal-infos',

@@ -1,5 +1,5 @@
 <div class="container-app">
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
+  <h1 class="text-3xl font-bold underline">Mon profil!</h1>
   <div class="list-info">
     <div class="nom-prenom-age-genre">
       <p-button
@@ -29,7 +29,6 @@
       ></app-line-binary-data>
     </div>
     <div class="image">
-      <!-- <img [src]="userConnected().imgUrl" width="200" height="200" alt="" /> -->
       <p-image
         [src]="userToDisplay().imgUrl"
         alt="Image"
@@ -50,7 +49,7 @@
       [icon]="'pi pi-plus'"
       (onClick)="showModalEditFormation()"
     ></p-button>
-    <!-- <p-divider></p-divider> -->
+    <span>Ajouter une formation</span>
     <div class="formations">
       <app-formation
         *ngFor="let formation of listFormations()"
@@ -71,6 +70,8 @@
       [icon]="'pi pi-plus'"
       (onClick)="showModalEditFormation()"
     ></p-button>
+    <span>Ajouter une adresse</span>
+
     <!-- <p-divider></p-divider> -->
     <div class="Adresses">
       <app-addresse

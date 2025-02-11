@@ -4,6 +4,8 @@
   justify-content: space-between;
   align-items: center;
   height: 120px;
+  padding: 0 1rem;
+  margin-top: 1rem;
   border-radius: 5px;
   box-shadow: 1px 1px 1px $primary-color;
 
@@ -34,7 +36,7 @@
   }
   .card-skill-control {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     margin-right: 10px;
     button {
       border: none;
