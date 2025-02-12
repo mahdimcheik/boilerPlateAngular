@@ -167,6 +167,7 @@ export class SlotService {
       extendedProps: {
         price: slot.price,
         reduction: slot.reduction,
+        discountedPrice: slot.discountedPrice,
         id: slot.id,
         studentFirstName: slot.studentFirstName,
         studentLastName: slot.studentLastName,

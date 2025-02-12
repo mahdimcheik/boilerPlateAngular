@@ -19,6 +19,23 @@
       <h2>Résumé de votre créneau</h2>
       <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
 
+      <div class="price-reduction">
+        <div class="price">
+          <h3>Prix (€):</h3>
+          <input type="number" pinput class="pl-2" [(ngModel)]="price" />
+          <p class="error" *ngIf="price < 0 || price > 200">
+            Attention, prix anormal
+          </p>
+        </div>
+        <div class="reduction">
+          <h3>Réduction (%):</h3>
+          <input type="number" pinput class="pl-2" [(ngModel)]="reduction" />
+          <p class="error" *ngIf="reduction < 0 || reduction > 100">
+            Attention, réduction anormale (0-100%)
+          </p>
+        </div>
+      </div>
+
       <div class="time-control">
         <div class="dat-from-to">
           <h4>De : {{ start | date : "HH:mm" }}</h4>
@@ -47,6 +64,9 @@
         icon="pi pi-check"
         (onClick)="validate()"
         severity="success"
+        [disabled]="
+          price < 0 || price > 200 || reduction < 0 || reduction > 100
+        "
       ></p-button>
     </div>
   </div>

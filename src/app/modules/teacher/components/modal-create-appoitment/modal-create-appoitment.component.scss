@@ -15,9 +15,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .time-control {
+    .time-control,
+    .price-reduction {
       display: flex;
       gap: 10px;
+      margin: 0 auto;
     }
   }
   .control {
@@ -31,4 +33,10 @@ h3,
 h4 {
   padding: 0;
   margin: 10px 0;
+}
+
+.error {
+  margin-top: 5px;
+  font-size: 10px;
+  color: red;
 }

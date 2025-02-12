@@ -24,6 +24,8 @@ export class ModalCreateAppoitmentComponent implements OnInit {
   };
   start!: Date;
   end!: Date;
+  price: number = 15;
+  reduction: number = 0;
 
   slotService = inject(SlotService);
 
@@ -36,12 +38,19 @@ export class ModalCreateAppoitmentComponent implements OnInit {
     this.actionEmitter.emit();
   }
   validate() {
+    if (
+      this.price < 0 ||
+      this.price > 200 ||
+      this.reduction < 0 ||
+      this.reduction > 100
+    )
+      return;
     const newAppoitment = {
       startAt: this.start,
       endAt: this.end,
       createdAt: new Date(),
-      price: 10,
-      reduction: 10,
+      price: this.price,
+      reduction: this.reduction,
       type: 0,
     };
     this.slotService

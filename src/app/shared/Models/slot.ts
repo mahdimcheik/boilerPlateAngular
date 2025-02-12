@@ -6,6 +6,7 @@ export type SlotResponseDTO = {
   createById: string;
   price: number;
   reduction: number;
+  discountedPrice: number;
   type: number;
   studentId?: string;
   studentFirstName?: string;
