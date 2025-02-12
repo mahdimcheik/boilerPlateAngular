@@ -5,11 +5,11 @@ import { SlotService } from '../../../../services/slot.service';
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-modal-delete-appointment',
-  templateUrl: './modal-delete-appointment.component.html',
-  styleUrl: './modal-delete-appointment.component.scss',
+  selector: 'app-modal-reserver-annuler-by-student',
+  templateUrl: './modal-reserver-annuler-by-student.component.html',
+  styleUrl: './modal-reserver-annuler-by-student.component.scss',
 })
-export class ModalDeleteAppointmentComponent {
+export class ModalReserverAnnulerByStudentComponent {
   @Input() visible: boolean = false;
   @Output() actionEmitter = new EventEmitter();
   @Input({ required: true }) appoitment: EventInput = {

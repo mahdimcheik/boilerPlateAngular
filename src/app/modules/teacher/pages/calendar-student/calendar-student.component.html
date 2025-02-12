@@ -24,6 +24,13 @@
       <b *ngIf="!!arg.event.title && arg.event.title != 'No title'">{{
         arg.event.title
       }}</b>
+      <div *ngIf="arg.event.extendedProps?.['imgUrl']">
+        <img
+          [src]="arg.event.extendedProps?.['imgUrl']"
+          width="50"
+          height="50"
+        />
+      </div>
       <div *ngIf="arg.event.extendedProps?.['studentId']">
         <div class="slot-content">
           <img

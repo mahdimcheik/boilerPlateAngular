@@ -118,6 +118,24 @@ export class SlotService {
       );
   }
 
+  // student reservations
+  getSlotByStudent(fromDate: string, toDate: string): Observable<EventInput[]> {
+    return this.http
+      .get<ResponseDTO>(
+        `https://localhost:7113/slot/student?fromDate=${fromDate}&toDate=${toDate}`
+      )
+      .pipe(
+        map((res) => {
+          var slots = res.data as SlotResponseDTO[];
+          if (slots == null || slots.length == 0) return [];
+          return slots.map((slot) =>
+            this.convertSlotResponseToEventInput(slot)
+          );
+        }),
+        tap((res) => this.visibleEvents.set(res))
+      );
+  }
+
   convertSlotResponseToEventInput(slot: SlotResponseDTO) {
     return {
       start: new Date(slot.startAt),

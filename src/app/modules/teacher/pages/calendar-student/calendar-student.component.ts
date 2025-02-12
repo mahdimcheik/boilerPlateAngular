@@ -80,9 +80,7 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
   };
 
   loadSlot() {
-    this.slotService
-      .getSlotByCreator(this.userConnected().id, this.dateStart, this.dateEnd)
-      .subscribe();
+    this.slotService.getSlotByStudent(this.dateStart, this.dateEnd).subscribe();
   }
 
   calendarOptions: CalendarOptions = {
