@@ -65,36 +65,18 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
   selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
 
   canDrop = (dropInfo: any, draggedEvent: any) => {
-    const now = new Date();
-    return dropInfo.start >= now && draggedEvent.start >= now;
+    return false;
   };
   onEventClick = (eventClickArg: EventClickArg) => {
     this.selectedAppoitment = eventClickArg.event as EventInput;
     this.slotService.selectedEvent.set(this.selectedAppoitment);
     this.isVisibleModalDelete = true;
   };
-  onResize = (eventResizeArg: EventResizeDoneArg) => {
-    this.selectedAppoitment = eventResizeArg.oldEvent as EventInput;
-    this.selectedSlot = eventResizeArg.event as EventInput;
-
-    this.isVisibleModalUpdate = true;
-  };
-  onDrop = (eventDropArg: EventDropArg) => {
-    console.log('event drop', eventDropArg);
-    this.selectedSlot = {
-      start: eventDropArg.event.start as Date,
-      end: eventDropArg.event.end as Date,
-    };
-    this.selectedAppoitment = eventDropArg.oldEvent as EventInput;
-    this.isVisibleModalUpdate = true;
-  };
-  onDateSelect = (selectionInfo: DateSelectArg) => {
-    this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
-
-    this.showCreateModal();
-  };
+  onResize = (eventResizeArg: EventResizeDoneArg) => {};
+  onDrop = (eventDropArg: EventDropArg) => {};
+  onDateSelect = (selectionInfo: DateSelectArg) => {};
   canStartDrag = (selectionInfo: any) => {
-    return selectionInfo.start > new Date();
+    return false;
   };
 
   loadSlot() {
@@ -102,36 +84,6 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
       .getSlotByCreator(this.userConnected().id, this.dateStart, this.dateEnd)
       .subscribe();
   }
-
-  // // template slot
-  // renderEventContent = (arg: EventContentArg) => {
-  //   let html = `<div class="custom-event">
-  //                   <b>${arg.event.title}</b>
-  //                   <div>${
-  //                     arg.event.extendedProps?.['studentId']
-  //                       ? `<div class="slot-content"><img src=${
-  //                           (arg.event.extendedProps as any).studentImgUrl
-  //                         } width="24" height="24"/><span>${
-  //                           (arg.event.extendedProps as any).studentFirstName
-  //                         } ${
-  //                           (arg.event.extendedProps as any).studentLastName
-  //                         }</span></div>
-  //                       <div class="sujet">Sujet : ${
-  //                         (arg.event.extendedProps as any).subject
-  //                       }</div>
-
-  //                       `
-  //                       : `Créneau disponible <div>Prix :${
-  //                           (arg.event.extendedProps as any).price
-  //                         }</div>`
-  //                   }</div>
-  //                 </div>`;
-  //   let arrayOfDomNodes = [];
-  //   let div = document.createElement('div');
-  //   div.innerHTML = html;
-  //   arrayOfDomNodes.push(div.firstChild);
-  //   return { domNodes: arrayOfDomNodes };
-  // };
 
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',

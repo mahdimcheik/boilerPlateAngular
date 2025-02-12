@@ -26,7 +26,7 @@ const routes: Routes = [
       {
         path: 'booking-calendar',
         component: CalendarStudentComponent,
-        canActivate: [!isAdminOnlyGuard],
+        canActivate: [isAdminOnlyGuard],
       },
     ],
   },
