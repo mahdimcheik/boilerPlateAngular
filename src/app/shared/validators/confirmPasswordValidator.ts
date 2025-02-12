@@ -39,3 +39,23 @@ export function passwordValidator(
     return null;
   };
 }
+
+export function ageValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const birthdate = new Date(control.value);
+    const today = new Date();
+    const age = today.getFullYear() - birthdate.getFullYear();
+    const monthDifference = today.getMonth() - birthdate.getMonth();
+    const dayDifference = today.getDate() - birthdate.getDate();
+
+    if (
+      age > 13 ||
+      (age === 13 &&
+        (monthDifference > 0 || (monthDifference === 0 && dayDifference >= 0)))
+    ) {
+      return null;
+    } else {
+      return { underage: "L'age doit etre superieur a 13 ans" };
+    }
+  };
+}

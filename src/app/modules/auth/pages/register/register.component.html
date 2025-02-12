@@ -149,7 +149,14 @@
         <div [hidden]="!userForm.controls['dateOfBirth'].errors['required']">
           Ce champs est obligatoire
         </div>
+        <div
+          class="error"
+          *ngIf="form.submitted && userForm.errors?.['underage']"
+        >
+          le mot de passe est faibles
+        </div>
       </div>
+
       <div class="double-field">
         <label for="gender" class="half-label"
           >Genre<span class="asterix">*</span></label

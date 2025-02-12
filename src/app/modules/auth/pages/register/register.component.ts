@@ -7,8 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Password } from 'primeng/password';
-import { finalize, max } from 'rxjs';
+import { finalize, max, tap } from 'rxjs';
 import {
+  ageValidator,
   passwordStrengthValidator,
   passwordValidator,
 } from '../../../../shared/validators/confirmPasswordValidator';
@@ -52,7 +53,11 @@ export class RegisterComponent {
       value: EnumGender.Autre,
     },
   ];
-  selectedGender!: GenderDropDown;
+  selectedGender: GenderDropDown = {
+    id: '3',
+    name: 'Autre',
+    value: EnumGender.Autre,
+  };
 
   userForm = this.fb.group(
     {
@@ -69,7 +74,7 @@ export class RegisterComponent {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       phoneNumber: [''],
-      dateOfBirth: [new Date(), [Validators.required]],
+      dateOfBirth: [new Date(), [Validators.required, ageValidator]],
       gender: [this.selectedGender, [Validators.required]],
     },
     { validators: [passwordValidator('password', 'confirmPassword')] }
@@ -85,7 +90,8 @@ export class RegisterComponent {
     this.authService
       .register(newUser)
       .pipe(
-        finalize(() => {
+        tap((res) => {
+          console.log('res', res);
           this.router.navigateByUrl('auth/account-created');
         })
       )

@@ -2,11 +2,8 @@ import {
   Component,
   computed,
   inject,
-  input,
   Input,
   OnInit,
-  signal,
-  Signal,
   WritableSignal,
 } from '@angular/core';
 import { FormationService } from '../../../../services/formation.service';
@@ -51,8 +48,6 @@ export class PersonnalInfosComponent implements OnInit {
       this.adresseService.getAllAddresses(this.userToDisplay().id)
     );
   }
-
-  run() {}
 
   hideAddForm() {
     this.isVisibleModalAddFormation = false;
