@@ -20,6 +20,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { UserLiComponent } from './components/user-li/user-li.component';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { CalendarStudentComponent } from './pages/calendar-student/calendar-student.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -35,6 +36,7 @@ registerLocaleData(localeFr, 'fr');
     ModalDeleteAppointmentComponent,
     UsersComponent,
     UserLiComponent,
+    CalendarStudentComponent,
   ],
   imports: [
     CommonModule,

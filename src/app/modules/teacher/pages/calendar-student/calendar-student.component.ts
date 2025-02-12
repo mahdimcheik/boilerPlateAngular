@@ -42,10 +42,10 @@ type CustomEvent = {
 
 @Component({
   selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss',
+  templateUrl: './calendar-student.component.html',
+  styleUrl: './calendar-student.component.scss',
 })
-export class CalendarComponent implements OnInit, AfterViewInit {
+export class CalendarStudentComponent implements OnInit, AfterViewInit {
   slotService = inject(SlotService);
   visibleEvents = this.slotService.visibleEvents; // signal
   userConnected = inject(AuthService).userConnected; // signal
