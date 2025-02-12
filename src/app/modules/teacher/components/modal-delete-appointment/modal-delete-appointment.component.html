@@ -16,6 +16,54 @@
         {{appoitment.extendedProps?.["studentFirstName"] | titlecase}}
         {{appoitment.extendedProps?.["studentLastName"] | titlecase}}
       </h3>
+      <p-fieldset
+        toggleable="true"
+        legend="Editer"
+        collapsed
+        styleClass="fieldset-edit"
+        *ngIf="!appoitment.extendedProps?.['studentId']"
+      >
+        <div class="price-reduction">
+          <div class="price">
+            <h3>Prix (€):</h3>
+            <input
+              type="number"
+              class="pl-2"
+              pinput
+              [(ngModel)]="price"
+              variant="filled"
+            />
+            <p class="error" *ngIf="price < 0 || price > 200">
+              Attention, prix anormal
+            </p>
+          </div>
+          <div class="reduction">
+            <h3>Réduction (%):</h3>
+            <input type="number" pinput class="pl-2" [(ngModel)]="reduction" />
+            <p class="error" *ngIf="reduction < 0 || reduction > 100">
+              Attention, réduction anormale (0-100%)
+            </p>
+          </div>
+          <p-button
+            severity="primary"
+            label="Sauvegarder"
+            (onClick)="cancel()"
+          ></p-button>
+        </div>
+      </p-fieldset>
+
+      <p-button
+        *ngIf="appoitment.extendedProps?.['studentId']"
+        class="btn-contact"
+        [label]="'Contacter ' + appoitment.extendedProps?.['studentFirstName']"
+        icon="pi pi-phone"
+        iconPos="right"
+        (onClick)="cancel()"
+        severity="info"
+        ><img
+          class="img-contact"
+          [src]="appoitment.extendedProps?.['studentImgUrl']"
+      /></p-button>
     </div>
     <div class="content">
       <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>

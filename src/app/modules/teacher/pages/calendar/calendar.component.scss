@@ -32,3 +32,11 @@
   border: 3px solid red;
   cursor: pointer;
 }
+.original-price {
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+.new-price {
+  color: $primary-color-text;
+  margin-left: 5px;
+}

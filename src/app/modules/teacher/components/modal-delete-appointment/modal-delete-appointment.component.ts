@@ -20,6 +20,8 @@ export class ModalDeleteAppointmentComponent {
   };
   start!: Date;
   end!: Date;
+  price: number = 15;
+  reduction: number = 0;
 
   slotService = inject(SlotService);
   visibleEvents = this.slotService.visibleEvents;

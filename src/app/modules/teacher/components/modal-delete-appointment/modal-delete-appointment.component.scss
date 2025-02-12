@@ -1,3 +1,4 @@
+@import "../../../../../variables.scss";
 .modal {
   display: flex;
   flex-direction: column;
@@ -27,4 +28,34 @@ h3,
 h4 {
   padding: 0;
   margin: 10px 0;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.btn-contact {
+  border-radius: 2px;
+  outline: 4px solid $primary-color;
+  min-width: 130px;
+}
+.img-contact {
+  width: 35px;
+  height: auto;
+  // border-radius: 5px;
+  border: none;
+  outline: none;
+  margin-right: 5px;
+}
+
+// edit fieldset
+.price-reduction {
+  // display: flex;
+  // gap: 10px;
+  // margin: 0 auto;
+  width: 90%;
+}
+.error {
+  margin-top: 5px;
+  font-size: 10px;
+  color: red;
 }
