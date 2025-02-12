@@ -24,6 +24,7 @@ import interactionPlugin, {
 } from '@fullcalendar/interaction';
 import { SlotService } from '../../../../services/slot.service';
 import { AuthService } from '../../../../services/auth.service';
+import { HelpTypePipe } from '../../../../utilities/pipes/help-type.pipe';
 
 type MinimalEvent = {
   start: Date;
@@ -50,9 +51,7 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
   visibleEvents = this.slotService.visibleEvents; // signal
   userConnected = inject(AuthService).userConnected; // signal
 
-  isVisibleModalCreate: boolean = false;
-  isVisibleModalUpdate: boolean = false;
-  isVisibleModalDelete: boolean = false;
+  isVisibleModalBookDelete: boolean = false;
 
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
@@ -70,7 +69,7 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
   onEventClick = (eventClickArg: EventClickArg) => {
     this.selectedAppoitment = eventClickArg.event as EventInput;
     this.slotService.selectedEvent.set(this.selectedAppoitment);
-    this.isVisibleModalDelete = true;
+    this.isVisibleModalBookDelete = true;
   };
   onResize = (eventResizeArg: EventResizeDoneArg) => {};
   onDrop = (eventDropArg: EventDropArg) => {};
@@ -78,7 +77,6 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
   canStartDrag = (selectionInfo: any) => {
     return false;
   };
-
   loadSlot() {
     this.slotService.getSlotByStudent(this.dateStart, this.dateEnd).subscribe();
   }
@@ -140,11 +138,8 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
     eventColor: '#0000',
   };
 
-  showCreateModal() {
-    this.isVisibleModalCreate = true;
-  }
   hideCreateModal() {
-    this.isVisibleModalCreate = false;
+    this.isVisibleModalBookDelete = false;
   }
   async ngOnInit(): Promise<void> {
     // this.loadSlot();
@@ -164,9 +159,6 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
     this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
     this.loadSlot();
-    // setTimeout(() => {
-    //   this.today = signal('today');
-    // }, 10);
   }
 
   next(): void {
@@ -192,5 +184,11 @@ export class CalendarStudentComponent implements OnInit, AfterViewInit {
   dayView() {
     this.calendarComponent.getApi().changeView('timeGridDay');
     this.updateViewDates();
+  }
+
+  // react on modals
+  onModalAction(e: any) {
+    this.isVisibleModalBookDelete = false;
+    this.loadSlot();
   }
 }

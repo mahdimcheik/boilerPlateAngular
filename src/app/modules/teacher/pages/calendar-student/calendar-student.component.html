@@ -45,7 +45,11 @@
         </div>
         <div class="sujet">
           <span>Sujet :</span>
-          <span> {{ arg.event.extendedProps?.['subject'] }} </span>
+          <span> {{ arg.event.title }} </span>
+        </div>
+        <div class="sujet">
+          <span>Type :</span>
+          <span> {{ arg.event.extendedProps?.['typeHelp'] | helpType }} </span>
         </div>
       </div>
       <div *ngIf="!(arg.event.extendedProps?.['studentId'])">
@@ -56,24 +60,9 @@
   </ng-template>
 </full-calendar>
 
-<app-modal-create-appoitment
-  *ngIf="isVisibleModalCreate"
-  [appoitment]="selectedSlot"
-  [visible]="isVisibleModalCreate"
-  (actionEmitter)="hideCreateModal()"
-></app-modal-create-appoitment>
-
-<app-modal-delete-appointment
-  *ngIf="isVisibleModalDelete"
+<app-modal-reserver-annuler-by-student
+  [visible]="true"
   [appoitment]="selectedAppoitment"
-  [visible]="isVisibleModalDelete"
-  (actionEmitter)="isVisibleModalDelete = false"
-></app-modal-delete-appointment>
-
-<app-modal-update-appointment
-  *ngIf="isVisibleModalUpdate"
-  [appoitment]="selectedAppoitment"
-  [newSlot]="selectedSlot"
-  [visible]="isVisibleModalUpdate"
-  (actionEmitter)="isVisibleModalUpdate = false"
-></app-modal-update-appointment>
+  [visible]="isVisibleModalBookDelete"
+  (actionEmitter)="onModalAction($event)"
+></app-modal-reserver-annuler-by-student>

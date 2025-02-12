@@ -11,6 +11,9 @@ export type SlotResponseDTO = {
   studentFirstName?: string;
   studentLastName?: string;
   studentImgUrl?: string;
+  typeHelp?: number;
+  subject?: string;
+  description?: string;
 };
 
 export type SlotCreateDTO = {
@@ -31,3 +34,9 @@ export type SlotUpdateDTO = {
   reduction: number;
   type: number;
 };
+
+export enum EnumTypeHelp {
+  other = 0,
+  homework = 1,
+  exams = 2,
+}

@@ -11,7 +11,7 @@ import { finalize } from 'rxjs';
 })
 export class ModalReserverAnnulerByStudentComponent {
   @Input() visible: boolean = false;
-  @Output() actionEmitter = new EventEmitter();
+  @Output() actionEmitter = new EventEmitter<boolean>(false);
   @Input({ required: true }) appoitment: EventInput = {
     // appointment to change
     start: new Date(),
@@ -28,20 +28,20 @@ export class ModalReserverAnnulerByStudentComponent {
     this.start = this.appoitment.start as Date;
     this.end = this.appoitment.end as Date;
   }
-  cancel() {
-    this.actionEmitter.emit();
+  cancel(shouldReload: boolean = false) {
+    this.actionEmitter.emit(shouldReload);
     // this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
   }
   validate() {
     if (this.appoitment.extendedProps?.['studentId']) {
       this.slotService
-        .unbookReservationByTeacher(this.appoitment.extendedProps?.['id'])
-        .pipe(finalize(() => this.cancel()))
+        .unbookReservationByStudent(this.appoitment.extendedProps?.['id'])
+        .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     } else {
       this.slotService
-        .deleteSlotByCreator(this.appoitment.extendedProps?.['id'])
-        .pipe(finalize(() => this.cancel()))
+        .bookSlot(this.appoitment.extendedProps?.['id'])
+        .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     }
   }

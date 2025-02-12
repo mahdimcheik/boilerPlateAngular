@@ -33,13 +33,13 @@
         [style]="{ minWidth: '130px' }"
         label="Annuler"
         icon="pi pi-times"
-        (onClick)="cancel()"
+        (onClick)="cancel(false)"
         severity="danger"
       ></p-button>
       <p-button
         autofocus="true"
         [style]="{ minWidth: '130px' }"
-        [label]="!appoitment.extendedProps?.['studentId']? 'Oui, supprimer': 'Oui, annuler'"
+        [label]="!appoitment.extendedProps?.['studentId'] ? 'Oui, Réserver' : 'Oui, supprimer' "
         icon="pi pi-check"
         (onClick)="validate()"
         severity="success"
