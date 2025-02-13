@@ -28,10 +28,10 @@
   padding: 5px;
   cursor: pointer;
 }
-.booked {
-  border: 3px solid red;
-  cursor: pointer;
-}
+// .booked {
+//   border: 3px solid red;
+//   cursor: pointer;
+// }
 .original-price {
   text-decoration: line-through;
   opacity: 0.75;
@@ -39,4 +39,69 @@
 .new-price {
   color: $primary-color-text;
   margin-left: 5px;
+}
+.custom-event {
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &.booked {
+    background: #ffe5e5;
+    border-left: 4px solid #e63946;
+  }
+
+  &.available {
+    background: #e7f6e7;
+    border-left: 4px solid #2a9d8f;
+  }
+
+  .event-image img {
+    border-radius: 6px;
+  }
+
+  .slot-content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: bold;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .event-type,
+  .availability-info {
+    font-size: 13px;
+    color: #555;
+  }
+
+  .pricing {
+    font-weight: bold;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    .original-price {
+      text-decoration: line-through;
+      color: #a0a0a0;
+    }
+
+    .new-price {
+      color: #e63946;
+      font-weight: bold;
+    }
+
+    .unique-price {
+      color: #2a9d8f;
+    }
+  }
+}
+.event-title,
+.student-name {
+  color: black;
 }
