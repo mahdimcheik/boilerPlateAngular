@@ -15,7 +15,6 @@ import localeFr from '@angular/common/locales/fr';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { ModalUpdateAppointmentComponent } from './components/modal-update-appointment/modal-update-appointment.component';
-import { ModalDeleteAppointmentComponent } from './components/modal-delete-appointment/modal-delete-appointment.component';
 import { UsersComponent } from './pages/users/users.component';
 import { UserLiComponent } from './components/user-li/user-li.component';
 import { TableModule } from 'primeng/table';
@@ -25,6 +24,7 @@ import { ModalReserverAnnulerByStudentComponent } from './components/modal-reser
 import { HelpTypePipe } from '../../utilities/pipes/help-type.pipe';
 import { FieldsetModule } from 'primeng/fieldset';
 import { EditorModule } from 'primeng/editor';
+import { ModalDetailsStudentAppointmentComponent } from './components/modal-details-student-appointment/modal-details-student-appointment.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -37,7 +37,7 @@ registerLocaleData(localeFr, 'fr');
     CustomNavbarComponent,
     SidenavChachaComponent,
     ModalUpdateAppointmentComponent,
-    ModalDeleteAppointmentComponent,
+    ModalDetailsStudentAppointmentComponent,
     UsersComponent,
     UserLiComponent,
     CalendarStudentComponent,

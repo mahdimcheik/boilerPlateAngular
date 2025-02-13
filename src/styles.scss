@@ -24,7 +24,13 @@ $surface-a: var(--surface-a);
 html {
   width: 100%;
 }
-
+.text-truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 body {
   margin: 0;
   padding: 0;

@@ -19,13 +19,14 @@
 
       <div class="content">
         <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
-
         <div class="dat-from-to">
           <h4>
             De : {{ start | date : "HH:mm" }} à : {{ end | date : "HH:mm" }}
           </h4>
         </div>
-        <div class="dat-from-to"></div>
+        <div class="description text-truncate m-2">
+          {{appoitment.extendedProps?.['description']}}
+        </div>
       </div>
       <p-fieldset
         toggleable="true"

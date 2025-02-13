@@ -176,12 +176,12 @@
   (actionEmitter)="hideCreateModal()"
 ></app-modal-create-appoitment>
 
-<app-modal-delete-appointment
+<app-modal-details-student-appointment
   *ngIf="isVisibleModalDelete"
   [appoitment]="selectedAppoitment"
   [visible]="isVisibleModalDelete"
   (actionEmitter)="onDeleteAppointmentReservation($event)"
-></app-modal-delete-appointment>
+></app-modal-details-student-appointment>
 
 <app-modal-update-appointment
   *ngIf="isVisibleModalUpdate"

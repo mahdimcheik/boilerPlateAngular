@@ -165,7 +165,7 @@ export class SlotService {
     return {
       start: new Date(slot.startAt),
       end: new Date(slot.endAt),
-      title: slot.description ?? 'Rendez-vous',
+      title: slot.subject ?? 'Rendez-vous',
       extendedProps: {
         price: slot.price,
         reduction: slot.reduction,
