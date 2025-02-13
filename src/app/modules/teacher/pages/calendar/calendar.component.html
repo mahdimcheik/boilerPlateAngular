@@ -7,18 +7,81 @@
   <div class="navigation">
     <p-button (onClick)="getToday()">Aujourd'hui</p-button>
     <p-button (onClick)="prev()" class="control-btn" icon="pi pi-angle-left">
-      <!-- <i class="pi pi-angle-left"></i> -->
-      <!-- <img src="assets/svgs/left.svg" alt="" width="35" height="35" /> -->
     </p-button>
     <p-button (onClick)="next()" class="control-btn" icon="pi pi-angle-right">
-      <!-- <i class="pi pi-angle-right"></i> -->
-      <!-- <img src="assets/svgs/right.svg" alt="" width="35" height="35" /> -->
     </p-button>
   </div>
 </div>
 <full-calendar [options]="calendarOptions" #calendar [events]="visibleEvents()">
   <ng-template #eventContent let-arg class="custom-event">
     <div
+      [ngClass]="[
+        'custom-event',
+        arg.event.extendedProps?.studentId ? 'booked' : 'available'
+      ]"
+    >
+      <b
+        *ngIf="arg.event.title && arg.event.title !== 'No title'"
+        class="event-title"
+      >
+        {{ arg.event.title }}
+      </b>
+
+      <div class="event-image" *ngIf="arg.event.extendedProps?.imgUrl">
+        <img [src]="arg.event.extendedProps.imgUrl" width="50" height="50" />
+      </div>
+
+      <ng-container
+        *ngIf="arg.event.extendedProps?.studentId; else availableSlot"
+      >
+        <div class="slot-content">
+          <img
+            [src]="arg.event.extendedProps.studentImgUrl"
+            width="24"
+            height="24"
+          />
+          <span class="student-name">
+            {{ arg.event.extendedProps.studentFirstName }}
+            {{ arg.event.extendedProps.studentLastName }}
+          </span>
+        </div>
+        <div class="event-type">
+          <span>Type :</span>
+          <span>{{ arg.event.extendedProps?.typeHelp | helpType }}</span>
+        </div>
+      </ng-container>
+
+      <ng-template #availableSlot>
+        <div class="availability-info">
+          <span>Créneau disponible</span>
+          <div class="pricing">
+            <span
+              [ngClass]="{
+                'original-price':
+                  arg.event.extendedProps.price !==
+                  arg.event.extendedProps.discountedPrice,
+                'unique-price':
+                  arg.event.extendedProps.price ===
+                  arg.event.extendedProps.discountedPrice
+              }"
+            >
+              {{ arg.event.extendedProps.price }} €
+            </span>
+            <span
+              class="new-price"
+              *ngIf="
+                arg.event.extendedProps.price !==
+                arg.event.extendedProps.discountedPrice
+              "
+            >
+              {{ arg.event.extendedProps.discountedPrice }} €
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- <div
       [ngClass]="arg.event.extendedProps?.['studentId'] ? 'custom-event booked' : 'custom-event'"
     >
       <b *ngIf="!!arg.event.title && arg.event.title != 'No title'">{{
@@ -43,10 +106,7 @@
             {{ arg.event.extendedProps?.['studentLastName'] }}
           </span>
         </div>
-        <!-- <div class="sujet">
-          <span>Sujet :</span>
-          <span> {{ arg.event.title }} </span>
-        </div> -->
+
         <div class="sujet">
           <span>Type :</span>
           <span> {{ arg.event.extendedProps?.['typeHelp'] | helpType }} </span>
@@ -75,7 +135,7 @@
           >
         </div>
       </div>
-    </div>
+    </div> -->
   </ng-template>
   <!-- <ng-template #eventContent let-arg class="custom-event">
     <div
