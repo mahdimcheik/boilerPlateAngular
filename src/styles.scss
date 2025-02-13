@@ -93,6 +93,9 @@ body {
 .input {
   outline-width: 2px;
 }
+.input-field {
+  min-width: 350px;
+}
 // fieldset
 .p-fieldset {
   outline: 2px solid $primary-color;

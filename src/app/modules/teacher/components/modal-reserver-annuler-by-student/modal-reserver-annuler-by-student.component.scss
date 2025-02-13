@@ -3,6 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
 
   .container-img-forgot {
     display: flex;
@@ -27,4 +31,25 @@ h3,
 h4 {
   padding: 0;
   margin: 10px 0;
+}
+
+.type-description-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .input-field {
+      height: 35px;
+    }
+    .description {
+      width: 350px;
+      min-height: 100px;
+    }
+  }
 }

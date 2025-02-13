@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, of, switchMap, tap } from 'rxjs';
 import { ResponseDTO } from '../shared/Models/user/user';
 import {
+  BookingCreateDTO,
   SlotCreateDTO,
   SlotResponseDTO,
   SlotUpdateDTO,
@@ -130,10 +131,11 @@ export class SlotService {
       );
   }
 
-  bookSlot(slotId: string): Observable<ResponseDTO> {
-    return this.http.post<ResponseDTO>(`https://localhost:7113/slot/book`, {
-      slotId,
-    });
+  bookSlot(newBooking: BookingCreateDTO): Observable<ResponseDTO> {
+    return this.http.post<ResponseDTO>(
+      `https://localhost:7113/slot/book`,
+      newBooking
+    );
   }
 
   unbookReservationByStudent(slotId: string): Observable<ResponseDTO> {

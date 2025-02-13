@@ -9,13 +9,24 @@
   <div class="modal">
     <div class="container-img-forgot">
       <h2>
-        {{appoitment.extendedProps?.["studentId"] ? "Annuler la résérvation" : "Supprimer le créneau suivant"}}
+        {{appoitment.extendedProps?.["studentId"] ? "Détails de la réservation" : "Détails du créneau"}}
       </h2>
       <h3 *ngIf="appoitment.extendedProps?.['studentId']">
         Prévue pour :
         {{appoitment.extendedProps?.["studentFirstName"] | titlecase}}
         {{appoitment.extendedProps?.["studentLastName"] | titlecase}}
       </h3>
+
+      <div class="content">
+        <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
+
+        <div class="dat-from-to">
+          <h4>
+            De : {{ start | date : "HH:mm" }} à : {{ end | date : "HH:mm" }}
+          </h4>
+        </div>
+        <div class="dat-from-to"></div>
+      </div>
       <p-fieldset
         toggleable="true"
         legend="Editer"
@@ -65,17 +76,9 @@
           [src]="appoitment.extendedProps?.['studentImgUrl']"
       /></p-button>
     </div>
-    <div class="content">
-      <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
-
-      <div class="dat-from-to">
-        <h4>
-          De : {{ start | date : "HH:mm" }} à : {{ end | date : "HH:mm" }}
-        </h4>
-      </div>
-      <div class="dat-from-to"></div>
-    </div>
-
+    <h2>
+      {{appoitment.extendedProps?.["studentId"] ? "Annuler la résérvation" : "Supprimer le créneau suivant"}}
+    </h2>
     <div class="control" autofocus>
       <p-button
         [style]="{ minWidth: '130px' }"

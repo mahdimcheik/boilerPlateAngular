@@ -24,6 +24,7 @@ import { CalendarStudentComponent } from './pages/calendar-student/calendar-stud
 import { ModalReserverAnnulerByStudentComponent } from './components/modal-reserver-annuler-by-student/modal-reserver-annuler-by-student.component';
 import { HelpTypePipe } from '../../utilities/pipes/help-type.pipe';
 import { FieldsetModule } from 'primeng/fieldset';
+import { EditorModule } from 'primeng/editor';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -56,6 +57,7 @@ registerLocaleData(localeFr, 'fr');
     TableModule,
     PaginatorModule,
     FieldsetModule,
+    EditorModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
 })

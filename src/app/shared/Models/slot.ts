@@ -41,3 +41,10 @@ export enum EnumTypeHelp {
   homework = 1,
   exams = 2,
 }
+
+export type BookingCreateDTO = {
+  slotId: string;
+  subject: string;
+  description: string;
+  typeHelp: number;
+};

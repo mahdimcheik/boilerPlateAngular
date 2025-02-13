@@ -1,9 +1,17 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { EventInput } from '@fullcalendar/core/index.js';
-import { SlotUpdateDTO } from '../../../../shared/Models/slot';
+import {
+  BookingCreateDTO,
+  SlotUpdateDTO,
+} from '../../../../shared/Models/slot';
 import { SlotService } from '../../../../services/slot.service';
 import { finalize } from 'rxjs';
+import { HelpTypePipe } from '../../../../utilities/pipes/help-type.pipe';
 
+type TypeHelpType = {
+  id: number;
+  value: string;
+};
 @Component({
   selector: 'app-modal-reserver-annuler-by-student',
   templateUrl: './modal-reserver-annuler-by-student.component.html',
@@ -20,9 +28,27 @@ export class ModalReserverAnnulerByStudentComponent {
   };
   start!: Date;
   end!: Date;
+  subject: string = 'Cours particuliers';
+  description: string = "Besoin d'aide";
 
   slotService = inject(SlotService);
   visibleEvents = this.slotService.visibleEvents;
+  typeHelpTransformInstance: HelpTypePipe = new HelpTypePipe();
+  typesHelp = [
+    {
+      id: 0,
+      value: this.typeHelpTransformInstance.transform(0),
+    },
+    {
+      id: 1,
+      value: this.typeHelpTransformInstance.transform(1),
+    },
+    {
+      id: 2,
+      value: this.typeHelpTransformInstance.transform(2),
+    },
+  ];
+  selectedType: TypeHelpType = this.typesHelp[0];
 
   ngOnInit(): void {
     this.start = this.appoitment.start as Date;
@@ -39,8 +65,14 @@ export class ModalReserverAnnulerByStudentComponent {
         .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     } else {
+      const newBooking: BookingCreateDTO = {
+        slotId: this.appoitment.extendedProps?.['id'],
+        subject: this.subject,
+        description: this.description,
+        typeHelp: this.selectedType.id,
+      };
       this.slotService
-        .bookSlot(this.appoitment.extendedProps?.['id'])
+        .bookSlot(newBooking)
         .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     }

@@ -28,6 +28,42 @@
       <div class="dat-from-to"></div>
     </div>
 
+    <div
+      class="type-description-title"
+      *ngIf="!appoitment.extendedProps?.['studentId']"
+    >
+      <div class="field">
+        <label for="title" class="half-label">Sujet</label>
+        <input
+          pinput
+          class="input-field pl-2"
+          type="text"
+          [(ngModel)]="subject"
+        />
+      </div>
+      <div class="field">
+        <label for="type" class="half-label">Type</label>
+        <p-dropdown
+          id="type"
+          [options]="typesHelp"
+          [(ngModel)]="selectedType"
+          variant="filled"
+          optionLabel="value"
+          placeholder="Type"
+          [styleClass]="'dropdown input-field'"
+        />
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          [(ngModel)]="description"
+          class="description p-2"
+        ></textarea>
+      </div>
+    </div>
+
     <div class="control" autofocus>
       <p-button
         [style]="{ minWidth: '130px' }"
