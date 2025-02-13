@@ -1,68 +1,120 @@
 @import "../../../../../variables.scss";
 .modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // background: white;
+  // border-radius: 12px;
+  // box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  // padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
 
-  .container-img-forgot {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .control {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-  }
+.details-header {
+  font-size: 22px;
+  font-weight: bold;
+  // color: #333;
+  text-align: center;
+  margin-bottom: 15px;
 }
-h2,
-h3,
-h4 {
-  padding: 0;
-  margin: 10px 0;
+
+.details-student-name {
+  font-size: 18px;
+  // color: #555;
+  text-align: center;
+  margin-bottom: 10px;
 }
-h2 {
-  font-size: 1.5rem;
+
+.detailts-content h3,
+.dat-from-to h4 {
+  font-size: 16px;
   font-weight: 500;
-}
-.btn-contact {
-  border-radius: 2px;
-  outline: 4px solid $primary-color;
-  min-width: 130px;
-}
-.img-contact {
-  width: 35px;
-  height: auto;
-  // border-radius: 5px;
-  border: none;
-  outline: none;
-  margin-right: 5px;
+  // color: #444;
+  opacity: 0.9;
+  margin: 5px 0;
 }
 
-// edit fieldset
-.price-reduction {
-  // display: flex;
-  // gap: 10px;
-  // margin: 0 auto;
-  width: 90%;
-}
-.error {
-  margin-top: 5px;
-  font-size: 10px;
-  color: red;
-}
-.description {
+.details-description {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #393838;
   margin-top: 10px;
+}
+
+.details-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+  background: $primary-color;
+  color: $primary-color-text;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.img-contact {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.appointment-edition {
+  margin-top: 20px;
+  background: $primary-color;
+  color: $primary-color-text;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.price,
+.reduction {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  h3 {
+    min-width: 50%;
+  }
+}
+
+input[pinput] {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px;
+  background-color: $primary-color;
+  width: 50%;
+  color: $primary-color-text;
+}
+
+.error {
+  color: red;
   font-size: 12px;
-  opacity: 0.85;
-  max-width: 300px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d9534f;
+  margin-bottom: 10px;
+}
+
+.control {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+p-button {
+  min-width: 140px;
+  font-weight: bold;
 }

@@ -7,95 +7,98 @@
   (onHide)="actionEmitter.emit()"
 >
   <div class="modal">
-    <div class="container-img-forgot">
-      <h2>
-        {{appoitment.extendedProps?.["studentId"] ? "Détails de la réservation" : "Détails du créneau"}}
+    <div class="details-appointment">
+      <h2 class="details-header">
+        {{appoitment.extendedProps?.['studentId'] ? "Détails de la réservation": "Détails du créneau"}}
       </h2>
-      <h3 *ngIf="appoitment.extendedProps?.['studentId']">
+      <h3
+        class="details-student-name"
+        *ngIf="appoitment.extendedProps?.['studentId']"
+      >
         Prévue pour :
         {{appoitment.extendedProps?.["studentFirstName"] | titlecase}}
         {{appoitment.extendedProps?.["studentLastName"] | titlecase}}
       </h3>
-
-      <div class="content">
+      <div class="detailts-content">
         <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
         <div class="dat-from-to">
           <h4>
             De : {{ start | date : "HH:mm" }} à : {{ end | date : "HH:mm" }}
           </h4>
         </div>
-        <div class="description text-truncate m-2">
+        <div
+          class="details-description text-truncate"
+          *ngIf="appoitment.extendedProps?.['studentId']"
+        >
           {{appoitment.extendedProps?.['description']}}
         </div>
+        <p-button
+          *ngIf="appoitment.extendedProps?.['studentId']"
+          class="details-contact"
+          [label]="' Contacter ' + appoitment.extendedProps?.['studentFirstName']"
+          icon="pi pi-phone"
+          iconPos="right"
+          (onClick)="cancel()"
+          severity="info"
+          ><img
+            class="img-contact mr-2"
+            [src]="appoitment.extendedProps?.['studentImgUrl']"
+        /></p-button>
       </div>
-      <p-fieldset
-        toggleable="true"
-        legend="Editer"
-        collapsed
-        styleClass="fieldset-edit"
-        *ngIf="!appoitment.extendedProps?.['studentId']"
-      >
-        <div class="price-reduction">
-          <div class="price">
-            <h3>Prix (€):</h3>
-            <input
-              type="number"
-              class="pl-2"
-              pinput
-              [(ngModel)]="price"
-              variant="filled"
-            />
-            <p class="error" *ngIf="price < 0 || price > 200">
-              Attention, prix anormal
-            </p>
-          </div>
-          <div class="reduction">
-            <h3>Réduction (%):</h3>
-            <input type="number" pinput class="pl-2" [(ngModel)]="reduction" />
-            <p class="error" *ngIf="reduction < 0 || reduction > 100">
-              Attention, réduction anormale (0-100%)
-            </p>
-          </div>
-          <p-button
-            severity="primary"
-            label="Sauvegarder"
-            (onClick)="cancel()"
-          ></p-button>
-        </div>
-      </p-fieldset>
+    </div>
 
+    <div
+      class="appointment-edition"
+      *ngIf="!appoitment.extendedProps?.['studentId']"
+    >
+      <div class="price">
+        <h3>Prix (€):</h3>
+        <input
+          type="number"
+          class="pl-2"
+          pinput
+          [(ngModel)]="price"
+          variant="filled"
+        />
+        <p class="error" *ngIf="price < 0 || price > 200">
+          Attention, prix anormal
+        </p>
+      </div>
+      <div class="reduction">
+        <h3>Réduction (%):</h3>
+        <input type="number" pinput class="pl-2" [(ngModel)]="reduction" />
+        <p class="error" *ngIf="reduction < 0 || reduction > 100">
+          Attention, réduction anormale (0-100%)
+        </p>
+      </div>
       <p-button
-        *ngIf="appoitment.extendedProps?.['studentId']"
-        class="btn-contact"
-        [label]="'Contacter ' + appoitment.extendedProps?.['studentFirstName']"
-        icon="pi pi-phone"
-        iconPos="right"
-        (onClick)="cancel()"
-        severity="info"
-        ><img
-          class="img-contact"
-          [src]="appoitment.extendedProps?.['studentImgUrl']"
-      /></p-button>
-    </div>
-    <h2>
-      {{appoitment.extendedProps?.["studentId"] ? "Annuler la résérvation" : "Supprimer le créneau suivant"}}
-    </h2>
-    <div class="control" autofocus>
-      <p-button
-        [style]="{ minWidth: '130px' }"
-        label="Annuler"
-        icon="pi pi-times"
-        (onClick)="cancel(false)"
-        severity="danger"
-      ></p-button>
-      <p-button
-        autofocus="true"
-        [style]="{ minWidth: '130px' }"
-        [label]="!appoitment.extendedProps?.['studentId']? 'Oui, supprimer': 'Oui, annuler'"
-        icon="pi pi-check"
-        (onClick)="validate()"
+        styleClass="btn-save"
         severity="success"
+        label="Sauvegarder"
+        (onClick)="cancel()"
       ></p-button>
     </div>
+    <footer>
+      <h2>
+        {{appoitment.extendedProps?.["studentId"] ? "Résilier la résérvation" : "Supprimer le créneau suivant"}}
+      </h2>
+      <div class="control" autofocus>
+        <p-button
+          [style]="{ minWidth: '130px' }"
+          label="Annuler"
+          icon="pi pi-times"
+          (onClick)="cancel(false)"
+          severity="danger"
+        ></p-button>
+        <p-button
+          autofocus="true"
+          [style]="{ minWidth: '130px' }"
+          [label]="!appoitment.extendedProps?.['studentId']? 'Oui, supprimer': 'Oui, résilier'"
+          icon="pi pi-check"
+          (onClick)="validate()"
+          severity="success"
+        ></p-button>
+      </div>
+    </footer>
   </div>
 </p-dialog>
