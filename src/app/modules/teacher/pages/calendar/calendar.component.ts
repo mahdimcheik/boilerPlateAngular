@@ -103,36 +103,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       .subscribe();
   }
 
-  // // template slot
-  // renderEventContent = (arg: EventContentArg) => {
-  //   let html = `<div class="custom-event">
-  //                   <b>${arg.event.title}</b>
-  //                   <div>${
-  //                     arg.event.extendedProps?.['studentId']
-  //                       ? `<div class="slot-content"><img src=${
-  //                           (arg.event.extendedProps as any).studentImgUrl
-  //                         } width="24" height="24"/><span>${
-  //                           (arg.event.extendedProps as any).studentFirstName
-  //                         } ${
-  //                           (arg.event.extendedProps as any).studentLastName
-  //                         }</span></div>
-  //                       <div class="sujet">Sujet : ${
-  //                         (arg.event.extendedProps as any).subject
-  //                       }</div>
-
-  //                       `
-  //                       : `Créneau disponible <div>Prix :${
-  //                           (arg.event.extendedProps as any).price
-  //                         }</div>`
-  //                   }</div>
-  //                 </div>`;
-  //   let arrayOfDomNodes = [];
-  //   let div = document.createElement('div');
-  //   div.innerHTML = html;
-  //   arrayOfDomNodes.push(div.firstChild);
-  //   return { domNodes: arrayOfDomNodes };
-  // };
-
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
@@ -178,7 +148,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
 
     eventResizeStop(arg) {},
     eventResize: this.onResize,
-    // eventContent: this.renderEventContent, // template appoitment
     select: this.onDateSelect,
     eventClick: this.onEventClick,
     // drag and drop
@@ -214,9 +183,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.dateEnd = calendarApi.view.currentEnd.toUTCString();
     this.currentDate = calendarApi.getDate();
     this.loadSlot();
-    // setTimeout(() => {
-    //   this.today = signal('today');
-    // }, 10);
   }
 
   next(): void {
@@ -242,5 +208,12 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   dayView() {
     this.calendarComponent.getApi().changeView('timeGridDay');
     this.updateViewDates();
+  }
+
+  onDeleteAppointmentReservation(shouldRelaod: boolean = false) {
+    this.isVisibleModalCreate = false;
+    this.isVisibleModalUpdate = false;
+    this.isVisibleModalDelete = false;
+    shouldRelaod && this.loadSlot();
   }
 }
