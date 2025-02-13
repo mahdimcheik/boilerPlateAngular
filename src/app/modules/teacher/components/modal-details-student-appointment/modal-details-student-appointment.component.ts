@@ -47,4 +47,20 @@ export class ModalDetailsStudentAppointmentComponent {
         .subscribe();
     }
   }
+
+  update() {
+    const slotUpdateDTO: SlotUpdateDTO = {
+      id: this.appoitment.extendedProps?.['id'],
+      startAt: this.start,
+      endAt: this.end,
+      createdAt: new Date(),
+      price: this.price,
+      reduction: this.reduction,
+      type: this.appoitment.extendedProps?.['type'] ?? 0,
+    };
+    this.slotService
+      .updateSlotByCreator(slotUpdateDTO)
+      .pipe(finalize(() => this.cancel(true)))
+      .subscribe();
+  }
 }

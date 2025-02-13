@@ -70,6 +70,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   };
   onEventClick = (eventClickArg: EventClickArg) => {
     this.selectedAppoitment = eventClickArg.event as EventInput;
+    if (this.selectedAppoitment?.end! < new Date()) return;
     this.slotService.selectedEvent.set(this.selectedAppoitment);
     this.isVisibleModalDelete = true;
   };
@@ -165,9 +166,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   hideCreateModal() {
     this.isVisibleModalCreate = false;
   }
-  async ngOnInit(): Promise<void> {
-    // this.loadSlot();
-  }
+  async ngOnInit(): Promise<void> {}
 
   ngAfterViewInit(): void {
     const calendarApi = this.calendarComponent.getApi();
@@ -176,7 +175,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.currentDate = calendarApi.getDate();
     this.loadSlot();
   }
-  // manually add buttons controlling the calendar
+
   updateViewDates() {
     const calendarApi = this.calendarComponent.getApi();
     this.dateStart = calendarApi.view.currentStart.toUTCString();
@@ -211,6 +210,12 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   }
 
   onDeleteAppointmentReservation(shouldRelaod: boolean = false) {
+    this.isVisibleModalCreate = false;
+    this.isVisibleModalUpdate = false;
+    this.isVisibleModalDelete = false;
+    shouldRelaod && this.loadSlot();
+  }
+  onUpdateAppointment(shouldRelaod: boolean = false) {
     this.isVisibleModalCreate = false;
     this.isVisibleModalUpdate = false;
     this.isVisibleModalDelete = false;
