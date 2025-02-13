@@ -29,22 +29,29 @@ export class ModalDetailsStudentAppointmentComponent {
   ngOnInit(): void {
     this.start = this.appoitment.start as Date;
     this.end = this.appoitment.end as Date;
+    this.price = this.appoitment.extendedProps?.['slot']?.['price'] || 15;
+    this.reduction =
+      this.appoitment.extendedProps?.['slot']?.['reduction'] || 0;
   }
   cancel(shouldRelaod: boolean = false) {
     this.actionEmitter.emit(shouldRelaod);
-    // this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
   }
   validate() {
-    if (this.appoitment.extendedProps?.['studentId']) {
+    if (this.appoitment.extendedProps?.['slot']?.['studentId']) {
       this.slotService
-        .unbookReservationByTeacher(this.appoitment.extendedProps?.['id'])
+        .unbookReservationByTeacher(
+          this.appoitment.extendedProps?.['slot']?.['id']
+        )
         .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     } else {
       this.slotService
-        .deleteSlotByCreator(this.appoitment.extendedProps?.['id'])
+        .deleteSlotByCreator(this.appoitment.extendedProps?.['slot']?.['id'])
         .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     }
+  }
+  update() {
+    this.cancel(true);
   }
 }
