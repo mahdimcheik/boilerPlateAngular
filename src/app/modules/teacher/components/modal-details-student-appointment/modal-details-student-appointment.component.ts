@@ -18,6 +18,11 @@ export class ModalDetailsStudentAppointmentComponent {
     end: new Date(),
     extendedProps: {},
   };
+  @Input() newSlot: EventInput = {
+    // new slot place , when we drag and drop mofo
+    start: new Date(),
+    end: new Date(),
+  };
   start!: Date;
   end!: Date;
   price: number = 15;
@@ -27,12 +32,13 @@ export class ModalDetailsStudentAppointmentComponent {
   visibleEvents = this.slotService.visibleEvents;
 
   ngOnInit(): void {
-    this.start = this.appoitment.start as Date;
-    this.end = this.appoitment.end as Date;
+    this.start = this.newSlot.start as Date;
+    this.end = this.newSlot.end as Date;
+    this.reduction = this.appoitment.extendedProps?.['reduction'];
   }
   cancel(shouldRelaod: boolean = false) {
     this.actionEmitter.emit(shouldRelaod);
-    // this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
+    this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
   }
   validate() {
     if (this.appoitment.extendedProps?.['studentId']) {

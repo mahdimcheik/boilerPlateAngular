@@ -39,6 +39,7 @@ export class ModalUpdateAppointmentComponent implements OnInit {
   ngOnInit(): void {
     this.start = this.newSlot.start as Date;
     this.end = this.newSlot.end as Date;
+    var toto = this.appoitment;
   }
 
   cancel() {

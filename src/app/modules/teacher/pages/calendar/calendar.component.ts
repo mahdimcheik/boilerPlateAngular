@@ -70,6 +70,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   };
   onEventClick = (eventClickArg: EventClickArg) => {
     this.selectedAppoitment = eventClickArg.event as EventInput;
+    this.selectedSlot = eventClickArg.event as EventInput;
     if (this.selectedAppoitment?.end! < new Date()) return;
     this.slotService.selectedEvent.set(this.selectedAppoitment);
     this.isVisibleModalDelete = true;
@@ -77,8 +78,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   onResize = (eventResizeArg: EventResizeDoneArg) => {
     this.selectedAppoitment = eventResizeArg.oldEvent as EventInput;
     this.selectedSlot = eventResizeArg.event as EventInput;
-
-    this.isVisibleModalUpdate = true;
+    this.isVisibleModalDelete = true;
+    // this.isVisibleModalUpdate = true;
   };
   onDrop = (eventDropArg: EventDropArg) => {
     console.log('event drop', eventDropArg);
@@ -87,7 +88,8 @@ export class CalendarComponent implements OnInit, AfterViewInit {
       end: eventDropArg.event.end as Date,
     };
     this.selectedAppoitment = eventDropArg.oldEvent as EventInput;
-    this.isVisibleModalUpdate = true;
+    this.isVisibleModalDelete = true;
+    // this.isVisibleModalUpdate = true;
   };
   onDateSelect = (selectionInfo: DateSelectArg) => {
     this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
