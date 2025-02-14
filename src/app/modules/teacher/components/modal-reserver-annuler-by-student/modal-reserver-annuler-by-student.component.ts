@@ -26,9 +26,6 @@ type TypeHelpType = {
   styleUrl: './modal-reserver-annuler-by-student.component.scss',
 })
 export class ModalReserverAnnulerByStudentComponent implements OnInit {
-  ngAfterContentInit(): void {
-    throw new Error('Method not implemented.');
-  }
   @Input() visible: boolean = false;
   @Output() actionEmitter = new EventEmitter<boolean>(false);
   @Input({ required: true }) appoitment: EventInput = {
@@ -67,6 +64,7 @@ export class ModalReserverAnnulerByStudentComponent implements OnInit {
     this.end = this.appoitment.end as Date;
     this.isInThePast = new Date() > this.start;
   }
+
   cancel(shouldReload: boolean = false) {
     this.actionEmitter.emit(shouldReload);
     // this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
@@ -90,4 +88,7 @@ export class ModalReserverAnnulerByStudentComponent implements OnInit {
         .subscribe();
     }
   }
+  // isInThePast() {
+  //   return new Date() > this.start;
+  // }
 }

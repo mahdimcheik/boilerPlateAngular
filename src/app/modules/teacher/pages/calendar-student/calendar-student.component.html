@@ -83,9 +83,10 @@
   </ng-template>
 </full-calendar>
 
+<!-- [visible]="true" -->
 <app-modal-reserver-annuler-by-student
-  [visible]="true"
-  [appoitment]="selectedAppoitment"
+  *ngIf="isVisibleModalBookDelete"
   [visible]="isVisibleModalBookDelete"
+  [appoitment]="selectedAppoitment"
   (actionEmitter)="onModalAction($event)"
 ></app-modal-reserver-annuler-by-student>

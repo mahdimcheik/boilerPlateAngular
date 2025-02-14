@@ -83,6 +83,7 @@
         severity="danger"
       ></p-button>
       <p-button
+        *ngIf="!isInThePast"
         autofocus="true"
         [style]="{ minWidth: '130px' }"
         [label]="!appoitment.extendedProps?.['studentId'] ? 'Oui, réserver' : 'Oui, résilier' "
