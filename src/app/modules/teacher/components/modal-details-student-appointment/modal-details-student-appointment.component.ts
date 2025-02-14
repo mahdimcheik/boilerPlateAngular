@@ -95,4 +95,8 @@ export class ModalDetailsStudentAppointmentComponent {
       .pipe(finalize(() => this.cancel(true)))
       .subscribe();
   }
+
+  isInThePast() {
+    return (this.appoitment.start as Date) < new Date();
+  }
 }

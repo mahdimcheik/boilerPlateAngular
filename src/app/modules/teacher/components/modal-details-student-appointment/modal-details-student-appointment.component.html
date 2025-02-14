@@ -60,6 +60,7 @@
           pinput
           [(ngModel)]="price"
           variant="filled"
+          [disabled]="isInThePast()"
         />
         <p class="error" *ngIf="price < 0 || price > 200">
           Attention, prix anormal
@@ -67,13 +68,19 @@
       </div>
       <div class="reduction">
         <h3>Réduction (%):</h3>
-        <input type="number" pinput class="pl-2" [(ngModel)]="reduction" />
+        <input
+          type="number"
+          pinput
+          class="pl-2"
+          [(ngModel)]="reduction"
+          [disabled]="isInThePast()"
+        />
         <p class="error" *ngIf="reduction < 0 || reduction > 100">
           Attention, réduction anormale (0-100%)
         </p>
       </div>
       <p-button
-        *ngIf="!isCreateModal"
+        *ngIf="!isCreateModal && !isInThePast()"
         [disabled]="
           price < 0 || price > 200 || reduction < 0 || reduction > 100
         "
@@ -84,7 +91,7 @@
       ></p-button>
     </div>
     <footer>
-      <h2>
+      <h2 *ngIf="!isInThePast()">
         {{isCreateModal ? 'Ouvrir un créneau' : appoitment.extendedProps?.["studentId"] ? "Résilier la résérvation" : "Supprimer ce créneau"}}
       </h2>
       <div class="control" autofocus>
@@ -96,6 +103,7 @@
           severity="danger"
         ></p-button>
         <p-button
+          *ngIf="!isInThePast()"
           autofocus="true"
           [style]="{ minWidth: '130px' }"
           [label]="isCreateModal ? 'Oui, créer' :  !appoitment.extendedProps?.['studentId']? 'Oui, supprimer':  'Oui, résilier'   "

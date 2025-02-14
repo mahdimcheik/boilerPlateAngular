@@ -74,7 +74,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.isModalCreate = false;
     this.selectedAppoitment = eventClickArg.event as EventInput;
     this.selectedSlot = eventClickArg.event as EventInput;
-    if (this.selectedAppoitment?.end! < new Date()) return;
+    // if (this.selectedAppoitment?.start! < new Date()) return;
     this.slotService.selectedEvent.set(this.selectedAppoitment);
     this.isVisibleModalDelete = true;
   };
