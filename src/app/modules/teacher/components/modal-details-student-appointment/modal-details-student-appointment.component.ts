@@ -28,7 +28,7 @@ export class ModalDetailsStudentAppointmentComponent {
   end!: Date;
   price: number = 15;
   reduction: number = 0;
-
+  isInThePast: boolean = false;
   slotService = inject(SlotService);
   visibleEvents = this.slotService.visibleEvents;
 
@@ -41,6 +41,7 @@ export class ModalDetailsStudentAppointmentComponent {
     this.price = this.isCreateModal
       ? 15
       : this.appoitment.extendedProps?.['price'] ?? 15;
+    this.isInThePast = new Date() > this.start;
   }
   cancel(shouldRelaod: boolean = false) {
     this.actionEmitter.emit(shouldRelaod);
@@ -94,9 +95,5 @@ export class ModalDetailsStudentAppointmentComponent {
       .updateSlotByCreator(slotUpdateDTO)
       .pipe(finalize(() => this.cancel(true)))
       .subscribe();
-  }
-
-  isInThePast() {
-    return (this.appoitment.start as Date) < new Date();
   }
 }

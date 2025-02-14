@@ -1,4 +1,12 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { EventInput } from '@fullcalendar/core/index.js';
 import {
   BookingCreateDTO,
@@ -17,7 +25,10 @@ type TypeHelpType = {
   templateUrl: './modal-reserver-annuler-by-student.component.html',
   styleUrl: './modal-reserver-annuler-by-student.component.scss',
 })
-export class ModalReserverAnnulerByStudentComponent {
+export class ModalReserverAnnulerByStudentComponent implements OnInit {
+  ngAfterContentInit(): void {
+    throw new Error('Method not implemented.');
+  }
   @Input() visible: boolean = false;
   @Output() actionEmitter = new EventEmitter<boolean>(false);
   @Input({ required: true }) appoitment: EventInput = {
@@ -30,6 +41,7 @@ export class ModalReserverAnnulerByStudentComponent {
   end!: Date;
   subject: string = 'Cours particuliers';
   description: string = "Besoin d'aide";
+  isInThePast: boolean = false;
 
   slotService = inject(SlotService);
   visibleEvents = this.slotService.visibleEvents;
@@ -53,6 +65,7 @@ export class ModalReserverAnnulerByStudentComponent {
   ngOnInit(): void {
     this.start = this.appoitment.start as Date;
     this.end = this.appoitment.end as Date;
+    this.isInThePast = new Date() > this.start;
   }
   cancel(shouldReload: boolean = false) {
     this.actionEmitter.emit(shouldReload);

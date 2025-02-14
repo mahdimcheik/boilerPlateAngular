@@ -83,3 +83,17 @@ p-button {
   min-width: 140px;
   font-weight: bold;
 }
+
+.details-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+  background: $primary-color;
+  color: $primary-color-text;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 15px;
+}

@@ -64,6 +64,16 @@
       </div>
     </div>
 
+    <p-button
+      *ngIf="appoitment.extendedProps?.['studentId']"
+      class="details-contact"
+      label="Contacter votre prof"
+      icon="pi pi-phone"
+      iconPos="right"
+      (onClick)="cancel()"
+      severity="info"
+    ></p-button>
+
     <div class="control" autofocus>
       <p-button
         [style]="{ minWidth: '130px' }"
@@ -75,7 +85,7 @@
       <p-button
         autofocus="true"
         [style]="{ minWidth: '130px' }"
-        [label]="!appoitment.extendedProps?.['studentId'] ? 'Oui, Réserver' : 'Oui, supprimer' "
+        [label]="!appoitment.extendedProps?.['studentId'] ? 'Oui, réserver' : 'Oui, résilier' "
         icon="pi pi-check"
         (onClick)="validate()"
         severity="success"
