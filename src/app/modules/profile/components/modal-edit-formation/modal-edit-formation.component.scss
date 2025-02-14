@@ -61,3 +61,12 @@
   font-weight: 500;
   margin-bottom: 1rem;
 }
+
+input[pinput] {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px;
+  background-color: $primary-color;
+  width: 50%;
+  color: $primary-color-text;
+}

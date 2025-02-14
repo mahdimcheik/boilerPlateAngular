@@ -67,7 +67,7 @@ export class NavbarComponent {
       this.userConnected()?.roles.includes('Admin')
       ? [
           {
-            label: 'Home',
+            label: 'Accueil',
             icon: 'pi pi-home',
             command: () => this.router.navigateByUrl(''),
           },
@@ -107,9 +107,15 @@ export class NavbarComponent {
             command: () => this.router.navigateByUrl(''),
           },
           {
-            label: 'A Propos',
+            label: 'Contact',
+            icon: 'pi pi-envelope',
+            command: () => this.router.navigateByUrl('contactus'),
+          },
+          {
+            label: 'Réserver',
             icon: 'pi pi-search',
-            command: () => this.router.navigateByUrl('aboutus'),
+            command: () =>
+              this.router.navigateByUrl('teacher/booking-calendar'),
           },
           {
             label: 'Contact',
@@ -119,7 +125,7 @@ export class NavbarComponent {
         ]
       : [
           {
-            label: 'Home',
+            label: 'Accueil',
             icon: 'pi pi-home',
             command: () => this.router.navigateByUrl(''),
           },
@@ -127,6 +133,12 @@ export class NavbarComponent {
             label: 'Contact',
             icon: 'pi pi-envelope',
             command: () => this.router.navigateByUrl('contactus'),
+          },
+          {
+            label: 'Réserver',
+            icon: 'pi pi-search',
+            command: () =>
+              this.router.navigateByUrl('teacher/booking-calendar'),
           },
         ];
   });
