@@ -46,7 +46,7 @@
           </span>
         </div>
         <div class="event-type">
-          <span>Type :</span>
+          <span>Type : </span>
           <span>{{ arg.event.extendedProps?.typeHelp | helpType }}</span>
         </div>
       </ng-container>
@@ -83,12 +83,12 @@
   </ng-template>
 </full-calendar>
 
-<app-modal-create-appoitment
+<!-- <app-modal-create-appoitment
   *ngIf="isVisibleModalCreate"
   [appoitment]="selectedSlot"
   [visible]="isVisibleModalCreate"
   (actionEmitter)="hideCreateModal()"
-></app-modal-create-appoitment>
+></app-modal-create-appoitment> -->
 
 <app-modal-details-student-appointment
   *ngIf="isVisibleModalDelete"
@@ -99,10 +99,10 @@
   (actionEmitter)="onDeleteAppointmentReservation($event)"
 ></app-modal-details-student-appointment>
 
-<app-modal-update-appointment
+<!-- <app-modal-update-appointment
   *ngIf="isVisibleModalUpdate"
   [appoitment]="selectedAppoitment"
   [newSlot]="selectedSlot"
   [visible]="isVisibleModalUpdate"
   (actionEmitter)="isVisibleModalUpdate = false"
-></app-modal-update-appointment>
+></app-modal-update-appointment> -->

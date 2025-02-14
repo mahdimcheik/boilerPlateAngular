@@ -6,7 +6,6 @@ import { CalendarComponent } from './pages/calendar/calendar.component';
 import { TeacherRoutingModule } from './teacher-routing';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ButtonModule } from 'primeng/button';
-import { ModalCreateAppoitmentComponent } from './components/modal-create-appoitment/modal-create-appoitment.component';
 import { DialogModule } from 'primeng/dialog';
 import { CustomNavbarComponent } from './components/custom-navbar/custom-navbar.component';
 import { SidebarModule } from 'primeng/sidebar';
@@ -14,7 +13,6 @@ import { SidenavChachaComponent } from './components/sidenav-chacha/sidenav-chac
 import localeFr from '@angular/common/locales/fr';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
-import { ModalUpdateAppointmentComponent } from './components/modal-update-appointment/modal-update-appointment.component';
 import { UsersComponent } from './pages/users/users.component';
 import { UserLiComponent } from './components/user-li/user-li.component';
 import { TableModule } from 'primeng/table';
@@ -33,10 +31,8 @@ registerLocaleData(localeFr, 'fr');
     LayoutTeacherComponent,
     ProfilComponent,
     CalendarComponent,
-    ModalCreateAppoitmentComponent,
     CustomNavbarComponent,
     SidenavChachaComponent,
-    ModalUpdateAppointmentComponent,
     ModalDetailsStudentAppointmentComponent,
     UsersComponent,
     UserLiComponent,
