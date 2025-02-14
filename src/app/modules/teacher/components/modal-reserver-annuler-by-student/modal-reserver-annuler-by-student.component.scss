@@ -1,55 +1,85 @@
+@import "../../../../../variables.scss";
 .modal {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-
-  .container-img-forgot {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .control {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-  }
-}
-h2,
-h3,
-h4 {
+  border-radius: 12px;
   padding: 0;
-  margin: 10px 0;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.container-img-forgot h2 {
+  font-size: 22px;
+  font-weight: bold;
+  // color: $primary-color-text;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.container-img-forgot h3 {
+  font-size: 18px;
+  // color: #555;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.content h3,
+.dat-from-to h4 {
+  font-size: 16px;
+  font-weight: 500;
+  // color: #444;
+  margin: 5px 0;
 }
 
 .type-description-title {
+  margin-top: 20px;
+  background: $primary-color;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.field {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  margin-bottom: 10px;
+  color: $primary-color-text;
+}
 
-    .input-field {
-      height: 35px;
-    }
-    .description {
-      width: 350px;
-      min-height: 100px;
-    }
-  }
+.half-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: $primary-color-text;
+  margin-bottom: 5px;
+}
+
+.input-field,
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: $primary-color;
+  color: $primary-color-text;
+  padding: 8px;
+  width: 100%;
+  font-size: 14px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+.dropdown {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.control {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+p-button {
+  min-width: 140px;
+  font-weight: bold;
 }
