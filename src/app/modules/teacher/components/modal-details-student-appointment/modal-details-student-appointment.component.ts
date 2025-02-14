@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { EventInput } from '@fullcalendar/core/index.js';
-import { SlotUpdateDTO } from '../../../../shared/Models/slot';
+import { SlotCreateDTO, SlotUpdateDTO } from '../../../../shared/Models/slot';
 import { SlotService } from '../../../../services/slot.service';
 import { finalize } from 'rxjs';
 
@@ -23,6 +23,7 @@ export class ModalDetailsStudentAppointmentComponent {
     start: new Date(),
     end: new Date(),
   };
+  @Input() isCreateModal: boolean = false;
   start!: Date;
   end!: Date;
   price: number = 15;
@@ -34,14 +35,39 @@ export class ModalDetailsStudentAppointmentComponent {
   ngOnInit(): void {
     this.start = this.newSlot.start as Date;
     this.end = this.newSlot.end as Date;
-    this.reduction = this.appoitment.extendedProps?.['reduction'];
+    this.reduction = this.isCreateModal
+      ? 0
+      : this.appoitment.extendedProps?.['reduction'] ?? 0;
+    this.price = this.isCreateModal
+      ? 15
+      : this.appoitment.extendedProps?.['price'] ?? 15;
   }
   cancel(shouldRelaod: boolean = false) {
     this.actionEmitter.emit(shouldRelaod);
     this.slotService.visibleEvents.set([...this.slotService.visibleEvents()]);
   }
   validate() {
-    if (this.appoitment.extendedProps?.['studentId']) {
+    if (this.isCreateModal) {
+      if (
+        this.price < 0 ||
+        this.price > 200 ||
+        this.reduction < 0 ||
+        this.reduction > 100
+      )
+        return;
+      const newAppoitment = {
+        startAt: this.start,
+        endAt: this.end,
+        createdAt: new Date(),
+        price: this.price,
+        reduction: this.reduction,
+        type: 0,
+      };
+      this.slotService
+        .addSlotByCreator(newAppoitment as SlotCreateDTO)
+        .subscribe();
+      this.cancel();
+    } else if (this.appoitment.extendedProps?.['studentId']) {
       this.slotService
         .unbookReservationByTeacher(this.appoitment.extendedProps?.['id'])
         .pipe(finalize(() => this.cancel(true)))

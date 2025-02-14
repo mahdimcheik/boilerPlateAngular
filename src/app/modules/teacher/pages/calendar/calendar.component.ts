@@ -24,6 +24,7 @@ import interactionPlugin, {
 } from '@fullcalendar/interaction';
 import { SlotService } from '../../../../services/slot.service';
 import { AuthService } from '../../../../services/auth.service';
+import { reduce } from 'rxjs';
 
 type MinimalEvent = {
   start: Date;
@@ -63,12 +64,14 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   currentDate!: Date;
   selectedSlot: EventInput = { start: new Date(), end: new Date() }; // empty slot selected pas un appoitment
   selectedAppoitment: EventInput = { start: new Date(), end: new Date() }; // evenement déjà créé
+  isModalCreate: boolean = false;
 
   canDrop = (dropInfo: any, draggedEvent: any) => {
     const now = new Date();
     return dropInfo.start >= now && draggedEvent.start >= now;
   };
   onEventClick = (eventClickArg: EventClickArg) => {
+    this.isModalCreate = false;
     this.selectedAppoitment = eventClickArg.event as EventInput;
     this.selectedSlot = eventClickArg.event as EventInput;
     if (this.selectedAppoitment?.end! < new Date()) return;
@@ -76,13 +79,14 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.isVisibleModalDelete = true;
   };
   onResize = (eventResizeArg: EventResizeDoneArg) => {
+    this.isModalCreate = false;
     this.selectedAppoitment = eventResizeArg.oldEvent as EventInput;
     this.selectedSlot = eventResizeArg.event as EventInput;
     this.isVisibleModalDelete = true;
     // this.isVisibleModalUpdate = true;
   };
   onDrop = (eventDropArg: EventDropArg) => {
-    console.log('event drop', eventDropArg);
+    this.isModalCreate = false;
     this.selectedSlot = {
       start: eventDropArg.event.start as Date,
       end: eventDropArg.event.end as Date,
@@ -93,7 +97,6 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   };
   onDateSelect = (selectionInfo: DateSelectArg) => {
     this.selectedSlot = { start: selectionInfo.start, end: selectionInfo.end };
-
     this.showCreateModal();
   };
   canStartDrag = (selectionInfo: any) => {
@@ -163,10 +166,14 @@ export class CalendarComponent implements OnInit, AfterViewInit {
   };
 
   showCreateModal() {
-    this.isVisibleModalCreate = true;
+    // this.isVisibleModalCreate = true;
+    this.isModalCreate = true;
+    this.isVisibleModalDelete = true;
   }
   hideCreateModal() {
-    this.isVisibleModalCreate = false;
+    // this.isVisibleModalCreate = false;
+    this.isModalCreate = false;
+    this.isVisibleModalDelete = false;
   }
   async ngOnInit(): Promise<void> {}
 

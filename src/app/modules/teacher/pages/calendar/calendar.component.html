@@ -94,6 +94,7 @@
   *ngIf="isVisibleModalDelete"
   [appoitment]="selectedAppoitment"
   [newSlot]="selectedSlot"
+  [isCreateModal]="isModalCreate"
   [visible]="isVisibleModalDelete"
   (actionEmitter)="onDeleteAppointmentReservation($event)"
 ></app-modal-details-student-appointment>

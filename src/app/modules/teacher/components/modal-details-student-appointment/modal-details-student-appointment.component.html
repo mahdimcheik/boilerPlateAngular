@@ -30,6 +30,7 @@
           class="details-description text-truncate"
           *ngIf="appoitment.extendedProps?.['studentId']"
         >
+          <h3>{{appoitment.extendedProps?.['subject']}}</h3>
           {{appoitment.extendedProps?.['description']}}
         </div>
         <p-button
@@ -72,15 +73,19 @@
         </p>
       </div>
       <p-button
+        *ngIf="!isCreateModal"
+        [disabled]="
+          price < 0 || price > 200 || reduction < 0 || reduction > 100
+        "
         styleClass="btn-save"
         severity="success"
-        label="Sauvegarder"
+        label="Mettre à jour"
         (onClick)="update()"
       ></p-button>
     </div>
     <footer>
       <h2>
-        {{appoitment.extendedProps?.["studentId"] ? "Résilier la résérvation" : "Supprimer le créneau suivant"}}
+        {{isCreateModal ? 'Ouvrir un créneau' : appoitment.extendedProps?.["studentId"] ? "Résilier la résérvation" : "Supprimer ce créneau"}}
       </h2>
       <div class="control" autofocus>
         <p-button
@@ -93,9 +98,12 @@
         <p-button
           autofocus="true"
           [style]="{ minWidth: '130px' }"
-          [label]="!appoitment.extendedProps?.['studentId']? 'Oui, supprimer': 'Oui, résilier'"
+          [label]="isCreateModal ? 'Oui, créer' :  !appoitment.extendedProps?.['studentId']? 'Oui, supprimer':  'Oui, résilier'   "
           icon="pi pi-check"
           (onClick)="validate()"
+          [disabled]="
+            price < 0 || price > 200 || reduction < 0 || reduction > 100
+          "
           severity="success"
         ></p-button>
       </div>
