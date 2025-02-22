@@ -13,11 +13,11 @@
       </h2>
       <h3
         class="details-student-name"
-        *ngIf="appoitment.extendedProps?.['studentId']"
+        *ngIf="appoitment.extendedProps?.['slot']?.['studentId']"
       >
         Prévue pour :
-        {{appoitment.extendedProps?.["studentFirstName"] | titlecase}}
-        {{appoitment.extendedProps?.["studentLastName"] | titlecase}}
+        {{appoitment.extendedProps?.['slot']?.["studentFirstName"] | titlecase}}
+        {{appoitment.extendedProps?.['slot']?.["studentLastName"] | titlecase}}
       </h3>
       <div class="detailts-content">
         <h3>Date : {{ start | date : "EEEE, d MMMM y" }}</h3>
@@ -28,29 +28,29 @@
         </div>
         <div
           class="details-description text-truncate"
-          *ngIf="appoitment.extendedProps?.['studentId']"
+          *ngIf="appoitment.extendedProps?.['slot']?.['studentId']"
         >
           <h3>{{appoitment.extendedProps?.['subject']}}</h3>
           {{appoitment.extendedProps?.['description']}}
         </div>
         <p-button
-          *ngIf="appoitment.extendedProps?.['studentId']"
+          *ngIf="appoitment.extendedProps?.['slot']?.['studentId']"
           class="details-contact"
-          [label]="' Contacter ' + appoitment.extendedProps?.['studentFirstName']"
+          [label]="' Contacter ' + appoitment.extendedProps?.['slot']?.['studentFirstName']"
           icon="pi pi-phone"
           iconPos="right"
           (onClick)="cancel()"
           severity="info"
           ><img
             class="img-contact mr-2"
-            [src]="appoitment.extendedProps?.['studentImgUrl']"
+            [src]="appoitment.extendedProps?.['slot']?.['studentImgUrl']"
         /></p-button>
       </div>
     </div>
 
     <div
       class="appointment-edition"
-      *ngIf="!appoitment.extendedProps?.['studentId']"
+      *ngIf="!appoitment.extendedProps?.['slot']?.['studentId']"
     >
       <div class="price">
         <h3>Prix (€):</h3>

@@ -75,7 +75,7 @@ export class ModalDetailsStudentAppointmentComponent {
         .subscribe();
     } else {
       this.slotService
-        .deleteSlotByCreator(this.appoitment.extendedProps?.['id'])
+        .deleteSlotByCreator(this.appoitment.extendedProps?.['slot']?.['id'])
         .pipe(finalize(() => this.cancel(true)))
         .subscribe();
     }
