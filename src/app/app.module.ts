@@ -29,6 +29,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import localeFr from '@angular/common/locales/fr';
 import { BadgeModule } from 'primeng/badge';
+import { AppTopbar } from './components/top-bar/app.topbar';
 
 registerLocaleData(localeFr);
 @NgModule({
@@ -53,6 +54,7 @@ registerLocaleData(localeFr);
     FullCalendarModule,
     NavbarComponent,
     ThemeSelectorComponent,
+    AppTopbar,
   ],
   providers: [
     provideAnimations(),
